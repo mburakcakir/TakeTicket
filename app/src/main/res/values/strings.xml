@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Take Ticket</string>
+    <string name="login">Giriş Yap</string>
+    <string name="register">Üye Ol</string>
+    <string name="name">Ad-Soyad</string>
+    <string name="username">Kullanıcı Adı</string>
+    <string name="email">Email</string>
+    <string name="password">Şifre</string>
+    <string name="activity">Etkinlik</string>
+    <string name="price">Ücret</string>
+    <string name="time">Zaman</string>
+    <string name="login_again">OTURUM KAPATILDI. TEKRAR GİRİŞ YAPIN.</string>
+    <string name="exit_app">Çıkmak için geri tuşuna basın.</string>
+    <string name="contact">İletişim Bilgileri</string>
+    <string name="try_again">Tekrar dene.</string>
+    <string name="no_user">Kullanıcı bulunamadı.</string>
+    <string name="already_registered">Kullanıcı zaten kayıtlı.</string>
+    <string name="tickets">Biletlerim</string>
+
+</resources>

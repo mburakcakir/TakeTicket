@@ -1,0 +1,83 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.gms.google-services'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.0"
+
+    defaultConfig {
+        applicationId "com.mburakcakir.taketicket"
+        minSdkVersion 16
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    aaptOptions { cruncherEnabled = false }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'com.google.android.material:material:1.2.1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    def room_version = "2.2.5"
+    def lottieVersion = "3.4.4"
+    def liveDataVersion ="2.2.0"
+    def retrofitLibraryVersion = "2.9.0"
+    def coroutinesVersion = "1.3.9"
+    def glideVersion = "4.11.0"
+    def firebaseUiVersion = "6.4.0"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+
+    // coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+
+    // viewmodel and livedata
+    implementation "androidx.lifecycle:lifecycle-extensions:$liveDataVersion"
+    api "androidx.lifecycle:lifecycle-livedata-ktx:$liveDataVersion"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$liveDataVersion"
+
+    //glide
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    kapt "com.github.bumptech.glide:compiler:$glideVersion"
+
+    //lottiefiles
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+
+    //Retrofit Library
+    implementation "com.squareup.retrofit2:retrofit:$retrofitLibraryVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitLibraryVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitLibraryVersion"
+    implementation 'com.squareup.okhttp:okhttp:2.7.2'
+
+    // Firebase Storage
+    implementation "com.firebaseui:firebase-ui-storage:$firebaseUiVersion"
+
+
+}

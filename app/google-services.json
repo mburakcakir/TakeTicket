@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "160543780577",
+    "firebase_url": "https://taketicketandroid-default-rtdb.firebaseio.com",
+    "project_id": "taketicketandroid",
+    "storage_bucket": "taketicketandroid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:160543780577:android:e934ba558a021a37c391a0",
+        "android_client_info": {
+          "package_name": "com.mburakcakir.taketicket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "160543780577-gg9g2mdc6u4cago6757amj5skddim2di.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFWxgxx0AkIGOAuWOBTKpeBJIX70W6z7w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "160543780577-gg9g2mdc6u4cago6757amj5skddim2di.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
