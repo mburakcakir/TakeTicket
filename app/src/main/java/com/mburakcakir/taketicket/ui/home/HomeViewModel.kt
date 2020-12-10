@@ -1,7 +1,9 @@
 package com.mburakcakir.taketicket.ui.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.viewModelScope
 import com.mburakcakir.taketicket.data.db.TicketDatabase
 import com.mburakcakir.taketicket.data.db.entity.ProductModel
 import com.mburakcakir.taketicket.data.db.entity.TicketModel
@@ -15,22 +17,21 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(
     application: Application
-) : AndroidViewModel(application){
+) : AndroidViewModel(application) {
     val sessionManager: SessionManager
-    val productRepository : ProductRepository
-    val ticketRepository : TicketRepository
-
-    val allProducts : LiveData<List<ProductModel>>
+    val productRepository: ProductRepository
+    val ticketRepository: TicketRepository
+    val allProducts: LiveData<List<ProductModel>>
 
     init {
         sessionManager = SessionManager(application)
-        val database = TicketDatabase.getDatabase(application,viewModelScope)
+        val database = TicketDatabase.getDatabase(application, viewModelScope)
         productRepository = ProductRepositoryImpl(database.productDao())
         ticketRepository = TicketRepositoryImpl(database.ticketDao())
         allProducts = productRepository.getAllProducts()
     }
 
-    fun insertTicket(ticketModel: TicketModel) = viewModelScope.launch(Dispatchers.IO){
+    fun insertTicket(ticketModel: TicketModel) = viewModelScope.launch(Dispatchers.IO) {
         ticketRepository.insertTicket(ticketModel)
     }
 }

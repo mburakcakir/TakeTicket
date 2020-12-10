@@ -1,6 +1,7 @@
 package com.mburakcakir.taketicket.ui.activity
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -20,13 +21,13 @@ import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var homeViewModel: HomeViewModel
-    var backPressedTime : Long = 0
+    var backPressedTime: Long = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        toolbar.setTitle("Hoşgeldin ${homeViewModel.sessionManager.getUsername()}")
+        toolbar.title = "Hoşgeldin ${homeViewModel.sessionManager.getUsername()}"
         setSupportActionBar(toolbar)
 
         //Adapter çağırıldığı yer 1
@@ -41,8 +42,10 @@ class HomeActivity : AppCompatActivity() {
         homeViewModel.allProducts.observe(this, { allProducts ->
             allProducts?.let {
                 (recyclerView.adapter as ProductAdapter).submitList(allProducts)
+                Log.d("tag2", allProducts.toString())
             }
         })
+
     }
 
     override fun onBackPressed() {
@@ -51,7 +54,8 @@ class HomeActivity : AppCompatActivity() {
             this extToast resources.getString(R.string.login_again)
             finish()
         } else {
-            Toast.makeText(baseContext, resources.getString(R.string.exit_app), Toast.LENGTH_SHORT).show()
+            Toast.makeText(baseContext, resources.getString(R.string.exit_app), Toast.LENGTH_SHORT)
+                .show()
         }
         backPressedTime = System.currentTimeMillis()
     }

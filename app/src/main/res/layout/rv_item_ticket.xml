@@ -32,19 +32,34 @@
                 android:layout_gravity="center"
                 android:orientation="horizontal">
 
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/ic_title" />
+
                 <TextView
                     android:id="@+id/txtTicketTitle"
                     android:layout_width="0dp"
-                    android:layout_weight="0.8"
+                    android:layout_weight="0.69"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
                     tools:text="subject" />
 
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.05"
+                    android:background="@drawable/ic_time" />
+
                 <TextView
-                    android:id="@+id/txtTicketPrice"
+                    android:id="@+id/txtTicketBoughtTime"
                     android:layout_width="0dp"
                     android:textColor="@color/colorRed"
+                    android:textStyle="bold"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.20"
                     android:gravity="center" />
@@ -55,7 +70,30 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
+                android:gravity="center"
                 android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.40">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/ic_price" />
+
+                    <TextView
+                        android:id="@+id/txtTicketPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:text="@string/price" />
+                </LinearLayout>
 
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -69,28 +107,19 @@
                         android:text="1"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        tools:text="day" />
+                        tools:text="category" />
                 </RelativeLayout>
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.35">
+                    android:layout_weight="0.25">
 
-                    <TextView
-                        android:id="@+id/txtTicketBoughtTime"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="1"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        tools:text="day" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.30">
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/ic_calendar" />
 
                     <TextView
                         android:id="@+id/txtTicketLastTime"
@@ -100,12 +129,14 @@
                         android:text="1"
                         android:textSize="14sp"
                         tools:text="day" />
-                </RelativeLayout>
+                </LinearLayout>
             </LinearLayout>
-
         </LinearLayout>
 
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="@drawable/ic_delete" />
+
     </LinearLayout>
-
-
 </androidx.cardview.widget.CardView>
