@@ -1,8 +1,8 @@
 package com.mburakcakir.taketicket.ui.register
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.data.db.entity.UserModel
@@ -17,6 +17,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         registerViewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
+
 
         btnRegister.setOnClickListener {
             val userModel = UserModel(
