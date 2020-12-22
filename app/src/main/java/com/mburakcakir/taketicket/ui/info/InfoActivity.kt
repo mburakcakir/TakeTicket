@@ -1,14 +1,14 @@
 package com.mburakcakir.taketicket.ui.info
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.mburakcakir.taketicket.R
+import com.mburakcakir.taketicket.data.network.service.ServiceProvider
 import com.mburakcakir.taketicket.data.repository.info.InfoRepository
 import com.mburakcakir.taketicket.data.repository.info.InfoRepositoryImpl
-import com.mburakcakir.taketicket.data.network.service.ServiceProvider
 import com.mburakcakir.vbtinternshipschedule.utils.Status
 import kotlinx.android.synthetic.main.activity_info.*
 
@@ -22,7 +22,7 @@ class InfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info)
-        toolbarInfo.setTitle(resources.getString(R.string.contact))
+        toolbarInfo.title = resources.getString(R.string.contact)
         setSupportActionBar(toolbarInfo)
         init()
     }
@@ -36,9 +36,7 @@ class InfoActivity : AppCompatActivity() {
         )
 
         //Adapter çağırıldığı yer 1
-        recyclerView.apply {
-            adapter = InfoAdapter()
-        }
+        recyclerView.adapter = InfoAdapter()
 
         getAllSchedules()
     }

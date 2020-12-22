@@ -1,16 +1,15 @@
 package com.mburakcakir.taketicket.ui.info
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.data.network.model.InfoModel
 import com.mburakcakir.taketicket.utils.GlideApp
+import com.mburakcakir.taketicket.utils.shareText
 import kotlinx.android.synthetic.main.rv_item_info.view.*
 
 // Adapter Pattern olarak, Android Programlamada sıkça kullanılan RecyclerViewAdapter ve yeni kullanılmaya başlanılan ListAdapter sınıflarının ikisi de kullanıldı.
@@ -20,8 +19,7 @@ import kotlinx.android.synthetic.main.rv_item_info.view.*
 // InfoCallBack sınıfı, yeni gelen nesneleri eskisiyle karşılaştırıp reaksiyon alabilmemizi sağlıyor.
 // InfoViewHolder sınıfı ile View belirlenmesi, bind methodu ile List<Model> olarak gelen nesnelerin pozisyonlarının alınıp, Modellerin componentler üzerine yerleşmesini sağlanmaktadır.
 
-class InfoAdapter(
-) : ListAdapter<InfoModel, InfoViewHolder>(InfoCallBack()) {
+class InfoAdapter : ListAdapter<InfoModel, InfoViewHolder>(InfoCallBack()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         InfoViewHolder(parent)
 
@@ -53,27 +51,13 @@ class InfoViewHolder(
         val getReference = storage.getReferenceFromUrl(infoModel.imageUrl)
 
         with(itemView) {
-            txtInfoTitle.text = "${infoModel.account}"
+            txtInfoTitle.text = infoModel.account
             txtInfoLink.text = infoModel.siteUrl
             GlideApp.with(context).load(getReference).into(imgInfoImage)
         }
 
         itemView.imgInfoShare.setOnClickListener {
-            with(infoModel) {
-                val text = infoModel.siteUrl
-                shareText(text)
-            }
+            itemView.context shareText infoModel.siteUrl
         }
-    }
-
-    private fun shareText(text: String) {
-        val sendIntent = Intent().apply {
-            action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, text)
-            type = "text/plain"
-        }
-
-        val shareIntent = Intent.createChooser(sendIntent, null)
-        itemView.context.startActivity(shareIntent)
     }
 }

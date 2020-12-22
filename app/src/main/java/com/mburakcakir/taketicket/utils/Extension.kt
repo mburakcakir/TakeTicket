@@ -21,7 +21,7 @@ infix fun Context.extToast(message : String) {
     Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
 }
 
-fun Activity.showDetailDialog(ticketModel : TicketModel, homeViewModel: HomeViewModel) {
+fun Activity.extDetailDialog(ticketModel: TicketModel, homeViewModel: HomeViewModel) {
     val alertDialog = AlertDialog.Builder(this)
     val dialog = layoutInflater.inflate(R.layout.dialog_ticket, null)
     alertDialog.setView(dialog)
@@ -31,7 +31,7 @@ fun Activity.showDetailDialog(ticketModel : TicketModel, homeViewModel: HomeView
     Glide.with(this).load(ticketModel.url).into(dialog.imgTicketImage)
 
     dialog.apply {
-        txtTicketName.text =  ticketModel.name
+        txtTicketName.text = ticketModel.name
         txtTicketEmail.text = ticketModel.email
         txtTicketTitle.text = ticketModel.title
         txtTicketPrice.text = "Toplam : ${ticketModel.price}"
@@ -45,5 +45,15 @@ fun Activity.showDetailDialog(ticketModel : TicketModel, homeViewModel: HomeView
         this extOpenActivity TicketActivity::class.java
     }
 
+}
 
+infix fun Context.shareText(text: String) {
+    val sendIntent = Intent().apply {
+        action = Intent.ACTION_SEND
+        putExtra(Intent.EXTRA_TEXT, text)
+        type = "text/plain"
+    }
+
+    val shareIntent = Intent.createChooser(sendIntent, null)
+    this.startActivity(shareIntent)
 }

@@ -12,9 +12,9 @@ import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.ui.info.InfoActivity
 import com.mburakcakir.taketicket.ui.ticket.TicketActivity
 import com.mburakcakir.taketicket.ui.viewmodel.HomeViewModel
+import com.mburakcakir.taketicket.utils.extDetailDialog
 import com.mburakcakir.taketicket.utils.extOpenActivity
 import com.mburakcakir.taketicket.utils.extToast
-import com.mburakcakir.taketicket.utils.showDetailDialog
 import com.mburakcakir.vbtinternshipschedule.ui.adapter.ProductAdapter
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -26,6 +26,11 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        init()
+    }
+
+    fun init() {
+
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         toolbar.title = "Hoşgeldin ${homeViewModel.sessionManager.getUsername()}"
         setSupportActionBar(toolbar)
@@ -33,7 +38,7 @@ class HomeActivity : AppCompatActivity() {
         //Adapter çağırıldığı yer 1
         recyclerView.apply {
             adapter = ProductAdapter {
-                this@HomeActivity.showDetailDialog(it, homeViewModel)
+                this@HomeActivity.extDetailDialog(it, homeViewModel)
             }
         }
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -45,7 +50,6 @@ class HomeActivity : AppCompatActivity() {
                 Log.d("tag2", allProducts.toString())
             }
         })
-
     }
 
     override fun onBackPressed() {
@@ -73,5 +77,4 @@ class HomeActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
 }
