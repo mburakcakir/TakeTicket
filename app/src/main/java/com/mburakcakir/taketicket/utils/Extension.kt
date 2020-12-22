@@ -39,10 +39,15 @@ fun Activity.extDetailDialog(ticketModel: TicketModel, homeViewModel: HomeViewMo
     }
 
     dialog.btnApprove.setOnClickListener {
-        homeViewModel.insertTicket(ticketModel)
+        if (!homeViewModel.checkIfTicketExists(ticketModel.title)) {
+            homeViewModel.insertTicket(ticketModel)
+            this extToast "Biletin alındı."
+            this extOpenActivity TicketActivity::class.java
+        } else
+            this extToast "Bilet zaten alınmış."
+
         mAlertDialog.dismiss()
-        this extToast "Biletin alındı."
-        this extOpenActivity TicketActivity::class.java
+
     }
 
 }

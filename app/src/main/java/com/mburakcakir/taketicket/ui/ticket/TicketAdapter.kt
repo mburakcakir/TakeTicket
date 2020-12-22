@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.rv_item_ticket.view.*
 // onBindViewHolder ile, TicketViewHolder içerisinde bulunan bind methodunu tetikliyor.
 // TicketViewHolder sınıfı ile View belirlenmesi, bind methodu ile List<Model> olarak gelen nesnelerin pozisyonlarının alınıp, Modellerin componentler üzerine yerleşmesini sağlanmaktadır.
 // Burası Adapter'ın DataBinding görevini üstlendiği yerdir.
-class TicketAdapter : ListAdapter<TicketModel, TicketViewHolder>(InfoCallBack()) {
+class TicketAdapter : ListAdapter<TicketModel, TicketViewHolder>(TicketCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         TicketViewHolder(parent)
 
@@ -27,7 +27,7 @@ class TicketAdapter : ListAdapter<TicketModel, TicketViewHolder>(InfoCallBack())
 }
 
 
-class InfoCallBack : DiffUtil.ItemCallback<TicketModel>() {
+class TicketCallback : DiffUtil.ItemCallback<TicketModel>() {
     override fun areItemsTheSame(oldItem: TicketModel, newItem: TicketModel) =
         oldItem == newItem
 
