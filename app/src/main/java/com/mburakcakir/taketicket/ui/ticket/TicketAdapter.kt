@@ -1,8 +1,9 @@
-package com.mburakcakir.vbtinternshipschedule.ui.adapter
+package com.mburakcakir.taketicket.ui.ticket
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mburakcakir.taketicket.R
@@ -16,21 +17,26 @@ import kotlinx.android.synthetic.main.rv_item_ticket.view.*
 // onBindViewHolder ile, TicketViewHolder içerisinde bulunan bind methodunu tetikliyor.
 // TicketViewHolder sınıfı ile View belirlenmesi, bind methodu ile List<Model> olarak gelen nesnelerin pozisyonlarının alınıp, Modellerin componentler üzerine yerleşmesini sağlanmaktadır.
 // Burası Adapter'ın DataBinding görevini üstlendiği yerdir.
-class TicketAdapter(
-    val ticketList : ArrayList<TicketModel>
-) : RecyclerView.Adapter<TicketViewHolder>() {
+class TicketAdapter : ListAdapter<TicketModel, TicketViewHolder>(InfoCallBack()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         TicketViewHolder(parent)
 
+    override fun onBindViewHolder(holder: TicketViewHolder, position: Int) =
+        holder.bind(getItem(position))
 
-    override fun getItemCount(): Int = ticketList.size
+}
 
-    override fun onBindViewHolder(holder: TicketViewHolder, position: Int) = holder.bind(ticketList.get(position))
+
+class InfoCallBack : DiffUtil.ItemCallback<TicketModel>() {
+    override fun areItemsTheSame(oldItem: TicketModel, newItem: TicketModel) =
+        oldItem == newItem
+
+    override fun areContentsTheSame(oldItem: TicketModel, newItem: TicketModel) = false
 
 }
 
 class TicketViewHolder(
-    container: ViewGroup,
+    container: ViewGroup
 ) : RecyclerView.ViewHolder(
     LayoutInflater.from(container.context).inflate(
         R.layout.rv_item_ticket,
@@ -40,7 +46,7 @@ class TicketViewHolder(
 ) {
     fun bind(ticketModel: TicketModel) {
         with(itemView) {
-            txtTicketTitle.text = "${ticketModel.title}"
+            txtTicketTitle.text = ticketModel.title
             txtTicketPrice.text = ticketModel.price
             txtTicketLastTime.text = ticketModel.time
             txtTicketCategory.text = ticketModel.category
@@ -49,4 +55,3 @@ class TicketViewHolder(
         }
     }
 }
-
