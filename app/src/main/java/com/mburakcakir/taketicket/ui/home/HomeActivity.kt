@@ -36,11 +36,10 @@ class HomeActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         //Adapter çağırıldığı yer 1
-        recyclerView.apply {
-            adapter = ProductAdapter {
-                this@HomeActivity.extDetailDialog(it, homeViewModel)
-            }
+        recyclerView.adapter = ProductAdapter {
+            this@HomeActivity.extDetailDialog(it, homeViewModel)
         }
+
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         //Adapter çağırıldığı yer 2

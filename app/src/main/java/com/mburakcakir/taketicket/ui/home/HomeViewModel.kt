@@ -34,5 +34,7 @@ class HomeViewModel(
     fun insertTicket(ticketModel: TicketModel) = viewModelScope.launch(Dispatchers.IO) {
         ticketRepository.insertTicket(ticketModel)
     }
+
+    fun checkIfTicketExists(ticketName: String) = ticketRepository.checkIfTicketExists(ticketName)
 }
 

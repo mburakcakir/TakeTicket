@@ -32,10 +32,7 @@ class ServiceProvider {
                 return retrofit
             }
 
-        private val okHttpClientFactory: OkHttpClient
-            get() {
-                val builder = OkHttpClient().newBuilder()
-                return builder.build()
-            }
+        private val okHttpClientFactory: OkHttpClient = OkHttpClient().newBuilder().build()
+
     }
 }

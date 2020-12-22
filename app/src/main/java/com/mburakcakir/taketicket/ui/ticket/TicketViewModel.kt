@@ -29,4 +29,5 @@ class TicketViewModel(
         ticketRepository = TicketRepositoryImpl(database.ticketDao())
         allTickets.value = sessionManager.getUsername()?.let { ticketRepository.getAllTickets(it) }
     }
+
 }
