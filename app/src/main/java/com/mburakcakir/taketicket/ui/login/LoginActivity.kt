@@ -20,6 +20,10 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        init()
+    }
+
+    fun init() {
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
         btnRegister.setOnClickListener {

@@ -10,9 +10,8 @@ import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.data.db.entity.ProductModel
 import com.mburakcakir.taketicket.data.db.entity.TicketModel
 import com.mburakcakir.taketicket.utils.SessionManager
+import com.mburakcakir.taketicket.utils.getCurrentTime
 import kotlinx.android.synthetic.main.rv_item_product.view.*
-import java.text.SimpleDateFormat
-import java.util.*
 
 // Adapter Pattern olarak, Android Programlamada sıkça kullanılan RecyclerViewAdapter ve yeni kullanılmaya başlanılan ListAdapter sınıflarının ikisi de kullanıldı.
 // ListAdapter kullanırken de yine nesneleri adapter aracılığıyla View üzerinde yerleştirmekteyiz.
@@ -76,10 +75,6 @@ class ProductViewHolder(
             onClickEvent(ticketModel)
         }
     }
-    fun getCurrentTime(): String {
-        val currentTime: Date = Calendar.getInstance().getTime()
-        val dateFormat = SimpleDateFormat("hh.mm")
-        return dateFormat.format(currentTime)
-    }
+
 }
 

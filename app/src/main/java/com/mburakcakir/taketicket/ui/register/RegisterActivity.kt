@@ -18,6 +18,10 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
         registerViewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
 
+        init()
+    }
+
+    fun init() {
 
         btnRegister.setOnClickListener {
             val userModel = UserModel(
