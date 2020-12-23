@@ -20,7 +20,7 @@
             android:layout_height="200dp">
 
             <ImageView
-                android:id="@+id/imgProductImage"
+                android:id="@+id/imgEventImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
@@ -42,7 +42,7 @@
                 android:padding="5dp">
 
                 <TextView
-                    android:id="@+id/txtProductTitle"
+                    android:id="@+id/txtEventTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimary"
@@ -50,7 +50,7 @@
                     tools:text="subject" />
 
                 <TextView
-                    android:id="@+id/txtProductSubtitle"
+                    android:id="@+id/txtEventSubtitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:autoLink="web"
@@ -62,7 +62,7 @@
             <TextView
                 android:gravity="center"
                 android:layout_gravity="top"
-                android:id="@+id/txtProductTime"
+                android:id="@+id/txtEventTime"
                 android:layout_width="0dp"
                 android:layout_marginTop="10dp"
                 android:textStyle="bold"
@@ -82,7 +82,7 @@
                 android:layout_weight="0.70">
 
                 <TextView
-                    android:id="@+id/txtProductOrder"
+                    android:id="@+id/txtEventOrder"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="1"
@@ -98,7 +98,7 @@
                 android:layout_weight="0.30">
 
                 <TextView
-                    android:id="@+id/txtProductCapacity"
+                    android:id="@+id/txtEventCapacity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="1"

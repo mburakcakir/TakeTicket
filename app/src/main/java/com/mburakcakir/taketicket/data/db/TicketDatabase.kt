@@ -6,24 +6,24 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.mburakcakir.taketicket.data.db.dao.ProductDao
+import com.mburakcakir.taketicket.data.db.dao.EventDao
 import com.mburakcakir.taketicket.data.db.dao.TicketDao
 import com.mburakcakir.taketicket.data.db.dao.UserDao
-import com.mburakcakir.taketicket.data.db.entity.ProductModel
+import com.mburakcakir.taketicket.data.db.entity.EventModel
 import com.mburakcakir.taketicket.data.db.entity.TicketModel
 import com.mburakcakir.taketicket.data.db.entity.UserModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Database(
-    entities = [UserModel::class, ProductModel::class, TicketModel::class],
+    entities = [UserModel::class, EventModel::class, TicketModel::class],
     version = 3,
     exportSchema = false
 )
 abstract class TicketDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
-    abstract fun productDao(): ProductDao
+    abstract fun eventDao(): EventDao
     abstract fun ticketDao(): TicketDao
 
     // verdiğimiz scope içinde ayrı bir thread açarak db işlemlerini gerçekleştiriyor.
@@ -36,7 +36,7 @@ abstract class TicketDatabase : RoomDatabase() {
             INSTANCE?.let { database ->
                 scope.launch {
                     populateDatabase(
-                        database.productDao()
+                        database.eventDao()
                     )
                 }
             }
@@ -47,15 +47,15 @@ abstract class TicketDatabase : RoomDatabase() {
 //            INSTANCE?.let { database ->
 //                scope.launch {
 //                    populateDatabase(
-//                        database.productDao()
+//                        database.eventDao()
 //                    )
 //                }
 //            }
 //        }
 
-        suspend fun populateDatabase(productDao : ProductDao) {
-            productDao.deleteAll()
-            var product = ProductModel(
+        suspend fun populateDatabase(eventDao: EventDao) {
+            eventDao.deleteAll()
+            var eventModel = EventModel(
                 "Ahududu",
                 "Harbiye Cemil Topuzlu Açıkhava Sahnesi ",
                 "Tiyatro",
@@ -65,9 +65,9 @@ abstract class TicketDatabase : RoomDatabase() {
                 "₺48"
             )
 
-            productDao.insertProduct(product)
+            eventDao.insertEvent(eventModel)
 
-            product = ProductModel(
+            eventModel = EventModel(
                 "Cihangir Kafika'dan size özel gösterim!",
                 "Kaçırdığınız filmler kafesi, Kafika!",
                 "Sinema",
@@ -77,9 +77,9 @@ abstract class TicketDatabase : RoomDatabase() {
                 "₺70"
             )
 
-            productDao.insertProduct(product)
+            eventDao.insertEvent(eventModel)
 
-            product = ProductModel(
+            eventModel = EventModel(
                 "Mustafa Keser sahnesi",
                 "Ataköy Marina Nossa Costa'da limitsiz yerli içecek ve fiks menü / Mustafa Keser sahnesi için geçerlidir.",
                 "Müzik",
@@ -89,9 +89,9 @@ abstract class TicketDatabase : RoomDatabase() {
                 "₺399"
             )
 
-            productDao.insertProduct(product)
+            eventDao.insertEvent(eventModel)
 
-            product = ProductModel(
+            eventModel = EventModel(
                 "Notre Dame’ın Kamburu",
                 "Dünyaca ünlü \"Notre Dame’ın Kamburu\" isimli müzikal, izleyicisi ile buluşuyor!",
                 "Müzikal",
@@ -101,9 +101,9 @@ abstract class TicketDatabase : RoomDatabase() {
                 "₺63"
             )
 
-            productDao.insertProduct(product)
+            eventDao.insertEvent(eventModel)
 
-            product = ProductModel(
+            eventModel = EventModel(
                 "Forest Kemerburgaz'a giriş biletleri",
                 "Türkiye'nin en büyük açık alanına sahip macera & etkinlik parkı Forest Kemerburgaz sizi ve sevdiklerinizi bekliyor.",
                 "Eğlence Merkezi",
@@ -113,9 +113,9 @@ abstract class TicketDatabase : RoomDatabase() {
                 "₺33"
             )
 
-            productDao.insertProduct(product)
+            eventDao.insertEvent(eventModel)
 
-            product = ProductModel(
+            eventModel = EventModel(
                 "Ahmet Aslan konseri",
                 "Anadolu müziğini batı enstrümanlarıyla birlikte kullanan Ahmet Aslan, müzikseverlerle buluşuyor.",
                 "Müzik",
@@ -125,9 +125,9 @@ abstract class TicketDatabase : RoomDatabase() {
                 "₺56"
             )
 
-            productDao.insertProduct(product)
+            eventDao.insertEvent(eventModel)
 
-            product = ProductModel(
+            eventModel = EventModel(
                 "Müfit Can Saçıntı Güldürüsü",
                 "Müfit Can Saçıntı'nın sahneledeği tek kişilik müzikli gösteri ''İtiraz Ediyorum\" seyircisiyle buluşuyor!",
                 "Tiyatro",
@@ -137,9 +137,9 @@ abstract class TicketDatabase : RoomDatabase() {
                 "₺49"
             )
 
-            productDao.insertProduct(product)
+            eventDao.insertEvent(eventModel)
 
-            product = ProductModel(
+            eventModel = EventModel(
                 "Son Senfoni",
                 "Kaan Erkam’ın kaleminden çıkan Levent Tayman’ın yönettiği, yağmurlu ve soğuk bir gecede opera tezi yazmaya çalışan adamın yaşadıkları.",
                 "Tiyatro",
@@ -149,9 +149,9 @@ abstract class TicketDatabase : RoomDatabase() {
                 "₺20"
             )
 
-            productDao.insertProduct(product)
+            eventDao.insertEvent(eventModel)
 
-            product = ProductModel(
+            eventModel = EventModel(
                 "Emaar Akvaryum & Sualtı Hayvanat Bahçesi",
                 "Okyanusların büyüleyici dünyasına dalışa geçin.",
                 "Akvaryum",
@@ -161,9 +161,9 @@ abstract class TicketDatabase : RoomDatabase() {
                 "₺48"
             )
 
-            productDao.insertProduct(product)
+            eventDao.insertEvent(eventModel)
 
-            product = ProductModel(
+            eventModel = EventModel(
                 "Cihangir Kafika'dan size özel gösterim!",
                 "İster evden DVD getirebilir ister mekanın geniş arşivinden seçim yapabilirsiniz.",
                 "Sinema",
@@ -173,8 +173,8 @@ abstract class TicketDatabase : RoomDatabase() {
                 "₺70"
             )
 
-            productDao.insertProduct(product)
-            Log.d("tag", productDao.getAllProducts().value.toString())
+            eventDao.insertEvent(eventModel)
+            Log.d("tag", eventDao.getAllEvents().value.toString())
         }
     }
     // ROOM DB SINGLETON.

@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.data.db.entity.TicketModel
 import com.mburakcakir.taketicket.ui.ticket.TicketActivity
-import com.mburakcakir.taketicket.ui.viewmodel.HomeViewModel
+import com.mburakcakir.taketicket.ui.viewmodel.EventViewModel
 import kotlinx.android.synthetic.main.dialog_ticket.view.*
 
 infix fun <T> Context.extOpenActivity(cls : Class<T>) {
@@ -21,7 +21,7 @@ infix fun Context.extToast(message : String) {
     Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
 }
 
-fun Activity.extDetailDialog(ticketModel: TicketModel, homeViewModel: HomeViewModel) {
+fun Activity.extDetailDialog(ticketModel: TicketModel, eventViewModel: EventViewModel) {
     val alertDialog = AlertDialog.Builder(this)
     val dialog = layoutInflater.inflate(R.layout.dialog_ticket, null)
     alertDialog.setView(dialog)
@@ -39,8 +39,8 @@ fun Activity.extDetailDialog(ticketModel: TicketModel, homeViewModel: HomeViewMo
     }
 
     dialog.btnApprove.setOnClickListener {
-        if (!homeViewModel.checkIfTicketExists(ticketModel.title)) {
-            homeViewModel.insertTicket(ticketModel)
+        if (!eventViewModel.checkIfTicketExists(ticketModel.title)) {
+            eventViewModel.insertTicket(ticketModel)
             this extToast "Biletin alındı."
             this extOpenActivity TicketActivity::class.java
         } else

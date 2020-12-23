@@ -1,8 +1,6 @@
 package com.mburakcakir.taketicket.utils
 
-import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import org.w3c.dom.Text
 
 class ValidateUtils {
     companion object{
@@ -23,6 +21,8 @@ class ValidateUtils {
             val input = textInput.editText?.text.toString().trim()
             if (input.isEmpty()) {
                 textInput.error = "Field can't be empty"
+            } else if (input.length > 15) {
+                textInput.error = "Field size too long."
             } else {
                 textInput.error = null
                 return true

@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.appcompat.app.AppCompatActivity
 import com.mburakcakir.taketicket.R
-import com.mburakcakir.taketicket.ui.activity.HomeActivity
+import com.mburakcakir.taketicket.ui.activity.EventActivity
 import com.mburakcakir.taketicket.ui.login.LoginActivity
 import com.mburakcakir.taketicket.utils.SessionManager
 import com.mburakcakir.taketicket.utils.extOpenActivity
@@ -26,7 +26,7 @@ class SplashActivity : AppCompatActivity() {
                 val state = sessionManager.ifUserLoggedIn()
 
                 if (state)
-                    this@SplashActivity extOpenActivity HomeActivity::class.java
+                    this@SplashActivity extOpenActivity EventActivity::class.java
                 else
                     this@SplashActivity extOpenActivity LoginActivity::class.java
                 finish()

@@ -11,42 +11,43 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.ui.info.InfoActivity
 import com.mburakcakir.taketicket.ui.ticket.TicketActivity
-import com.mburakcakir.taketicket.ui.viewmodel.HomeViewModel
+import com.mburakcakir.taketicket.ui.viewmodel.EventViewModel
 import com.mburakcakir.taketicket.utils.extDetailDialog
 import com.mburakcakir.taketicket.utils.extOpenActivity
 import com.mburakcakir.taketicket.utils.extToast
-import com.mburakcakir.vbtinternshipschedule.ui.adapter.ProductAdapter
-import kotlinx.android.synthetic.main.activity_home.*
+import com.mburakcakir.vbtinternshipschedule.ui.adapter.EventAdapter
+import kotlinx.android.synthetic.main.activity_event.*
 
 
-class HomeActivity : AppCompatActivity() {
-    private lateinit var homeViewModel: HomeViewModel
+class EventActivity : AppCompatActivity() {
+    private lateinit var eventViewModel: EventViewModel
     var backPressedTime: Long = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        setContentView(R.layout.activity_event)
 
         init()
     }
 
     fun init() {
 
-        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        toolbar.title = "Hoşgeldin ${homeViewModel.sessionManager.getUsername()}"
+        eventViewModel = ViewModelProvider(this).get(EventViewModel::class.java)
+        toolbar.title = "Hoşgeldin ${eventViewModel.getUsername()}"
         setSupportActionBar(toolbar)
 
         //Adapter çağırıldığı yer 1
-        recyclerView.adapter = ProductAdapter {
-            this@HomeActivity.extDetailDialog(it, homeViewModel)
+        recyclerView.adapter = EventAdapter {
+            this@EventActivity.extDetailDialog(it, eventViewModel)
         }
 
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         //Adapter çağırıldığı yer 2
-        homeViewModel.allProducts.observe(this, { allProducts ->
-            allProducts?.let {
-                (recyclerView.adapter as ProductAdapter).submitList(allProducts)
-                Log.d("tag2", allProducts.toString())
+        // Observer Pattern, tüm
+        eventViewModel.allEvents.observe(this, { allEvents ->
+            allEvents?.let {
+                (recyclerView.adapter as EventAdapter).submitList(allEvents)
+                Log.d("tag2", allEvents.toString())
             }
         })
     }
@@ -71,8 +72,8 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_list -> this@HomeActivity extOpenActivity TicketActivity::class.java
-            R.id.action_info -> this@HomeActivity extOpenActivity InfoActivity::class.java
+            R.id.action_list -> this@EventActivity extOpenActivity TicketActivity::class.java
+            R.id.action_info -> this@EventActivity extOpenActivity InfoActivity::class.java
         }
         return super.onOptionsItemSelected(item)
     }

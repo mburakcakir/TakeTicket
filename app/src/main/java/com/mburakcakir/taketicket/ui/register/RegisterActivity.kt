@@ -30,9 +30,10 @@ class RegisterActivity : AppCompatActivity() {
                 edtMail.text.toString(),
                 edtPassword.text.toString()
             )
+
             val username = userModel.userName
             val password = userModel.password
-
+            // Kullanıcı ViewModel aracılığıyla kontrol ediliyor
             val checkUser = registerViewModel.checkIfUserExists(username, password)
             Log.d("checkUser",checkUser.toString())
             if(checkUser)

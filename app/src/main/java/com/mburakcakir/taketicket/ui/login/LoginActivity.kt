@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.mburakcakir.taketicket.R
-import com.mburakcakir.taketicket.ui.activity.HomeActivity
+import com.mburakcakir.taketicket.ui.activity.EventActivity
 import com.mburakcakir.taketicket.ui.register.RegisterActivity
 import com.mburakcakir.taketicket.utils.extOpenActivity
 import com.mburakcakir.taketicket.utils.extToast
@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
                 loginViewModel.getUserByUsername(username, password).observe(this, {
                     loginViewModel.startSession(it)
                     Log.d("data", it.toString())
-                    extOpenActivity(HomeActivity::class.java)
+                    extOpenActivity(EventActivity::class.java)
                 })
             } else
                 this@LoginActivity extToast resources.getString(R.string.no_user)

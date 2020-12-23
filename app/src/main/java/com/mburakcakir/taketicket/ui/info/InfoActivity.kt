@@ -41,6 +41,7 @@ class InfoActivity : AppCompatActivity() {
         getAllSchedules()
     }
     //Adapter çağırıldığı yer 2
+    // Observer Pattern
     private fun getAllSchedules() {
         viewModel.getInfo().observe(this, {
             it?.let { apiResult ->

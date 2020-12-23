@@ -12,12 +12,16 @@ import com.mburakcakir.taketicket.utils.SessionManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+// FACADE PATTERN
 class RegisterViewModel(
     application: Application
 ) : AndroidViewModel(application) {
     val sessionManager: SessionManager
     val userRepository: UserRepository
 
+    // UserRepositoryImpl nesnesi için UserDao nesnesi, UserDao nesnesi için Database nesnesi gerekmektedir.
+    // Bu işlemler ViewModel classında oluşturularak Activity'nin, nesnelerin oluşturulmasından haberi olmadan veya hangi nesnelere erişmesi gerektiği belirtilmeden
+    // verilere ulaşması sağlanmakta, aynı zamanda View-Model arasındaki bağlantı kurulmaktadır.
     init {
         val database = TicketDatabase.getDatabase(application, viewModelScope)
         sessionManager = SessionManager(application)
@@ -32,6 +36,10 @@ class RegisterViewModel(
     fun checkIfUserExists(username : String, password: String) = userRepository.checkIfUserExists(username, password)
 
     //fun startSession(userModel: UserModel) = sessionManager.startSession(userModel)
-    fun startSession(userModel: UserModel) = userRepository.startSession(userModel, getApplication())
+    fun startSession(userModel: UserModel) = userRepository.startSession(
+        userModel,
+        getApplication()
+    )
+
 
 }

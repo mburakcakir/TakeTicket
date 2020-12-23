@@ -23,6 +23,8 @@ class TicketActivity : AppCompatActivity() {
         rvTicket.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rvTicket.adapter = TicketAdapter()
 
+        // Observer Pattern
+        // Adapter
         ticketViewModel.allTickets.observe(this, {
             (rvTicket.adapter as TicketAdapter).submitList(it)
         })
