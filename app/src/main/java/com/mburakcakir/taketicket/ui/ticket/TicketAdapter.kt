@@ -16,9 +16,11 @@ import kotlinx.android.synthetic.main.rv_item_ticket.view.*
 // onBindViewHolder ile, TicketViewHolder içerisinde bulunan bind methodunu tetikliyor.
 // TicketCallback sınıfı, yeni gelen nesneleri eskisiyle karşılaştırıp reaksiyon alabilmemizi sağlıyor.
 // TicketViewHolder sınıfı ile View belirlenmesi, bind methodu ile List<TicketModel> olarak gelen nesnelerin pozisyonlarının alınıp, Modellerin componentler üzerine yerleşmesini sağlanmaktadır.
-class TicketAdapter : ListAdapter<TicketModel, TicketViewHolder>(TicketCallback()) {
+class TicketAdapter(
+    private inline val onClick: (ticketModel: TicketModel) -> Unit
+) : ListAdapter<TicketModel, TicketViewHolder>(TicketCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        TicketViewHolder(parent)
+        TicketViewHolder(parent, onClick)
 
     override fun onBindViewHolder(holder: TicketViewHolder, position: Int) =
         holder.bind(getItem(position))
@@ -34,7 +36,8 @@ class TicketCallback : DiffUtil.ItemCallback<TicketModel>() {
 }
 
 class TicketViewHolder(
-    container: ViewGroup
+    container: ViewGroup,
+    private inline val onClick: (ticketModel: TicketModel) -> Unit
 ) : RecyclerView.ViewHolder(
     LayoutInflater.from(container.context).inflate(
         R.layout.rv_item_ticket,
@@ -50,6 +53,12 @@ class TicketViewHolder(
             txtTicketCategory.text = ticketModel.category
             txtTicketBoughtTime.text = ticketModel.boughtTime
             Glide.with(itemView.context).load(ticketModel.url).into(imgTicketLastImage)
+
+            imgDeleteTicket.setOnClickListener {
+                onClick(ticketModel)
+
+            }
         }
     }
+
 }

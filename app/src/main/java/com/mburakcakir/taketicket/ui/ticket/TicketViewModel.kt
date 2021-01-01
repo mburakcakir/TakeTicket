@@ -37,4 +37,7 @@ class TicketViewModel(
         allTickets.value = sessionManager.getUsername()?.let { ticketRepository.getAllTickets(it) }
     }
 
+    fun deleteTicket(id: Int) = ticketRepository.deleteTicket(id)
+    fun getAllTickets() = sessionManager.getUsername()?.let { ticketRepository.getAllTickets(it) }
+
 }

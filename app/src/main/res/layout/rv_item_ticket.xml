@@ -3,16 +3,16 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     card_view:cardCornerRadius="6dp"
     card_view:cardElevation="3dp"
     card_view:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:paddingLeft="5dp"
-        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:paddingRight="5dp">
 
         <androidx.constraintlayout.widget.Guideline
@@ -27,6 +27,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
+            card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent" />
 
@@ -44,10 +45,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_weight="0.69"
+            android:layout_marginEnd="5dp"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
+            android:maxLines="2"
             card_view:layout_constraintStart_toEndOf="@id/imgTitle"
+            card_view:layout_constraintEnd_toStartOf="@id/guideline3"
             card_view:layout_constraintTop_toTopOf="@id/imgTicketLastImage"
             tools:text="subject" />
 
@@ -57,10 +60,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
             android:background="@drawable/ic_price"
             card_view:layout_constraintStart_toEndOf="@id/guideline"
-            card_view:layout_constraintTop_toBottomOf="@id/imgTitle" />
+            card_view:layout_constraintTop_toBottomOf="@id/txtTicketTitle" />
 
         <TextView
             android:id="@+id/txtTicketPrice"
@@ -68,18 +71,16 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
-            android:text="1"
             android:textSize="16sp"
             android:textStyle="bold"
             card_view:layout_constraintStart_toEndOf="@id/imgPrice"
-            card_view:layout_constraintTop_toBottomOf="@id/imgTitle"
+            card_view:layout_constraintTop_toBottomOf="@id/txtTicketTitle"
             tools:text="@string/price" />
 
         <TextView
             android:id="@+id/txtTicketCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1"
             android:textSize="16sp"
             android:textStyle="bold"
             card_view:layout_constraintBottom_toBottomOf="@id/txtTicketPrice"
@@ -92,7 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            card_view:layout_constraintGuide_percent="0.70" />
+            card_view:layout_constraintGuide_percent="0.75" />
 
 
         <ImageView
@@ -123,26 +124,26 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
             android:background="@drawable/ic_calendar"
             card_view:layout_constraintStart_toStartOf="@id/guideline3"
             card_view:layout_constraintTop_toBottomOf="@id/imgTime" />
 
         <TextView
             android:id="@+id/txtTicketLastTime"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
-            android:gravity="right"
-            android:text="1"
+            android:maxLines="2"
             android:textSize="14sp"
             card_view:layout_constraintStart_toEndOf="@id/imgCalendar"
+            card_view:layout_constraintEnd_toStartOf="@id/imgDeleteTicket"
             card_view:layout_constraintTop_toBottomOf="@id/txtTicketBoughtTime"
             tools:text="day" />
 
         <ImageView
-            android:id="@+id/imgDelete"
+            android:id="@+id/imgDeleteTicket"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@drawable/ic_delete"

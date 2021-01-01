@@ -7,9 +7,11 @@ class TicketRepositoryImpl(private val ticketDao : TicketDao) : TicketRepository
     override suspend fun insertTicket(ticketModel: TicketModel) =
         ticketDao.insertTicket(ticketModel)
 
-    override fun getAllTickets(username: String): ArrayList<TicketModel> =
-        ticketDao.getAllTickets(username) as ArrayList<TicketModel>
+    override fun getAllTickets(username: String): List<TicketModel> =
+        ticketDao.getAllTickets(username)
 
     override fun checkIfTicketExists(ticketName: String): Boolean =
         ticketDao.checkIfTicketExists(ticketName) != 0
+
+    override fun deleteTicket(id: Int) = ticketDao.deleteTicket(id)
 }

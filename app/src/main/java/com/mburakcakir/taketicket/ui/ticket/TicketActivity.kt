@@ -21,14 +21,16 @@ class TicketActivity : AppCompatActivity() {
         setSupportActionBar(toolbarTicket)
         ticketViewModel = ViewModelProvider(this).get(TicketViewModel::class.java)
         rvTicket.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        rvTicket.adapter = TicketAdapter()
 
-        // Adapter çağırıldığı yer
-        // Observer Pattern, allTickets değişkeni her değiştiğinde observe metodu tetiklenecek ve adapter güncellenecek.
-        // Böylece veri değişimini elle kontrol etmemize gerek kalmayacak. Hem güncel veriyi alacağız hem de set işlemlerini yapacağız.
+        rvTicket.adapter = TicketAdapter {
+            ticketViewModel.apply {
+                deleteTicket(it.ticketID)
+                allTickets.value = getAllTickets()
+            }
+        }
+
         ticketViewModel.allTickets.observe(this, {
             (rvTicket.adapter as TicketAdapter).submitList(it)
         })
-
     }
 }

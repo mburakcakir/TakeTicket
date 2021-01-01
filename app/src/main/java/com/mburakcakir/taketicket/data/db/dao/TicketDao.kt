@@ -16,4 +16,7 @@ interface TicketDao{
 
     @Query("SELECT COUNT(*) FROM table_ticket where title =:ticketTitle")
     fun checkIfTicketExists(ticketTitle: String): Int
+
+    @Query("DELETE FROM table_ticket WHERE ticketID=:id")
+    fun deleteTicket(id: Int)
 }
