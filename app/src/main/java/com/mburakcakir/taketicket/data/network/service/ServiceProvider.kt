@@ -11,11 +11,7 @@ class ServiceProvider {
         serviceApi = instance!!.create(ServiceApiClient::class.java)
         return serviceApi
     }
-    // ROOM DB SINGLETON.
-    // Kotlin'de static keyword olmadığından dolayı companion object ile static özelliği sağlayabilmekteyiz.
-    // Kotlin'de singleton için "object" keyword'unu kullanmak yeterlidir, fakat companion object, private instance ve null check ile adım adım yapılmıştır.
-    // singleton nesnesinin çağırımı getServiceApi() fonksiyonu ile çağırılmaktadır. Fonksiyonda null kontrolü sağlanmasına rağmen, null-safety desteği sağlayan Kotlin ile
-    // tekrardan null durumuna bakılarak uygulamanın çökmesi engellenmiştir.
+
     companion object {
         private var retrofit: Retrofit? = null
         val BASE_URL = "https://taketicketandroid-default-rtdb.firebaseio.com/"

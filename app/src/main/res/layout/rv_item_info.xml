@@ -1,42 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    card_view:cardCornerRadius="6dp"
-    card_view:cardElevation="3dp"
-    card_view:cardUseCompatPadding="true">
+    app:cardCornerRadius="6dp"
+    app:cardElevation="3dp"
+    app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="10dp">
 
         <ImageView
             android:id="@+id/imgInfoImage"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txtInfoTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
-            card_view:layout_constraintStart_toEndOf="@id/imgInfoImage"
-            card_view:layout_constraintTop_toTopOf="@id/imgInfoImage"
+            app:layout_constraintBottom_toTopOf="@id/txtInfoLink"
+            app:layout_constraintStart_toEndOf="@id/imgInfoImage"
+            app:layout_constraintTop_toTopOf="@id/imgInfoImage"
             tools:text="subject" />
 
         <TextView
             android:id="@+id/txtInfoLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:autoLink="web"
+            android:layout_marginStart="16dp"
+            android:autoLink="web|email"
             android:textColorLink="@color/colorBlack"
-            card_view:layout_constraintStart_toEndOf="@id/imgInfoImage"
-            card_view:layout_constraintTop_toBottomOf="@id/txtInfoTitle"
+            app:layout_constraintBottom_toBottomOf="@id/imgInfoImage"
+            app:layout_constraintStart_toEndOf="@id/imgInfoImage"
+            app:layout_constraintTop_toBottomOf="@id/txtInfoTitle"
             tools:text="link" />
 
         <ImageView
@@ -44,8 +50,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/ic_share"
-            card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

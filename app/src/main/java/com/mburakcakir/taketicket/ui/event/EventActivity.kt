@@ -36,19 +36,15 @@ class EventActivity : AppCompatActivity() {
         toolbar.title = "Hoşgeldin ${eventViewModel.getUsername()}"
         setSupportActionBar(toolbar)
 
-        //Adapter çağırıldığı yer 1
-        recyclerView.adapter = EventAdapter {
+        rvInfo.adapter = EventAdapter {
             this@EventActivity.extDetailDialog(it, eventViewModel)
         }
 
-        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rvInfo.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-        //Adapter çağırıldığı yer 2
-        // Observer Pattern, allEvents değişkeni her değiştiğinde observe metodu tetiklenecek ve adapter güncellenecek.
-        // Böylece veri değişimini elle kontrol etmemize gerek kalmayacak. Hem güncel veriyi alacağız hem de set işlemlerini yapacağız.
         eventViewModel.allEvents.observe(this, { allEvents ->
             allEvents?.let {
-                (recyclerView.adapter as EventAdapter).submitList(allEvents)
+                (rvInfo.adapter as EventAdapter).submitList(allEvents)
                 Log.d("tag2", allEvents.toString())
             }
         })

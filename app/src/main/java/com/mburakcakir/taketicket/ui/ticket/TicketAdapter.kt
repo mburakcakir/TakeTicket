@@ -10,12 +10,6 @@ import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.data.db.entity.TicketModel
 import kotlinx.android.synthetic.main.rv_item_ticket.view.*
 
-// Adapter Pattern olarak, Android Programlamada yeni kullanılmaya başlanan ListAdapter sınıfı kullanıldı.
-// ListAdapter kullanırken de yine nesneleri adapter aracılığıyla View üzerinde yerleştirmekteyiz.
-// getItemCount ile Adapter'a gelen listenin boyutunu ileterek kaç kez tekrar edeceğini belirtiyoruz
-// onBindViewHolder ile, TicketViewHolder içerisinde bulunan bind methodunu tetikliyor.
-// TicketCallback sınıfı, yeni gelen nesneleri eskisiyle karşılaştırıp reaksiyon alabilmemizi sağlıyor.
-// TicketViewHolder sınıfı ile View belirlenmesi, bind methodu ile List<TicketModel> olarak gelen nesnelerin pozisyonlarının alınıp, Modellerin componentler üzerine yerleşmesini sağlanmaktadır.
 class TicketAdapter(
     private inline val onClick: (ticketModel: TicketModel) -> Unit
 ) : ListAdapter<TicketModel, TicketViewHolder>(TicketCallback()) {

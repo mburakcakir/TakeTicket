@@ -26,7 +26,6 @@ abstract class TicketDatabase : RoomDatabase() {
     abstract fun eventDao(): EventDao
     abstract fun ticketDao(): TicketDao
 
-    // verdiğimiz scope içinde ayrı bir thread açarak db işlemlerini gerçekleştiriyor.
     private class TicketDatabaseCallback(
         private val scope: CoroutineScope
     ) : RoomDatabase.Callback() {
@@ -166,11 +165,6 @@ abstract class TicketDatabase : RoomDatabase() {
             Log.d("tag", eventDao.getAllEvents().value.toString())
         }
     }
-    // ROOM DB SINGLETON.
-    // Kotlin'de static keyword olmadığından dolayı companion object ile static özelliği sağlayabilmekteyiz.
-    // Kotlin'de singleton için "object" keyword'unu kullanmak yeterlidir, fakat companion object, private instance ve null check ile adım adım yapılmıştır.
-    // Aynı zamanda, veritabanı thread-safety olarak veri akışını sağlamak adına, instance için Volatile, function için synchronized ve database kullanacak
-    // fonksiyonlar için CoroutineScope kullanılmıştır.
 
     companion object {
         @Volatile

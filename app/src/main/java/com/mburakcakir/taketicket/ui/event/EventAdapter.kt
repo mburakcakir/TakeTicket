@@ -13,12 +13,6 @@ import com.mburakcakir.taketicket.utils.SessionManager
 import com.mburakcakir.taketicket.utils.getCurrentTime
 import kotlinx.android.synthetic.main.rv_item_event.view.*
 
-// Adapter Pattern olarak, Android Programlamada yeni kullanılmaya başlanan ListAdapter sınıfı kullanıldı.
-// getItemCount ile Adapter'a gelen listenin boyutunu ileterek kaç kez tekrar edeceğini belirtiyoruz.
-// onBindViewHolder ile, EventViewHolder içerisinde bulunan bind methodunu tetikliyoruz.
-// EventCallback sınıfı, yeni gelen nesneleri eskisiyle karşılaştırıp reaksiyon alabilmemizi sağlıyor.
-// EventViewHolder sınıfı ile View belirlenmesi, bind methodu ile List<EventModel> olarak gelen nesnelerin pozisyonlarının alınıp, Modellerin componentler üzerine yerleşmesi sağlanmaktadır.
-// Burası Adapter'ın DataBinding görevini üstlendiği yerdir.
 class EventAdapter(
     private inline val onClickEvent: (ticketModel: TicketModel) -> Unit
 ) : ListAdapter<EventModel, EventViewHolder>(EventCallback()) {

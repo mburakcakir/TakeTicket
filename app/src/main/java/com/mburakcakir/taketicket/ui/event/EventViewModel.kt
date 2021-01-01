@@ -24,12 +24,6 @@ class EventViewModel(
     val ticketRepository: TicketRepository
     val allEvents: LiveData<List<EventModel>>
 
-    // burada 34. satırda SessionManager class'ı, 36. satırda EventRepositoryImpl class'ı, 37. satırda, TicketRepositoryImpl class'ı ve nesneleri tanımlanmaktadır.
-    // init bloğu dışında da bu nesneler kullanılarak fonksiyonlar tanımlanmakta, Activity üzerinden de fonksiyonlar çağırılmaktadır.
-    // TicketRepositoryImpl nesnesi için TicketDao nesnesi, TicketDao nesnesi için TicketDatabase nesnesi gerekmektedir.
-    // EventRepositoryImpl nesnesi için EventDao nesnesi, EventDao nesnesi için TicketDatabase nesnesi gerekmektedir.
-    // Bu işlemler EventViewModel classında oluşturularak Activity'nin, nesnelerin oluşturulmasından haberi olmadan veya hangi nesnelere erişmesi gerektiği belirtilmeden
-    // verilere ulaşması sağlanmakta, aynı zamanda View-Model arasındaki bağlantıyı Repository aracılığıyla kurulmaktadır.
     init {
         sessionManager = SessionManager(application)
         val database = TicketDatabase.getDatabase(application, viewModelScope)

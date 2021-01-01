@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.data.network.service.ServiceProvider
 import com.mburakcakir.taketicket.data.repository.info.InfoRepository
@@ -24,6 +25,7 @@ class InfoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_info)
         toolbarInfo.title = getString(R.string.contact)
         setSupportActionBar(toolbarInfo)
+
         init()
     }
 
@@ -35,23 +37,18 @@ class InfoActivity : AppCompatActivity() {
             InfoViewModel::class.java
         )
 
-        //Adapter çağırıldığı yer 1
-        recyclerView.adapter = InfoAdapter()
-
+        rvInfo.adapter = InfoAdapter()
+        rvInfo.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         getAllSchedules()
     }
 
-    //Adapter çağırıldığı yer 2
-    // Observer Pattern, info her değiştiğinde observe metodu tetiklenecek ve adapter güncellenecek.
-    // Böylece veri değişimini elle kontrol etmemize gerek kalmayacak. Hem güncel veriyi alacağız hem de set işlemlerini yapacağız.
     private fun getAllSchedules() {
         viewModel.getInfo().observe(this, {
             it?.let { apiResult ->
                 when (apiResult.status) {
                     Status.SUCCESS -> {
                         Log.v("LOGSUCCESS", it.data.toString())
-                        //Submit with SubmitList by ListAdapter to adapter when change data
-                        (recyclerView.adapter as InfoAdapter).submitList(it.data)
+                        (rvInfo.adapter as InfoAdapter).submitList(it.data)
                     }
                     Status.ERROR -> {
                         Log.v("LOGERROR ", it.message.toString())
