@@ -57,11 +57,11 @@ class EventActivity : AppCompatActivity() {
     override fun onBackPressed() {
         if (backPressedTime + 5000 > System.currentTimeMillis()) {
             //  homeViewModel.sessionManager.endSession()
-            this extToast resources.getString(R.string.login_again)
+            this extToast getString(R.string.login_again)
             this extOpenActivity LoginActivity::class.java
             finish()
         } else {
-            Toast.makeText(baseContext, resources.getString(R.string.exit_app), Toast.LENGTH_SHORT)
+            Toast.makeText(baseContext, getString(R.string.exit_app), Toast.LENGTH_SHORT)
                 .show()
         }
         backPressedTime = System.currentTimeMillis()

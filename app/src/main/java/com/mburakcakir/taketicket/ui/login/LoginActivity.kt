@@ -42,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
                     extOpenActivity(EventActivity::class.java)
                 })
             } else
-                this@LoginActivity extToast resources.getString(R.string.no_user)
+                this@LoginActivity extToast getString(R.string.no_user)
 
         }
     }

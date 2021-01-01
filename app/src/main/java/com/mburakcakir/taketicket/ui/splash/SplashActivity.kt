@@ -18,7 +18,7 @@ class SplashActivity : AppCompatActivity() {
 
         object : CountDownTimer(1500, 1000) {
             override fun onTick(p0: Long) {
-                appName.text = resources.getString(R.string.app_name)
+                appName.text = getString(R.string.app_name)
             }
 
             override fun onFinish() {

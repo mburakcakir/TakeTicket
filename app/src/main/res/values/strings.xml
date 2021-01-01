@@ -16,5 +16,6 @@
     <string name="no_user">Kullanıcı bulunamadı.</string>
     <string name="already_registered">Kullanıcı zaten kayıtlı.</string>
     <string name="tickets">Biletlerim</string>
-
+    <string name="success_ticket">Biletin alındı.</string>
+    <string name="warn_ticket">Bilet zaten alınmış.</string>
 </resources>

@@ -38,7 +38,7 @@ class RegisterActivity : AppCompatActivity() {
             val checkUser = registerViewModel.checkIfUserExists(username, password)
             Log.d("checkUser",checkUser.toString())
             if(checkUser)
-                this@RegisterActivity extToast resources.getString(R.string.already_registered)
+                this@RegisterActivity extToast getString(R.string.already_registered)
             else {
                 registerViewModel.insertUser(userModel)
                 finish()

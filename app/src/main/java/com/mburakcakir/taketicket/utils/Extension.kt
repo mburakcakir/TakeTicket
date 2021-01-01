@@ -41,15 +41,14 @@ fun Activity.extDetailDialog(ticketModel: TicketModel, eventViewModel: EventView
     dialog.btnApprove.setOnClickListener {
         if (!eventViewModel.checkIfTicketExists(ticketModel.title)) {
             eventViewModel.insertTicket(ticketModel)
-            this extToast "Biletin alındı."
+            this extToast this.getString(R.string.success_ticket)
             this extOpenActivity TicketActivity::class.java
         } else
-            this extToast "Bilet zaten alınmış."
+            this extToast this.getString(R.string.warn_ticket)
 
         mAlertDialog.dismiss()
 
     }
-
 }
 
 infix fun Context.shareText(text: String) {

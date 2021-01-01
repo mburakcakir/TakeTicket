@@ -17,7 +17,7 @@ class TicketActivity : AppCompatActivity() {
     }
 
     fun init() {
-        toolbarTicket.title = resources.getString(R.string.tickets)
+        toolbarTicket.title = getString(R.string.tickets)
         setSupportActionBar(toolbarTicket)
         ticketViewModel = ViewModelProvider(this).get(TicketViewModel::class.java)
         rvTicket.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)

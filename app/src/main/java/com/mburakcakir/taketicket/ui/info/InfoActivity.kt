@@ -22,7 +22,7 @@ class InfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info)
-        toolbarInfo.title = resources.getString(R.string.contact)
+        toolbarInfo.title = getString(R.string.contact)
         setSupportActionBar(toolbarInfo)
         init()
     }
