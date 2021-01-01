@@ -19,12 +19,14 @@ class RegisterViewModel(
     val sessionManager: SessionManager
     val userRepository: UserRepository
 
-    // UserRepositoryImpl nesnesi için UserDao nesnesi, UserDao nesnesi için Database nesnesi gerekmektedir.
-    // Bu işlemler ViewModel classında oluşturularak Activity'nin, nesnelerin oluşturulmasından haberi olmadan veya hangi nesnelere erişmesi gerektiği belirtilmeden
-    // verilere ulaşması sağlanmakta, aynı zamanda View-Model arasındaki bağlantı kurulmaktadır.
+    // burada 28. satırda SessionManager class'ı, 30. satırda UserRepositoryImpl class'ı ve nesneleri tanımlanmaktadır.
+    // init bloğu dışında da bu nesneler kullanılarak fonksiyonlar tanımlanmakta, Activity üzerinden de fonksiyonlar çağırılmaktadır.
+    // UserRepositoryImpl nesnesi için UserDao nesnesi, UserDao nesnesi için TicketDatabase nesnesi gerekmektedir.
+    // Bu işlemler RegisterViewModel classında oluşturularak Activity'nin, nesnelerin oluşturulmasından haberi olmadan veya hangi nesnelere erişmesi gerektiği belirtilmeden
+    // verilere ulaşması sağlanmakta, aynı zamanda View-Model arasındaki bağlantıyı Repository aracılığıyla kurulmaktadır.
     init {
-        val database = TicketDatabase.getDatabase(application, viewModelScope)
         sessionManager = SessionManager(application)
+        val database = TicketDatabase.getDatabase(application, viewModelScope)
         userRepository = UserRepositoryImpl(database.userDao())
     }
 

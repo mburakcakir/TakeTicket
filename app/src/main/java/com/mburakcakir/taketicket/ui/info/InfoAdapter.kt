@@ -12,12 +12,12 @@ import com.mburakcakir.taketicket.utils.GlideApp
 import com.mburakcakir.taketicket.utils.shareText
 import kotlinx.android.synthetic.main.rv_item_info.view.*
 
-// Adapter Pattern olarak, Android Programlamada sıkça kullanılan RecyclerViewAdapter ve yeni kullanılmaya başlanılan ListAdapter sınıflarının ikisi de kullanıldı.
+// Adapter Pattern olarak, Android Programlamada yeni kullanılmaya başlanan ListAdapter sınıfı kullanıldı.
 // ListAdapter kullanırken de yine nesneleri adapter aracılığıyla View üzerinde yerleştirmekteyiz.
 // getItemCount ile Adapter'a gelen listenin boyutunu ileterek kaç kez tekrar edeceğini belirtiyoruz
 // onBindViewHolder ile, InfoViewHolder içerisinde bulunan bind methodunu tetikliyor.
 // InfoCallBack sınıfı, yeni gelen nesneleri eskisiyle karşılaştırıp reaksiyon alabilmemizi sağlıyor.
-// InfoViewHolder sınıfı ile View belirlenmesi, bind methodu ile List<Model> olarak gelen nesnelerin pozisyonlarının alınıp, Modellerin componentler üzerine yerleşmesini sağlanmaktadır.
+// InfoViewHolder sınıfı ile View belirlenmesi, bind methodu ile List<InfoModel> olarak gelen nesnelerin pozisyonlarının alınıp, Modellerin componentler üzerine yerleşmesini sağlanmaktadır.
 
 class InfoAdapter : ListAdapter<InfoModel, InfoViewHolder>(InfoCallBack()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -27,8 +27,6 @@ class InfoAdapter : ListAdapter<InfoModel, InfoViewHolder>(InfoCallBack()) {
         holder.bind(getItem(position))
 
 }
-
-
 class InfoCallBack : DiffUtil.ItemCallback<InfoModel>() {
     override fun areItemsTheSame(oldItem: InfoModel, newItem: InfoModel) =
         oldItem == newItem

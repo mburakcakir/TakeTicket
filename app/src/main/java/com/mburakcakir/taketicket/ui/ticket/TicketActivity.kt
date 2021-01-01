@@ -23,8 +23,9 @@ class TicketActivity : AppCompatActivity() {
         rvTicket.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rvTicket.adapter = TicketAdapter()
 
-        // Observer Pattern
-        // Adapter
+        // Adapter çağırıldığı yer
+        // Observer Pattern, allTickets değişkeni her değiştiğinde observe metodu tetiklenecek ve adapter güncellenecek.
+        // Böylece veri değişimini elle kontrol etmemize gerek kalmayacak. Hem güncel veriyi alacağız hem de set işlemlerini yapacağız.
         ticketViewModel.allTickets.observe(this, {
             (rvTicket.adapter as TicketAdapter).submitList(it)
         })

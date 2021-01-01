@@ -10,13 +10,12 @@ import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.data.db.entity.TicketModel
 import kotlinx.android.synthetic.main.rv_item_ticket.view.*
 
-// Adapter Pattern olarak, Android Programlamada sıkça kullanılan RecyclerViewAdapter ve yeni kullanılmaya başlanılan ListAdapter sınıflarının ikisi de kullanıldı.
-// RecyclerViewAdapter kullanırken de yine nesneleri adapter aracılığıyla View üzerinde yerleştirmekteyiz.
-// onCreateViewHolder methodu, ViewHolder yani View ve değişkenleri yönetmemizi sağlayan sınıfımızı tanıtmamızı sağlıyor.
+// Adapter Pattern olarak, Android Programlamada yeni kullanılmaya başlanan ListAdapter sınıfı kullanıldı.
+// ListAdapter kullanırken de yine nesneleri adapter aracılığıyla View üzerinde yerleştirmekteyiz.
 // getItemCount ile Adapter'a gelen listenin boyutunu ileterek kaç kez tekrar edeceğini belirtiyoruz
 // onBindViewHolder ile, TicketViewHolder içerisinde bulunan bind methodunu tetikliyor.
-// TicketViewHolder sınıfı ile View belirlenmesi, bind methodu ile List<Model> olarak gelen nesnelerin pozisyonlarının alınıp, Modellerin componentler üzerine yerleşmesini sağlanmaktadır.
-// Burası Adapter'ın DataBinding görevini üstlendiği yerdir.
+// TicketCallback sınıfı, yeni gelen nesneleri eskisiyle karşılaştırıp reaksiyon alabilmemizi sağlıyor.
+// TicketViewHolder sınıfı ile View belirlenmesi, bind methodu ile List<TicketModel> olarak gelen nesnelerin pozisyonlarının alınıp, Modellerin componentler üzerine yerleşmesini sağlanmaktadır.
 class TicketAdapter : ListAdapter<TicketModel, TicketViewHolder>(TicketCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         TicketViewHolder(parent)
@@ -25,7 +24,6 @@ class TicketAdapter : ListAdapter<TicketModel, TicketViewHolder>(TicketCallback(
         holder.bind(getItem(position))
 
 }
-
 
 class TicketCallback : DiffUtil.ItemCallback<TicketModel>() {
     override fun areItemsTheSame(oldItem: TicketModel, newItem: TicketModel) =

@@ -38,6 +38,7 @@ class LoginActivity : AppCompatActivity() {
                 loginViewModel.getUserByUsername(username, password).observe(this, {
                     loginViewModel.startSession(it)
                     Log.d("data", it.toString())
+                    finish()
                     extOpenActivity(EventActivity::class.java)
                 })
             } else

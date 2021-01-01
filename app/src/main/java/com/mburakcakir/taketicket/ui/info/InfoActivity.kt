@@ -40,24 +40,26 @@ class InfoActivity : AppCompatActivity() {
 
         getAllSchedules()
     }
+
     //Adapter çağırıldığı yer 2
-    // Observer Pattern
+    // Observer Pattern, info her değiştiğinde observe metodu tetiklenecek ve adapter güncellenecek.
+    // Böylece veri değişimini elle kontrol etmemize gerek kalmayacak. Hem güncel veriyi alacağız hem de set işlemlerini yapacağız.
     private fun getAllSchedules() {
         viewModel.getInfo().observe(this, {
             it?.let { apiResult ->
                 when (apiResult.status) {
                     Status.SUCCESS -> {
-                        Log.v("LOG SUCCESS", it.data.toString())
+                        Log.v("LOGSUCCESS", it.data.toString())
                         //Submit with SubmitList by ListAdapter to adapter when change data
                         (recyclerView.adapter as InfoAdapter).submitList(it.data)
                     }
                     Status.ERROR -> {
-                        Log.v("LOG ERROR ", it.message.toString())
+                        Log.v("LOGERROR ", it.message.toString())
                         Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
 
                     }
                     Status.LOADING -> {
-                        Log.v("LOG LOADING ", it.data.toString())
+                        Log.v("LOGLOADING ", it.data.toString())
                     }
                 }
             }

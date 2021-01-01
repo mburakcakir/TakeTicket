@@ -33,6 +33,7 @@ class RegisterActivity : AppCompatActivity() {
 
             val username = userModel.userName
             val password = userModel.password
+
             // Kullanıcı ViewModel aracılığıyla kontrol ediliyor
             val checkUser = registerViewModel.checkIfUserExists(username, password)
             Log.d("checkUser",checkUser.toString())
@@ -40,8 +41,9 @@ class RegisterActivity : AppCompatActivity() {
                 this@RegisterActivity extToast resources.getString(R.string.already_registered)
             else {
                 registerViewModel.insertUser(userModel)
-                extOpenActivity(LoginActivity::class.java)
                 finish()
+                extOpenActivity(LoginActivity::class.java)
+
             }
 //            registerViewModel.getUserByUsername(username, password).observe(this, {
 //                registerViewModel.startSession(it)

@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 
 @Database(
     entities = [UserModel::class, EventModel::class, TicketModel::class],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 abstract class TicketDatabase : RoomDatabase() {
@@ -31,8 +31,8 @@ abstract class TicketDatabase : RoomDatabase() {
         private val scope: CoroutineScope
     ) : RoomDatabase.Callback() {
 
-        override fun onCreate(db: SupportSQLiteDatabase) {
-            super.onCreate(db)
+        override fun onOpen(db: SupportSQLiteDatabase) {
+            super.onOpen(db)
             INSTANCE?.let { database ->
                 scope.launch {
                     populateDatabase(
@@ -42,19 +42,8 @@ abstract class TicketDatabase : RoomDatabase() {
             }
         }
 
-//        override fun onCreate(db: SupportSQLiteDatabase) {
-//            super.onCreate(db)
-//            INSTANCE?.let { database ->
-//                scope.launch {
-//                    populateDatabase(
-//                        database.eventDao()
-//                    )
-//                }
-//            }
-//        }
-
         suspend fun populateDatabase(eventDao: EventDao) {
-            eventDao.deleteAll()
+            eventDao.deleteAllEvents()
             var eventModel = EventModel(
                 "Ahududu",
                 "Harbiye Cemil Topuzlu Açıkhava Sahnesi ",
