@@ -18,4 +18,5 @@
     <string name="tickets">Biletlerim</string>
     <string name="success_ticket">Biletin alındı.</string>
     <string name="warn_ticket">Bilet zaten alınmış.</string>
+    <string name="approve_ticket">Onayla</string>
 </resources>
