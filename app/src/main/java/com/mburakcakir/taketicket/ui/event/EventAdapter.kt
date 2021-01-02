@@ -1,4 +1,4 @@
-package com.mburakcakir.vbtinternshipschedule.ui.adapter
+package com.mburakcakir.taketicket.ui.event.EventAdapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

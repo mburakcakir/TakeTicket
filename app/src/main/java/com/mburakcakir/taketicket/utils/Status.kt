@@ -1,4 +1,4 @@
-package com.mburakcakir.vbtinternshipschedule.utils
+package com.mburakcakir.taketicket.utils
 
 enum class Status {
     SUCCESS,

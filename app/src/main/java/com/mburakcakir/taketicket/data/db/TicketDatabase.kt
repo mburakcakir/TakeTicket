@@ -1,7 +1,6 @@
 package com.mburakcakir.taketicket.data.db
 
 import android.content.Context
-import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -30,8 +29,8 @@ abstract class TicketDatabase : RoomDatabase() {
         private val scope: CoroutineScope
     ) : RoomDatabase.Callback() {
 
-        override fun onOpen(db: SupportSQLiteDatabase) {
-            super.onOpen(db)
+        override fun onCreate(db: SupportSQLiteDatabase) {
+            super.onCreate(db)
             INSTANCE?.let { database ->
                 scope.launch {
                     populateDatabase(
@@ -162,7 +161,6 @@ abstract class TicketDatabase : RoomDatabase() {
             )
 
             eventDao.insertEvent(eventModel)
-            Log.d("tag", eventDao.getAllEvents().value.toString())
         }
     }
 

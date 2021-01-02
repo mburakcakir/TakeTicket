@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mburakcakir.taketicket.R
+import com.mburakcakir.taketicket.ui.event.EventAdapter.EventAdapter
 import com.mburakcakir.taketicket.ui.info.InfoActivity
 import com.mburakcakir.taketicket.ui.login.LoginActivity
 import com.mburakcakir.taketicket.ui.ticket.TicketActivity
@@ -16,7 +17,6 @@ import com.mburakcakir.taketicket.ui.viewmodel.EventViewModel
 import com.mburakcakir.taketicket.utils.extDetailDialog
 import com.mburakcakir.taketicket.utils.extOpenActivity
 import com.mburakcakir.taketicket.utils.extToast
-import com.mburakcakir.vbtinternshipschedule.ui.adapter.EventAdapter
 import kotlinx.android.synthetic.main.activity_event.*
 
 
@@ -36,19 +36,22 @@ class EventActivity : AppCompatActivity() {
         toolbar.title = "Hoşgeldin ${eventViewModel.getUsername()}"
         setSupportActionBar(toolbar)
 
-        rvInfo.adapter = EventAdapter {
+        rvEvent.adapter = EventAdapter {
             this@EventActivity.extDetailDialog(it, eventViewModel)
         }
 
-        rvInfo.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rvEvent.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+        eventViewModel.getAllEvents()
 
         eventViewModel.allEvents.observe(this, { allEvents ->
             allEvents?.let {
-                (rvInfo.adapter as EventAdapter).submitList(allEvents)
+                (rvEvent.adapter as EventAdapter).submitList(allEvents)
                 Log.d("tag2", allEvents.toString())
             }
         })
     }
+
 
     override fun onBackPressed() {
         if (backPressedTime + 5000 > System.currentTimeMillis()) {

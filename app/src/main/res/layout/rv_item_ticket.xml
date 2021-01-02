@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="5dp"
+        android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingRight="5dp">
 
@@ -24,21 +25,24 @@
 
         <ImageView
             android:id="@+id/imgTicketLastImage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_gravity="center"
+            android:layout_marginRight="5dp"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintEnd_toEndOf="@id/guideline"
             card_view:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imgTitle"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@drawable/ic_title"
             card_view:layout_constraintStart_toEndOf="@id/guideline"
-            card_view:layout_constraintTop_toTopOf="@id/imgTicketLastImage" />
+            card_view:layout_constraintEnd_toStartOf="@id/txtTicketTitle"
+            card_view:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txtTicketTitle"
@@ -51,7 +55,7 @@
             android:maxLines="2"
             card_view:layout_constraintStart_toEndOf="@id/imgTitle"
             card_view:layout_constraintEnd_toStartOf="@id/guideline3"
-            card_view:layout_constraintTop_toTopOf="@id/imgTicketLastImage"
+            card_view:layout_constraintTop_toTopOf="parent"
             tools:text="subject" />
 
         <ImageView
@@ -93,7 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            card_view:layout_constraintGuide_percent="0.75" />
+            card_view:layout_constraintGuide_percent="0.70" />
 
 
         <ImageView
@@ -103,7 +107,7 @@
             android:layout_gravity="center"
             android:background="@drawable/ic_time"
             card_view:layout_constraintStart_toStartOf="@id/guideline3"
-            card_view:layout_constraintTop_toTopOf="@id/txtTicketTitle" />
+            card_view:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txtTicketBoughtTime"
@@ -115,7 +119,7 @@
             android:textColor="@color/colorRed"
             android:textStyle="bold"
             card_view:layout_constraintStart_toEndOf="@id/imgTime"
-            card_view:layout_constraintTop_toTopOf="@id/txtTicketTitle"
+            card_view:layout_constraintTop_toTopOf="parent"
             tools:text="boughttime" />
 
         <ImageView
@@ -144,12 +148,12 @@
 
         <ImageView
             android:id="@+id/imgDeleteTicket"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@drawable/ic_delete"
-            card_view:layout_constraintBottom_toBottomOf="@id/imgCalendar"
+            card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintTop_toTopOf="@id/imgTime" />
+            card_view:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

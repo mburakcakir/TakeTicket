@@ -1,9 +1,10 @@
 package com.mburakcakir.taketicket.data.repository.event
 
-import androidx.lifecycle.LiveData
 import com.mburakcakir.taketicket.data.db.entity.EventModel
+import com.mburakcakir.taketicket.utils.Resource
+import kotlinx.coroutines.flow.Flow
 
 interface EventRepository {
-    fun getAllEvents(): LiveData<List<EventModel>>
+    suspend fun getAllEvents(): Flow<Resource<List<EventModel>>>
     suspend fun insertEvent(eventModel: EventModel)
 }
