@@ -2,7 +2,6 @@ package com.mburakcakir.taketicket.ui.register
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.mburakcakir.taketicket.data.db.TicketDatabase
 import com.mburakcakir.taketicket.data.db.entity.UserModel
@@ -29,14 +28,6 @@ class RegisterViewModel(
         userRepository.insertUser(userModel)
     }
 
-    fun getUserByUsername(username : String, password : String) : LiveData<UserModel> = userRepository.getUserByUsername(username, password)
-    fun checkIfUserExists(username : String, password: String) = userRepository.checkIfUserExists(username, password)
-
-    //fun startSession(userModel: UserModel) = sessionManager.startSession(userModel)
-    fun startSession(userModel: UserModel) = userRepository.startSession(
-        userModel,
-        getApplication()
-    )
-
-
+    fun checkIfUserExists(username: String, password: String) =
+        userRepository.checkIfUserExists(username, password)
 }

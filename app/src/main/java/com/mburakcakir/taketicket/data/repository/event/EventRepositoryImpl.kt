@@ -8,11 +8,11 @@ import kotlinx.coroutines.flow.flow
 class EventRepositoryImpl(private val eventDao: EventDao) : EventRepository {
 
     override suspend fun getAllEvents() = flow {
-        emit(Resource.loading())
+        emit(Resource.Loading())
         try {
-            emit(Resource.success(eventDao.getAllEvents()))
+            emit(Resource.Success(eventDao.getAllEvents()))
         } catch (e: Exception) {
-            emit(Resource.error())
+            emit(Resource.Error(e))
         }
     }
 

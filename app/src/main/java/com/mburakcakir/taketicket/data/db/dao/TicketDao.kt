@@ -18,5 +18,5 @@ interface TicketDao{
     fun checkIfTicketExists(ticketTitle: String): Int
 
     @Query("DELETE FROM table_ticket WHERE ticketID=:id")
-    fun deleteTicket(id: Int)
+    suspend fun deleteTicket(id: Int)
 }

@@ -1,6 +1,5 @@
 package com.mburakcakir.taketicket.data.db.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -16,6 +15,6 @@ interface UserDao {
     fun checkIfUserExists(username : String, password: String) : Int
 
     @Query("SELECT * FROM table_user WHERE userName =:username AND password =:password")
-    fun getUserByUsername(username : String, password : String) : LiveData<UserModel>
+    fun getUserByUsername(username: String, password: String): UserModel
 
 }

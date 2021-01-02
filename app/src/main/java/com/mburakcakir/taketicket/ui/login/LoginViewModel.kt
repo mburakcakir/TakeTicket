@@ -2,7 +2,6 @@ package com.mburakcakir.taketicket.ui.login
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.mburakcakir.taketicket.data.db.TicketDatabase
 import com.mburakcakir.taketicket.data.db.entity.UserModel
@@ -22,11 +21,16 @@ class LoginViewModel (
         userRepository = UserRepositoryImpl(database.userDao())
     }
 
-    fun startSession(userModel: UserModel) = sessionManager.startSession(userModel)
+    fun startSession(userName: String, password: String) {
+        val userModel = getUserByUsername(userName, password)
+        sessionManager.startSession(userModel)
+    }
+
     fun checkIfUserExists(username: String, password: String) =
         userRepository.checkIfUserExists(username, password)
 
-    fun getUserByUsername(username: String, password: String): LiveData<UserModel> =
+    fun getUserByUsername(username: String, password: String): UserModel =
         userRepository.getUserByUsername(username, password)
+
 
 }

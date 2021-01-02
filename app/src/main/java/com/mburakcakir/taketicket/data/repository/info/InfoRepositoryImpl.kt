@@ -11,16 +11,16 @@ class InfoRepositoryImpl(
 ) : InfoRepository {
 
     override suspend fun getAllInfo(): Flow<Resource<List<InfoModel>>> = flow {
-        emit(Resource.loading())
+        emit(Resource.Loading())
         try {
             val response = apiClient.getInfo()
             if (response.isSuccessful)
                 response.body()?.run {
-                    emit(Resource.success(this))
+                    emit(Resource.Success(this))
                 }
 
         } catch (e: Exception) {
-            emit(Resource.error())
+            emit(Resource.Error(e))
         }
     }
 

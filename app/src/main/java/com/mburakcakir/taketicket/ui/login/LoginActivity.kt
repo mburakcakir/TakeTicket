@@ -1,7 +1,6 @@
 package com.mburakcakir.taketicket.ui.login
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.mburakcakir.taketicket.R
@@ -33,17 +32,14 @@ class LoginActivity : AppCompatActivity() {
         btnLogin.setOnClickListener {
             val username = edtUsername.text.toString()
             val password = edtPassword.text.toString()
-            val checkUser = loginViewModel.checkIfUserExists(username, password)
-            if (checkUser) {
-                loginViewModel.getUserByUsername(username, password).observe(this, {
-                    loginViewModel.startSession(it)
-                    Log.d("data", it.toString())
-                    finish()
-                    extOpenActivity(EventActivity::class.java)
-                })
+            val ifUserExists = loginViewModel.checkIfUserExists(username, password)
+
+            if (ifUserExists) {
+                loginViewModel.startSession(username, password)
+                finish()
+                extOpenActivity(EventActivity::class.java)
             } else
                 this@LoginActivity extToast getString(R.string.no_user)
-
         }
     }
 }

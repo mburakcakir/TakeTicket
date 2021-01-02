@@ -34,7 +34,6 @@ class EventViewModel(
         val database = TicketDatabase.getDatabase(application, viewModelScope)
         eventRepository = EventRepositoryImpl(database.eventDao())
         ticketRepository = TicketRepositoryImpl(database.ticketDao())
-        allEvents.value = eventRepository.getAllEvents2()
     }
 
     fun insertTicket(ticketModel: TicketModel) = viewModelScope.launch(Dispatchers.IO) {
@@ -50,7 +49,7 @@ class EventViewModel(
 
                 Status.SUCCESS -> {
                     Log.v("EVENTSUCCESS", it.data.toString())
-                    allEvents.postValue(it.data)
+                    allEvents.value = it.data
                 }
 
                 Status.ERROR -> {
@@ -62,6 +61,7 @@ class EventViewModel(
     }
 
     fun checkIfTicketExists(ticketName: String) = ticketRepository.checkIfTicketExists(ticketName)
+
     fun getUsername() = sessionManager.getUsername()
 }
 

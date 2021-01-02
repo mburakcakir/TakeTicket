@@ -1,16 +1,12 @@
 package com.mburakcakir.taketicket.utils
 
-data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
-    companion object {
+sealed class Resource<out T>(val status: Status, val data: T?, val message: Throwable?) {
 
-        fun <T> loading(): Resource<T> =
-            Resource(status = Status.LOADING, data = null, message = "Loading...")
 
-        fun <T> success(data: T): Resource<T> =
-            Resource(status = Status.SUCCESS, data = data, message = null)
+    class Loading<T> : Resource<T>(status = Status.LOADING, data = null, message = null)
+    class Error<T>(exception: Throwable) :
+        Resource<T>(status = Status.ERROR, data = null, message = exception)
 
-        fun <T> error(): Resource<T> =
-            Resource(status = Status.ERROR, data = null, message = "Error")
+    class Success<T>(data: T) : Resource<T>(status = Status.SUCCESS, data = data, message = null)
 
-    }
 }

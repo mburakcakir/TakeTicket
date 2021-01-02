@@ -1,7 +1,6 @@
 package com.mburakcakir.taketicket.ui.register
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.mburakcakir.taketicket.R
@@ -35,22 +34,16 @@ class RegisterActivity : AppCompatActivity() {
             val password = userModel.password
 
             val checkUser = registerViewModel.checkIfUserExists(username, password)
-            Log.d("checkUser",checkUser.toString())
-            if(checkUser)
+
+            if (checkUser)
                 this@RegisterActivity extToast getString(R.string.already_registered)
             else {
                 registerViewModel.insertUser(userModel)
                 finish()
                 extOpenActivity(LoginActivity::class.java)
-
             }
-//            registerViewModel.getUserByUsername(username, password).observe(this, {
-//                registerViewModel.startSession(it)
-//                Log.d("data",it.toString())
-//                extOpenActivity(HomeActivity::class.java)
-//                finish()
-//            })
         }
     }
+
 
 }

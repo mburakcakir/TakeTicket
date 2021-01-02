@@ -22,10 +22,12 @@ class TicketActivity : AppCompatActivity() {
         ticketViewModel = ViewModelProvider(this).get(TicketViewModel::class.java)
         rvTicket.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
+        ticketViewModel.getAllTickets()
+
         rvTicket.adapter = TicketAdapter {
             ticketViewModel.apply {
                 deleteTicket(it.ticketID)
-                allTickets.value = getAllTickets()
+                getAllTickets()
             }
         }
 
