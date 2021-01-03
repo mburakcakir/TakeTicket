@@ -32,14 +32,17 @@ class LoginActivity : AppCompatActivity() {
         btnLogin.setOnClickListener {
             val username = edtUsername.text.toString()
             val password = edtPassword.text.toString()
-            val ifUserExists = loginViewModel.checkIfUserExists(username, password)
-
-            if (ifUserExists) {
-                loginViewModel.startSession(username, password)
-                finish()
-                extOpenActivity(EventActivity::class.java)
-            } else
-                this@LoginActivity extToast getString(R.string.no_user)
+            checkIfUserExists(username, password)
         }
+    }
+
+    fun checkIfUserExists(username: String, password: String) {
+        val isUserExists = loginViewModel.checkIfUserExists(username, password)
+        if (isUserExists) {
+            loginViewModel.startSession(username, password)
+            finish()
+            extOpenActivity(EventActivity::class.java)
+        } else
+            this@LoginActivity extToast getString(R.string.no_user)
     }
 }

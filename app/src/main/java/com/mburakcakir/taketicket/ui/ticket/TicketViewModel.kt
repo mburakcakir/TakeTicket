@@ -16,13 +16,12 @@ import com.mburakcakir.taketicket.utils.Status
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-// FACADE PATTERN
 class TicketViewModel(
     application: Application
 ) : AndroidViewModel(application) {
-    val sessionManager: SessionManager
-    val eventRepository: EventRepository
-    val ticketRepository: TicketRepository
+    private val sessionManager: SessionManager
+    private val eventRepository: EventRepository
+    private val ticketRepository: TicketRepository
     val allTickets: MutableLiveData<List<TicketModel>> by lazy {
         MutableLiveData<List<TicketModel>>()
     }
@@ -49,5 +48,4 @@ class TicketViewModel(
             }
         }
     }
-
 }

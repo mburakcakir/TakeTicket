@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity() {
     lateinit var registerViewModel: RegisterViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -29,21 +30,20 @@ class RegisterActivity : AppCompatActivity() {
                 edtMail.text.toString(),
                 edtPassword.text.toString()
             )
-
-            val username = userModel.userName
-            val password = userModel.password
-
-            val checkUser = registerViewModel.checkIfUserExists(username, password)
-
-            if (checkUser)
-                this@RegisterActivity extToast getString(R.string.already_registered)
-            else {
-                registerViewModel.insertUser(userModel)
-                finish()
-                extOpenActivity(LoginActivity::class.java)
-            }
+            checkIfUserExists(userModel)
         }
     }
 
+    fun checkIfUserExists(userModel: UserModel) {
+        val isUserExists =
+            registerViewModel.checkIfUserExists(userModel.userName, userModel.password)
 
+        if (isUserExists)
+            this@RegisterActivity extToast getString(R.string.already_registered)
+        else {
+            registerViewModel.insertUser(userModel)
+            finish()
+            extOpenActivity(LoginActivity::class.java)
+        }
+    }
 }

@@ -11,8 +11,8 @@ import com.mburakcakir.taketicket.data.repository.info.InfoRepositoryImpl
 import kotlinx.android.synthetic.main.activity_info.*
 
 class InfoActivity : AppCompatActivity() {
-
     private lateinit var viewModel: InfoViewModel
+
     private val serviceClient by lazy {
         ServiceProvider().getServiceApi()
     }
@@ -28,17 +28,16 @@ class InfoActivity : AppCompatActivity() {
 
     private fun init() {
 
+        rvInfo.adapter = InfoAdapter()
+        rvInfo.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
         val repository = InfoRepositoryImpl(serviceClient)
         val mainActivityViewModelFactory = InfoViewModelFactory(repository)
         viewModel = ViewModelProvider(this, mainActivityViewModelFactory).get(
             InfoViewModel::class.java
         )
 
-        rvInfo.adapter = InfoAdapter()
-        rvInfo.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-
         viewModel.getAllInfo()
-
         viewModel.allInfo.observe(this, {
             it?.let {
                 (rvInfo.adapter as InfoAdapter).submitList(it)

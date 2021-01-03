@@ -18,13 +18,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-// FACADE PATTERN
 class EventViewModel(
     application: Application
 ) : AndroidViewModel(application) {
     val sessionManager: SessionManager
-    val eventRepository: EventRepository
-    val ticketRepository: TicketRepository
+    private val eventRepository: EventRepository
+    private val ticketRepository: TicketRepository
     val allEvents: MutableLiveData<List<EventModel>> by lazy {
         MutableLiveData<List<EventModel>>()
     }
@@ -43,25 +42,15 @@ class EventViewModel(
     fun getAllEvents() = viewModelScope.launch {
         eventRepository.getAllEvents().collect {
             when (it.status) {
-                Status.LOADING -> {
-                    Log.v("EVENTLOADING", "LOADING")
-                }
-
-                Status.SUCCESS -> {
-                    Log.v("EVENTSUCCESS", it.data.toString())
-                    allEvents.value = it.data
-                }
-
-                Status.ERROR -> {
-//                    Log.v("EVENTERROR", it.throwable.toString())
-                }
-
+                Status.LOADING -> Log.v("EVENTLOADING", "LOADING")
+                Status.SUCCESS -> allEvents.value = it.data
+                Status.ERROR -> Log.v("EVENTERROR", it.message.toString())
             }
         }
     }
 
     fun checkIfTicketExists(ticketName: String) = ticketRepository.checkIfTicketExists(ticketName)
-
+    fun endSession() = sessionManager.endSession()
     fun getUsername() = sessionManager.getUsername()
 }
 

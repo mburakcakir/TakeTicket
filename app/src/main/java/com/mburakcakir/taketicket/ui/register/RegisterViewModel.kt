@@ -11,12 +11,11 @@ import com.mburakcakir.taketicket.utils.SessionManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-// FACADE PATTERN
 class RegisterViewModel(
     application: Application
 ) : AndroidViewModel(application) {
-    val sessionManager: SessionManager
-    val userRepository: UserRepository
+    private val sessionManager: SessionManager
+    private val userRepository: UserRepository
 
     init {
         sessionManager = SessionManager(application)

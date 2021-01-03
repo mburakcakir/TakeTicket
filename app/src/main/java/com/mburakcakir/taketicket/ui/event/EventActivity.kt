@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.activity_event.*
 class EventActivity : AppCompatActivity() {
     private lateinit var eventViewModel: EventViewModel
     var backPressedTime: Long = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event)
@@ -39,11 +40,10 @@ class EventActivity : AppCompatActivity() {
         rvEvent.adapter = EventAdapter {
             this@EventActivity.extDetailDialog(it, eventViewModel)
         }
-
         rvEvent.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-        eventViewModel.getAllEvents()
 
+        eventViewModel.getAllEvents()
         eventViewModel.allEvents.observe(this, { allEvents ->
             allEvents?.let {
                 (rvEvent.adapter as EventAdapter).submitList(allEvents)
@@ -52,17 +52,16 @@ class EventActivity : AppCompatActivity() {
         })
     }
 
-
     override fun onBackPressed() {
         if (backPressedTime + 5000 > System.currentTimeMillis()) {
-            //  homeViewModel.sessionManager.endSession()
+
             this extToast getString(R.string.login_again)
-            this extOpenActivity LoginActivity::class.java
             finish()
-        } else {
-            Toast.makeText(baseContext, getString(R.string.exit_app), Toast.LENGTH_SHORT)
-                .show()
-        }
+            eventViewModel.endSession()
+            this extOpenActivity LoginActivity::class.java
+        } else
+            Toast.makeText(baseContext, getString(R.string.exit_app), Toast.LENGTH_SHORT).show()
+
         backPressedTime = System.currentTimeMillis()
     }
 

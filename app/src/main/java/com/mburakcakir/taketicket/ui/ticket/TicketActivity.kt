@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.activity_ticket.*
 
 class TicketActivity : AppCompatActivity() {
     private lateinit var ticketViewModel: TicketViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ticket)
@@ -20,10 +21,9 @@ class TicketActivity : AppCompatActivity() {
         toolbarTicket.title = getString(R.string.tickets)
         setSupportActionBar(toolbarTicket)
         ticketViewModel = ViewModelProvider(this).get(TicketViewModel::class.java)
-        rvTicket.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-
         ticketViewModel.getAllTickets()
 
+        rvTicket.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rvTicket.adapter = TicketAdapter {
             ticketViewModel.apply {
                 deleteTicket(it.ticketID)
