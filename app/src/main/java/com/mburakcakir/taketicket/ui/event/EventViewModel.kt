@@ -49,7 +49,8 @@ class EventViewModel(
         }
     }
 
-    fun checkIfTicketExists(ticketName: String) = ticketRepository.checkIfTicketExists(ticketName)
+    fun checkIfTicketExists(ticketID: Int) = ticketRepository.checkIfTicketExists(ticketID)
+    fun getEventById(ID: Int) = eventRepository.getEventById(ID)
     fun endSession() = sessionManager.endSession()
     fun getUsername() = sessionManager.getUsername()
 }

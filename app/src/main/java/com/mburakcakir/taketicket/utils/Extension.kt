@@ -28,18 +28,19 @@ fun Activity.extDetailDialog(ticketModel: TicketModel, eventViewModel: EventView
     val mAlertDialog = alertDialog.show()
     mAlertDialog.setCancelable(true)
 
-    Glide.with(this).load(ticketModel.url).into(dialog.imgTicketImage)
+    val eventModel = eventViewModel.getEventById(ticketModel.eventID)
+    Glide.with(this).load(eventModel.url).into(dialog.imgTicketImage)
 
     dialog.apply {
         txtTicketName.text = ticketModel.name
         txtTicketEmail.text = ticketModel.email
-        txtTicketTitle.text = ticketModel.title
-        txtTicketPrice.text = "Toplam : ${ticketModel.price}"
-        txtTicketTime.text = ticketModel.time
+        txtTicketTitle.text = eventModel.title
+        txtTicketPrice.text = eventModel.price
+        txtTicketTime.text = eventModel.time
     }
 
     dialog.btnApprove.setOnClickListener {
-        if (!eventViewModel.checkIfTicketExists(ticketModel.title)) {
+        if (!eventViewModel.checkIfTicketExists(ticketModel.ticketID)) {
             eventViewModel.insertTicket(ticketModel)
             this extToast this.getString(R.string.success_ticket)
             this extOpenActivity TicketActivity::class.java

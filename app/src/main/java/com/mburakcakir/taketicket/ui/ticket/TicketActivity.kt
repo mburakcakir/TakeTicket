@@ -24,7 +24,7 @@ class TicketActivity : AppCompatActivity() {
         ticketViewModel.getAllTickets()
 
         rvTicket.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        rvTicket.adapter = TicketAdapter {
+        rvTicket.adapter = TicketAdapter(ticketViewModel) {
             ticketViewModel.apply {
                 deleteTicket(it.ticketID)
                 getAllTickets()

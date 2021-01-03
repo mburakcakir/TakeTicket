@@ -5,14 +5,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "table_ticket")
 data class TicketModel(
-    val name : String,
-    val email : String,
-    val title : String,
-    val price : String,
-    val time : String,
-    val category: String,
-    val boughtTime : String,
-    val url : String
+    val name: String,
+    val email: String,
+    val boughtTime: String,
+    val eventID: Int
 ){
     @PrimaryKey(autoGenerate = true)
     var ticketID : Int = 0

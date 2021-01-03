@@ -14,8 +14,8 @@ interface TicketDao{
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTicket(ticketModel: TicketModel)
 
-    @Query("SELECT COUNT(*) FROM table_ticket where title =:ticketTitle")
-    fun checkIfTicketExists(ticketTitle: String): Int
+    @Query("SELECT COUNT(*) FROM table_ticket where ticketID =:ticketID")
+    fun checkIfTicketExists(ticketID: Int): Int
 
     @Query("DELETE FROM table_ticket WHERE ticketID=:id")
     suspend fun deleteTicket(id: Int)

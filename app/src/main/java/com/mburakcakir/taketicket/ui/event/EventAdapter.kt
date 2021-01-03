@@ -58,12 +58,8 @@ class EventViewHolder(
             val ticketModel = TicketModel(
                 sessionManager.getName()!!,
                 sessionManager.getUserEmail()!!,
-                eventModel.title,
-                eventModel.price,
-                eventModel.time,
-                eventModel.category,
                 getCurrentTime(),
-                eventModel.url,
+                eventModel.eventID
             )
             onClickEvent(ticketModel)
         }

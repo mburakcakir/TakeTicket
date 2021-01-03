@@ -14,7 +14,9 @@ interface EventDao {
     suspend fun insertEvent(eventModel: EventModel)
 
     @Query("DELETE FROM table_event")
-    suspend fun deleteAllEvents()
+    fun deleteAllEvents()
 
+    @Query("SELECT * FROM table_event WHERE eventID =:ID")
+    fun getEventById(ID: Int): EventModel
 
 }

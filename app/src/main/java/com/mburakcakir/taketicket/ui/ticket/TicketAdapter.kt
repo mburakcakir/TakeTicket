@@ -11,10 +11,11 @@ import com.mburakcakir.taketicket.data.db.entity.TicketModel
 import kotlinx.android.synthetic.main.rv_item_ticket.view.*
 
 class TicketAdapter(
+    private val ticketViewModel: TicketViewModel,
     private inline val onClick: (ticketModel: TicketModel) -> Unit
 ) : ListAdapter<TicketModel, TicketViewHolder>(TicketCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        TicketViewHolder(parent, onClick)
+        TicketViewHolder(parent, ticketViewModel, onClick)
 
     override fun onBindViewHolder(holder: TicketViewHolder, position: Int) =
         holder.bind(getItem(position))
@@ -31,6 +32,7 @@ class TicketCallback : DiffUtil.ItemCallback<TicketModel>() {
 
 class TicketViewHolder(
     container: ViewGroup,
+    private val ticketViewModel: TicketViewModel,
     private inline val onClick: (ticketModel: TicketModel) -> Unit
 ) : RecyclerView.ViewHolder(
     LayoutInflater.from(container.context).inflate(
@@ -40,17 +42,17 @@ class TicketViewHolder(
     )
 ) {
     fun bind(ticketModel: TicketModel) {
+        val eventModel = ticketViewModel.getEventByID(ticketModel.eventID)
         with(itemView) {
-            txtTicketTitle.text = ticketModel.title
-            txtTicketPrice.text = ticketModel.price
-            txtTicketLastTime.text = ticketModel.time
-            txtTicketCategory.text = ticketModel.category
+            txtTicketTitle.text = eventModel.title
+            txtTicketPrice.text = eventModel.price
+            txtTicketLastTime.text = eventModel.time
+            txtTicketCategory.text = eventModel.category
             txtTicketBoughtTime.text = ticketModel.boughtTime
-            Glide.with(itemView.context).load(ticketModel.url).into(imgTicketLastImage)
+            Glide.with(itemView.context).load(eventModel.url).into(imgTicketLastImage)
 
             imgDeleteTicket.setOnClickListener {
                 onClick(ticketModel)
-
             }
         }
     }

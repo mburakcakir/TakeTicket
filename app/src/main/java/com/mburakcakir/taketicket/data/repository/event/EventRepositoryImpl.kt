@@ -17,4 +17,6 @@ class EventRepositoryImpl(private val eventDao: EventDao) : EventRepository {
     }
 
     override suspend fun insertEvent(eventModel: EventModel) = eventDao.insertEvent(eventModel)
+    override fun deleteAllEvents() = eventDao.deleteAllEvents()
+    override fun getEventById(ID: Int): EventModel = eventDao.getEventById(ID)
 }

@@ -7,4 +7,6 @@ import kotlinx.coroutines.flow.Flow
 interface EventRepository {
     suspend fun getAllEvents(): Flow<Resource<List<EventModel>>>
     suspend fun insertEvent(eventModel: EventModel)
+    fun deleteAllEvents()
+    fun getEventById(ID: Int): EventModel
 }

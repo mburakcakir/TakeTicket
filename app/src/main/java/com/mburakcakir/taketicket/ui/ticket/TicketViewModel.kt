@@ -37,6 +37,8 @@ class TicketViewModel(
         ticketRepository.deleteTicket(id)
     }
 
+    fun getEventByID(ID: Int) = eventRepository.getEventById(ID)
+
     fun getAllTickets() = viewModelScope.launch {
         ticketRepository.getAllTickets(sessionManager.getUsername()).collect {
             it.let {

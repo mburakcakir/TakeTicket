@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 
 @Database(
     entities = [UserModel::class, EventModel::class, TicketModel::class],
-    version = 4,
+    version = 1,
     exportSchema = false
 )
 abstract class TicketDatabase : RoomDatabase() {
@@ -31,17 +31,13 @@ abstract class TicketDatabase : RoomDatabase() {
 
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
-            INSTANCE?.let { database ->
-                scope.launch {
-                    populateDatabase(
-                        database.eventDao()
-                    )
-                }
+            scope.launch {
+                populateDatabase()
             }
         }
 
-        suspend fun populateDatabase(eventDao: EventDao) {
-            eventDao.deleteAllEvents()
+        suspend fun populateDatabase() {
+            val eventDao = INSTANCE!!.eventDao()
             var eventModel = EventModel(
                 "Ahududu",
                 "Harbiye Cemil Topuzlu Açıkhava Sahnesi ",
@@ -60,7 +56,7 @@ abstract class TicketDatabase : RoomDatabase() {
                 "Sinema",
                 180,
                 "https://grpstat.com/DealImages/K-wwrnxwoh/KAFIKA-KAPAK2082__3_600-318.jpg",
-                "12.00 22.00",
+                "12.00 - 22.00",
                 "₺70"
             )
 
@@ -96,7 +92,7 @@ abstract class TicketDatabase : RoomDatabase() {
                 "Eğlence Merkezi",
                 20,
                 "https://grpstat.com/DealImages/G-g4y0jr53/17780__5_600-318.jpg",
-                "10.00 20.00",
+                "10.00 - 20.00",
                 "₺33"
             )
 
@@ -144,7 +140,7 @@ abstract class TicketDatabase : RoomDatabase() {
                 "Akvaryum",
                 10,
                 "https://grpstat.com/DealImages/G-q3l05po5/akvaryumgrsll6606__5_600-318.jpg",
-                "12.00 18.00",
+                "12.00 - 18.00",
                 "₺48"
             )
 
