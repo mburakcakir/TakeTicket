@@ -3,6 +3,7 @@ package com.mburakcakir.taketicket.ui.ticket
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.mburakcakir.taketicket.data.db.TicketDatabase
@@ -22,9 +23,9 @@ class TicketViewModel(
     private val sessionManager: SessionManager
     private val eventRepository: EventRepository
     private val ticketRepository: TicketRepository
-    val allTickets: MutableLiveData<List<TicketModel>> by lazy {
-        MutableLiveData<List<TicketModel>>()
-    }
+    private val _allTickets = MutableLiveData<List<TicketModel>>()
+    val allTickets: LiveData<List<TicketModel>>
+        get() = _allTickets
 
     init {
         sessionManager = SessionManager(application)
@@ -44,7 +45,7 @@ class TicketViewModel(
             it.let {
                 when (it.status) {
                     Status.LOADING -> Log.v("TICKETLOADING", "LOADING")
-                    Status.SUCCESS -> allTickets.value = it.data
+                    Status.SUCCESS -> _allTickets.value = it.data
                     Status.ERROR -> Log.v("TICKETERROR", "ERROR")
                 }
             }

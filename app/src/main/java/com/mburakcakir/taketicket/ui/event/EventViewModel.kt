@@ -3,6 +3,7 @@ package com.mburakcakir.taketicket.ui.viewmodel
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.mburakcakir.taketicket.data.db.TicketDatabase
@@ -24,9 +25,9 @@ class EventViewModel(
     val sessionManager: SessionManager
     private val eventRepository: EventRepository
     private val ticketRepository: TicketRepository
-    val allEvents: MutableLiveData<List<EventModel>> by lazy {
-        MutableLiveData<List<EventModel>>()
-    }
+    private val _allEvents = MutableLiveData<List<EventModel>>()
+    val allEvents: LiveData<List<EventModel>>
+        get() = _allEvents
 
     init {
         sessionManager = SessionManager(application)
@@ -43,7 +44,7 @@ class EventViewModel(
         eventRepository.getAllEvents().collect {
             when (it.status) {
                 Status.LOADING -> Log.v("EVENTLOADING", "LOADING")
-                Status.SUCCESS -> allEvents.value = it.data
+                Status.SUCCESS -> _allEvents.value = it.data
                 Status.ERROR -> Log.v("EVENTERROR", it.message.toString())
             }
         }
