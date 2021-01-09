@@ -19,7 +19,7 @@ class TicketRepositoryImpl(private val ticketDao: TicketDao) : TicketRepository 
     }
 
     override fun checkIfTicketExists(ticketID: Int): Boolean =
-        ticketDao.checkIfTicketExists(ticketID) != 0
+        ticketDao.checkIfTicketExists(ticketID) == 0
 
     override suspend fun deleteTicket(id: Int) = ticketDao.deleteTicket(id)
 }
