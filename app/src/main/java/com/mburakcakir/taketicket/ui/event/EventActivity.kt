@@ -9,12 +9,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mburakcakir.taketicket.R
+import com.mburakcakir.taketicket.ui.event.DetailDialog
 import com.mburakcakir.taketicket.ui.event.EventAdapter.EventAdapter
 import com.mburakcakir.taketicket.ui.info.InfoActivity
 import com.mburakcakir.taketicket.ui.login.LoginActivity
 import com.mburakcakir.taketicket.ui.ticket.TicketActivity
 import com.mburakcakir.taketicket.ui.viewmodel.EventViewModel
-import com.mburakcakir.taketicket.utils.extDetailDialog
 import com.mburakcakir.taketicket.utils.extOpenActivity
 import com.mburakcakir.taketicket.utils.extToast
 import kotlinx.android.synthetic.main.activity_event.*
@@ -36,9 +36,16 @@ class EventActivity : AppCompatActivity() {
         eventViewModel = ViewModelProvider(this).get(EventViewModel::class.java)
         toolbar.title = "Hoşgeldin ${eventViewModel.getUsername()}"
         setSupportActionBar(toolbar)
-
         rvEvent.adapter = EventAdapter {
-            this@EventActivity.extDetailDialog(it, eventViewModel)
+            DetailDialog(
+                ticketModel = it,
+                onClickApproved = {
+                    this extToast getString(R.string.success_ticket)
+                    this extOpenActivity TicketActivity::class.java
+                },
+                onClickDenied = {
+                    this extToast getString(R.string.warn_ticket)
+                }).show(supportFragmentManager, "DetailDialog")
         }
         rvEvent.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
@@ -53,13 +60,9 @@ class EventActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (backPressedTime + 5000 > System.currentTimeMillis()) {
-
-            this extToast getString(R.string.login_again)
-            finish()
-            eventViewModel.endSession()
-            this extOpenActivity LoginActivity::class.java
-        } else
+        if (backPressedTime + 5000 > System.currentTimeMillis())
+            endSession()
+        else
             Toast.makeText(baseContext, getString(R.string.exit_app), Toast.LENGTH_SHORT).show()
 
         backPressedTime = System.currentTimeMillis()
@@ -77,5 +80,12 @@ class EventActivity : AppCompatActivity() {
             R.id.action_info -> this@EventActivity extOpenActivity InfoActivity::class.java
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun endSession() {
+        this extToast getString(R.string.login_again)
+        finish()
+        eventViewModel.endSession()
+        this extOpenActivity LoginActivity::class.java
     }
 }
