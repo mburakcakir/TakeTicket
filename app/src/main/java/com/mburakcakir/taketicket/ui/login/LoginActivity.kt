@@ -1,6 +1,9 @@
 package com.mburakcakir.taketicket.ui.login
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.mburakcakir.taketicket.R
@@ -32,17 +35,51 @@ class LoginActivity : AppCompatActivity() {
         btnLogin.setOnClickListener {
             val username = edtUsername.text.toString()
             val password = edtPassword.text.toString()
-            checkIfUserExists(username, password)
+            loginViewModel.login(username, password)
         }
+
+        edtUsername.afterTextChanged {
+            loginViewModel.loginDataChanged(
+                edtUsername.text.toString(),
+                edtPassword.text.toString()
+            )
+        }
+
+        edtPassword.afterTextChanged {
+            loginViewModel.loginDataChanged(
+                edtUsername.text.toString(),
+                edtPassword.text.toString()
+            )
+        }
+
+        loginViewModel.loginFormState.observe(this, {
+            btnLogin.isEnabled = it.isDataValid
+            if (it.passwordError != null)
+                edtUsername.error = getString(it.passwordError)
+            if (it.usernameError != null)
+                edtUsername.error = getString(it.usernameError)
+        })
+
+        loginViewModel.loginResult.observe(this, {
+            if (it.success != null) {
+                finish()
+                extOpenActivity(EventActivity::class.java)
+            }
+            if (it.error != null)
+                this@LoginActivity extToast getString(R.string.no_user)
+        })
+
     }
 
-    fun checkIfUserExists(username: String, password: String) {
-        val isUserExists = loginViewModel.checkIfUserExists(username, password)
-        if (isUserExists) {
-            loginViewModel.startSession(username, password)
-            finish()
-            extOpenActivity(EventActivity::class.java)
-        } else
-            this@LoginActivity extToast getString(R.string.no_user)
+    fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
+        this.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(editable: Editable?) {
+                afterTextChanged.invoke(editable.toString())
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+        })
     }
 }

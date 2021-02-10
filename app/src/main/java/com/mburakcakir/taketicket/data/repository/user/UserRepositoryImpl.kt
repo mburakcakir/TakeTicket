@@ -29,4 +29,5 @@ class UserRepositoryImpl(private val userDao: UserDao) : UserRepository {
         userDao.checkIfUserExists(userName, password) != 0
 
     override suspend fun insertUser(userModel: UserModel) = userDao.insertUser(userModel)
+
 }
