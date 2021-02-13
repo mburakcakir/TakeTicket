@@ -1,48 +1,44 @@
 package com.mburakcakir.taketicket.ui.info
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mburakcakir.taketicket.R
-import com.mburakcakir.taketicket.data.network.service.ServiceProvider
-import com.mburakcakir.taketicket.data.repository.info.InfoRepositoryImpl
-import kotlinx.android.synthetic.main.activity_info.*
+import com.mburakcakir.taketicket.databinding.ActivityInfoBinding
 
 class InfoActivity : AppCompatActivity() {
     private lateinit var viewModel: InfoViewModel
+    private lateinit var binding: ActivityInfoBinding
 
-    private val serviceClient by lazy {
-        ServiceProvider().getServiceApi()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_info)
-        toolbarInfo.title = getString(R.string.contact)
-        setSupportActionBar(toolbarInfo)
+        binding = ActivityInfoBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
 
         init()
     }
 
     private fun init() {
+        binding.toolbarInfo.title = getString(R.string.contact)
+        setSupportActionBar(binding.toolbarInfo)
 
-        rvInfo.adapter = InfoAdapter()
-        rvInfo.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.rvInfo.adapter = InfoAdapter()
+        binding.rvInfo.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        viewModel = ViewModelProvider(this).get(InfoViewModel::class.java)
 
-        val repository = InfoRepositoryImpl(serviceClient)
-        val mainActivityViewModelFactory = InfoViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, mainActivityViewModelFactory).get(
-            InfoViewModel::class.java
-        )
+//        viewModel.allInfo.observe(this, {
+//            (binding.rvInfo.adapter as InfoAdapter).submitList(it)
+//        })
 
-        viewModel.getAllInfo()
-        viewModel.allInfo.observe(this, {
-            it?.let {
-                (rvInfo.adapter as InfoAdapter).submitList(it)
-                Log.d("tag2", it.toString())
-            }
-        })
+//        viewModel.allInfo.observe(this, {
+//            it?.let {
+//                (binding.rvInfo.adapter as InfoAdapter).submitList(it)
+//                Log.d("tag2", it.toString())
+//            }
+//        })
     }
 }

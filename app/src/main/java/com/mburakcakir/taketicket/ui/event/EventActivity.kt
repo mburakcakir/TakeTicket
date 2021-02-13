@@ -9,34 +9,36 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mburakcakir.taketicket.R
+import com.mburakcakir.taketicket.databinding.ActivityEventBinding
 import com.mburakcakir.taketicket.ui.entry.login.LoginActivity
 import com.mburakcakir.taketicket.ui.event.DetailDialog
-import com.mburakcakir.taketicket.ui.event.EventAdapter.EventAdapter
+import com.mburakcakir.taketicket.ui.event.EventAdapter
 import com.mburakcakir.taketicket.ui.info.InfoActivity
 import com.mburakcakir.taketicket.ui.ticket.TicketActivity
 import com.mburakcakir.taketicket.ui.viewmodel.EventViewModel
 import com.mburakcakir.taketicket.utils.extOpenActivity
 import com.mburakcakir.taketicket.utils.extToast
-import kotlinx.android.synthetic.main.activity_event.*
 
 
 class EventActivity : AppCompatActivity() {
     private lateinit var eventViewModel: EventViewModel
+    private lateinit var binding: ActivityEventBinding
     var backPressedTime: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_event)
+        binding = ActivityEventBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         init()
     }
 
     fun init() {
-
         eventViewModel = ViewModelProvider(this).get(EventViewModel::class.java)
-        toolbar.title = "Hoşgeldin ${eventViewModel.getUsername()}"
-        setSupportActionBar(toolbar)
-        rvEvent.adapter = EventAdapter {
+        binding.toolbar.title = "Hoşgeldin ${eventViewModel.getUsername()}"
+        setSupportActionBar(binding.toolbar)
+
+        binding.rvEvent.adapter = EventAdapter {
             DetailDialog(
                 ticketModel = it,
                 onClickApproved = {
@@ -47,13 +49,12 @@ class EventActivity : AppCompatActivity() {
                     this extToast getString(R.string.warn_ticket)
                 }).show(supportFragmentManager, "DetailDialog")
         }
-        rvEvent.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.rvEvent.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-
-        eventViewModel.getAllEvents()
         eventViewModel.allEvents.observe(this, { allEvents ->
             allEvents?.let {
-                (rvEvent.adapter as EventAdapter).submitList(allEvents)
+                (binding.rvEvent.adapter as EventAdapter).submitList(allEvents)
                 Log.d("tag2", allEvents.toString())
             }
         })

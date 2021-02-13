@@ -6,21 +6,19 @@ import android.text.TextWatcher
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.mburakcakir.taketicket.R
+import com.mburakcakir.taketicket.databinding.ActivityLoginBinding
 import com.mburakcakir.taketicket.ui.activity.EventActivity
 import com.mburakcakir.taketicket.ui.entry.register.RegisterActivity
 import com.mburakcakir.taketicket.utils.extOpenActivity
 import com.mburakcakir.taketicket.utils.extToast
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_register.edtPassword
-import kotlinx.android.synthetic.main.activity_register.edtUsername
-
 class LoginActivity : AppCompatActivity() {
-    lateinit var loginViewModel: LoginViewModel
+    private lateinit var loginViewModel: LoginViewModel
+    private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         init()
     }
@@ -28,47 +26,49 @@ class LoginActivity : AppCompatActivity() {
     fun init() {
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
-        btnRegister.setOnClickListener {
+        binding.btnRegister.setOnClickListener {
             extOpenActivity(RegisterActivity::class.java)
         }
 
-        btnLogin.setOnClickListener {
-            val username = edtUsername.text.toString()
-            val password = edtPassword.text.toString()
+        binding.btnLogin.setOnClickListener {
+            val username = binding.edtUsername.text.toString()
+            val password = binding.edtPassword.text.toString()
             loginViewModel.login(username, password)
         }
 
-        edtUsername.afterTextChanged {
+        binding.edtUsername.afterTextChanged {
             dataChanged()
         }
 
-        edtPassword.afterTextChanged {
+        binding.edtPassword.afterTextChanged {
             dataChanged()
         }
 
         loginViewModel.entryFormState.observe(this, {
-            btnLogin.isEnabled = it.isDataValid
+            binding.btnLogin.isEnabled = it.isDataValid
             if (it.passwordError != null)
-                edtPassword.error = getString(it.passwordError)
+                binding.edtPassword.error = getString(it.passwordError)
             if (it.usernameError != null)
-                edtUsername.error = getString(it.usernameError)
+                binding.edtUsername.error = getString(it.usernameError)
         })
 
-        loginViewModel.entryResultState.observe(this, {
+        loginViewModel.result.observe(this, {
             if (it.success != null) {
                 finish()
                 extOpenActivity(EventActivity::class.java)
             }
             if (it.error != null)
-                this@LoginActivity extToast getString(R.string.no_user)
+                this@LoginActivity extToast it.error
+            if (it.loading != null)
+                this@LoginActivity extToast it.loading
         })
 
     }
 
     fun dataChanged() {
         loginViewModel.loginDataChanged(
-            edtUsername.text.toString(),
-            edtPassword.text.toString()
+            binding.edtUsername.text.toString(),
+            binding.edtPassword.text.toString()
         )
     }
 

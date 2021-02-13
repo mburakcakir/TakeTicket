@@ -6,16 +6,19 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.mburakcakir.taketicket.R
+import com.mburakcakir.taketicket.data.db.entity.EventModel
 import com.mburakcakir.taketicket.data.db.entity.TicketModel
-import kotlinx.android.synthetic.main.rv_item_ticket.view.*
+import com.mburakcakir.taketicket.databinding.RvItemTicketBinding
 
 class TicketAdapter(
-    private val ticketViewModel: TicketViewModel,
+    private val eventList: List<EventModel>,
     private inline val onClick: (ticketModel: TicketModel) -> Unit
 ) : ListAdapter<TicketModel, TicketViewHolder>(TicketCallback()) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        TicketViewHolder(parent, ticketViewModel, onClick)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TicketViewHolder {
+        val binding =
+            RvItemTicketBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return TicketViewHolder(binding, eventList, onClick)
+    }
 
     override fun onBindViewHolder(holder: TicketViewHolder, position: Int) =
         holder.bind(getItem(position))
@@ -31,19 +34,13 @@ class TicketCallback : DiffUtil.ItemCallback<TicketModel>() {
 }
 
 class TicketViewHolder(
-    container: ViewGroup,
-    private val ticketViewModel: TicketViewModel,
+    private val binding: RvItemTicketBinding,
+    private val eventList: List<EventModel>,
     private inline val onClick: (ticketModel: TicketModel) -> Unit
-) : RecyclerView.ViewHolder(
-    LayoutInflater.from(container.context).inflate(
-        R.layout.rv_item_ticket,
-        container,
-        false
-    )
-) {
+) : RecyclerView.ViewHolder(binding.root) {
     fun bind(ticketModel: TicketModel) {
-        val eventModel = ticketViewModel.getEventByID(ticketModel.eventID)
-        with(itemView) {
+        val eventModel = eventList[ticketModel.eventID - 1]
+        with(binding) {
             txtTicketTitle.text = eventModel.title
             txtTicketPrice.text = eventModel.price
             txtTicketLastTime.text = eventModel.time

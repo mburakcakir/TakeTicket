@@ -18,7 +18,6 @@ class InfoRepositoryImpl(
                 response.body()?.run {
                     emit(Resource.Success(this))
                 }
-
         } catch (e: Exception) {
             emit(Resource.Error(e))
         }

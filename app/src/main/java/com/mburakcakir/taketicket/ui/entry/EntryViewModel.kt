@@ -1,21 +1,15 @@
 package com.mburakcakir.taketicket.ui.entry
 
 import android.app.Application
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Patterns
-import android.widget.EditText
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.mburakcakir.taketicket.R
+import com.mburakcakir.taketicket.ui.BaseViewModel
 
-open class EntryViewModel(application: Application) : AndroidViewModel(application) {
+open class EntryViewModel(application: Application) : BaseViewModel(application) {
     private val _entryForm = MutableLiveData<EntryFormState>()
     val entryFormState: LiveData<EntryFormState> = _entryForm
-
-    val _entryResult = MutableLiveData<EntryResult>()
-    val entryResultState: LiveData<EntryResult> = _entryResult
 
     fun loginDataChanged(username: String, password: String) {
         if (!isUserNameValid(username)) {
@@ -38,18 +32,6 @@ open class EntryViewModel(application: Application) : AndroidViewModel(applicati
 
     // A placeholder password validation check
     private fun isPasswordValid(password: String): Boolean {
-        return password.length > 1
-    }
-
-    fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
-        this.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(editable: Editable?) {
-                afterTextChanged.invoke(editable.toString())
-            }
-
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
-        })
+        return password.isNotEmpty()
     }
 }

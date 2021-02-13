@@ -7,40 +7,38 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.data.db.entity.TicketModel
+import com.mburakcakir.taketicket.databinding.DialogTicketBinding
 import com.mburakcakir.taketicket.ui.viewmodel.EventViewModel
-import kotlinx.android.synthetic.main.dialog_ticket.view.*
 
 class DetailDialog(
     private val ticketModel: TicketModel,
     private val onClickApproved: () -> Unit,
     private val onClickDenied: () -> Unit
 ) : BottomSheetDialogFragment() {
-
+    lateinit var binding: DialogTicketBinding
     // First way to implement
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val dialogView = inflater.inflate(R.layout.dialog_ticket, container, false)
+        binding = DialogTicketBinding.inflate(inflater, container, false)
+        val dialogView = binding.root
         isCancelable = true
 
         val eventViewModel = ViewModelProvider(this).get(EventViewModel::class.java)
 
         val eventModel = eventViewModel.getEventById(ticketModel.eventID)
-        Glide.with(requireContext()).load(eventModel.url).into(dialogView.imgTicketImage)
+        Glide.with(requireContext()).load(eventModel.url).into(binding.imgTicketImage)
 
-        dialogView.apply {
-            txtTicketName.text = ticketModel.name
-            txtTicketEmail.text = ticketModel.email
-            txtTicketTitle.text = eventModel.title
-            txtTicketPrice.text = eventModel.price
-            txtTicketTime.text = eventModel.time
-        }
+        binding.txtTicketName.text = ticketModel.name
+        binding.txtTicketEmail.text = ticketModel.email
+        binding.txtTicketTitle.text = eventModel.title
+        binding.txtTicketPrice.text = eventModel.price
+        binding.txtTicketTime.text = eventModel.time
 
-        dialogView.btnApprove.setOnClickListener {
+        binding.btnApprove.setOnClickListener {
             if (!eventViewModel.checkIfTicketExists(ticketModel.ticketID)) {
                 eventViewModel.insertTicket(ticketModel)
                 onClickApproved()

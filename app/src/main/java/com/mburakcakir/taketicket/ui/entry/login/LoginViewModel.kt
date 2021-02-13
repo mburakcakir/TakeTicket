@@ -1,14 +1,13 @@
 package com.mburakcakir.taketicket.ui.entry.login
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.mburakcakir.taketicket.data.db.TicketDatabase
 import com.mburakcakir.taketicket.data.db.entity.UserModel
 import com.mburakcakir.taketicket.data.repository.user.UserRepository
 import com.mburakcakir.taketicket.data.repository.user.UserRepositoryImpl
-import com.mburakcakir.taketicket.ui.entry.EntryResult
 import com.mburakcakir.taketicket.ui.entry.EntryViewModel
+import com.mburakcakir.taketicket.utils.Result
 import com.mburakcakir.taketicket.utils.SessionManager
 import com.mburakcakir.taketicket.utils.Status
 import kotlinx.coroutines.flow.collect
@@ -34,12 +33,14 @@ class LoginViewModel(
         userRepository.getUserByUsername(username, password).collect {
             it.let {
                 when (it.status) {
-                    Status.LOADING -> Log.v("USERLOADING", "LOADING")
+                    Status.LOADING -> _result.value = Result(loading = "Giriş Yapılıyor...")
                     Status.SUCCESS -> {
                         startSession(it.data!!)
-                        _entryResult.value = EntryResult("Success")
+                        _result.value = Result("Giriş Başarılı")
                     }
-                    Status.ERROR -> _entryResult.value = EntryResult(error = "Error")
+                    Status.ERROR -> _result.value = Result(
+                        error = "Error"
+                    )
                 }
             }
         }

@@ -1,10 +1,10 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext {
-        kotlin_version = "1.4.30"
+        kotlin_version = "1.4.0"
         room_version = "2.2.6"
         lottieVersion = "3.5.0"
-        liveDataVersion ="2.3.0"
+        liveDataVersion ="2.2.0"
         retrofitLibraryVersion = "2.9.0"
         coroutinesVersion = "1.4.2"
         glideVersion = "4.11.0"
