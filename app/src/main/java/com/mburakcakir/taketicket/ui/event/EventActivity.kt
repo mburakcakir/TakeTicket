@@ -9,10 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mburakcakir.taketicket.R
+import com.mburakcakir.taketicket.ui.entry.login.LoginActivity
 import com.mburakcakir.taketicket.ui.event.DetailDialog
 import com.mburakcakir.taketicket.ui.event.EventAdapter.EventAdapter
 import com.mburakcakir.taketicket.ui.info.InfoActivity
-import com.mburakcakir.taketicket.ui.login.LoginActivity
 import com.mburakcakir.taketicket.ui.ticket.TicketActivity
 import com.mburakcakir.taketicket.ui.viewmodel.EventViewModel
 import com.mburakcakir.taketicket.utils.extOpenActivity

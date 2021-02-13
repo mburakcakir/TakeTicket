@@ -1,4 +1,4 @@
-package com.mburakcakir.taketicket.ui.login
+package com.mburakcakir.taketicket.ui.entry.login
 
 import android.os.Bundle
 import android.text.Editable
@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.ui.activity.EventActivity
-import com.mburakcakir.taketicket.ui.register.RegisterActivity
+import com.mburakcakir.taketicket.ui.entry.register.RegisterActivity
 import com.mburakcakir.taketicket.utils.extOpenActivity
 import com.mburakcakir.taketicket.utils.extToast
 import kotlinx.android.synthetic.main.activity_login.*
@@ -39,28 +39,22 @@ class LoginActivity : AppCompatActivity() {
         }
 
         edtUsername.afterTextChanged {
-            loginViewModel.loginDataChanged(
-                edtUsername.text.toString(),
-                edtPassword.text.toString()
-            )
+            dataChanged()
         }
 
         edtPassword.afterTextChanged {
-            loginViewModel.loginDataChanged(
-                edtUsername.text.toString(),
-                edtPassword.text.toString()
-            )
+            dataChanged()
         }
 
-        loginViewModel.loginFormState.observe(this, {
+        loginViewModel.entryFormState.observe(this, {
             btnLogin.isEnabled = it.isDataValid
             if (it.passwordError != null)
-                edtUsername.error = getString(it.passwordError)
+                edtPassword.error = getString(it.passwordError)
             if (it.usernameError != null)
                 edtUsername.error = getString(it.usernameError)
         })
 
-        loginViewModel.loginResult.observe(this, {
+        loginViewModel.entryResultState.observe(this, {
             if (it.success != null) {
                 finish()
                 extOpenActivity(EventActivity::class.java)
@@ -71,7 +65,14 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
+    fun dataChanged() {
+        loginViewModel.loginDataChanged(
+            edtUsername.text.toString(),
+            edtPassword.text.toString()
+        )
+    }
+
+    private fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
         this.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(editable: Editable?) {
                 afterTextChanged.invoke(editable.toString())

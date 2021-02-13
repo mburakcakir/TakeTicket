@@ -1,24 +1,42 @@
 <resources>
     <string name="app_name">Take Ticket</string>
+
+    <!-- button -->
     <string name="login">Giriş Yap</string>
     <string name="register">Üye Ol</string>
+    <string name="approve_ticket">Onayla</string>
+
+    <!-- user info -->
     <string name="name">Ad-Soyad</string>
     <string name="username">Kullanıcı Adı</string>
     <string name="email">Email</string>
     <string name="password">Şifre</string>
+
+    <!-- ticket info -->
     <string name="activity">Etkinlik</string>
     <string name="price">Ücret</string>
     <string name="time">Zaman</string>
+
+    <!-- header -->
+    <string name="tickets">Biletlerim</string>
+    <string name="contact">İletişim Bilgileri</string>
+
+    <!-- success -->
+    <string name="success_ticket">Biletin alındı.</string>
+
+    <!-- warning -->
+    <string name="already_registered">Kullanıcı zaten kayıtlı.</string>
+    <string name="warn_ticket">Bilet zaten alınmış.</string>
+
+
+    <!-- error -->
+    <string name="no_user">Kullanıcı bulunamadı.</string>
+    <string name="try_again">Tekrar dene.</string>
+
+    <!-- info -->
     <string name="login_again">OTURUM KAPATILDI. TEKRAR GİRİŞ YAPIN.</string>
     <string name="exit_app">Çıkmak için geri tuşuna basın.</string>
-    <string name="contact">İletişim Bilgileri</string>
-    <string name="try_again">Tekrar dene.</string>
-    <string name="no_user">Kullanıcı bulunamadı.</string>
-    <string name="already_registered">Kullanıcı zaten kayıtlı.</string>
-    <string name="tickets">Biletlerim</string>
-    <string name="success_ticket">Biletin alındı.</string>
-    <string name="warn_ticket">Bilet zaten alınmış.</string>
-    <string name="approve_ticket">Onayla</string>
+
 
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>

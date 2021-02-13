@@ -1,11 +1,11 @@
-package com.mburakcakir.taketicket.ui.register
+package com.mburakcakir.taketicket.ui.entry.register
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.data.db.entity.UserModel
-import com.mburakcakir.taketicket.ui.login.LoginActivity
+import com.mburakcakir.taketicket.ui.entry.login.LoginActivity
 import com.mburakcakir.taketicket.utils.extOpenActivity
 import com.mburakcakir.taketicket.utils.extToast
 import kotlinx.android.synthetic.main.activity_register.*
@@ -30,20 +30,26 @@ class RegisterActivity : AppCompatActivity() {
                 edtMail.text.toString(),
                 edtPassword.text.toString()
             )
-            checkIfUserExists(userModel)
-        }
-    }
-
-    fun checkIfUserExists(userModel: UserModel) {
-        val isUserExists =
-            registerViewModel.checkIfUserExists(userModel.userName, userModel.password)
-
-        if (isUserExists)
-            this@RegisterActivity extToast getString(R.string.already_registered)
-        else {
             registerViewModel.insertUser(userModel)
-            finish()
-            extOpenActivity(LoginActivity::class.java)
         }
+
+        registerViewModel.entryFormState.observe(this, {
+            btnRegister.isEnabled = it.isDataValid
+
+            if (it.passwordError != null)
+                edtPassword.error = getString(it.passwordError)
+            if (it.usernameError != null)
+                edtUsername.error = getString(it.usernameError)
+        })
+
+        registerViewModel.entryResultState.observe(this, {
+            if (it.error != null)
+                this@RegisterActivity extToast it.error
+            if (it.success != null) {
+                this@RegisterActivity extToast it.success
+                finish()
+                extOpenActivity(LoginActivity::class.java)
+            }
+        })
     }
 }

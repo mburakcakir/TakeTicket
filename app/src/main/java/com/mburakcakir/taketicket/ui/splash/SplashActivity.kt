@@ -5,7 +5,7 @@ import android.os.CountDownTimer
 import androidx.appcompat.app.AppCompatActivity
 import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.ui.activity.EventActivity
-import com.mburakcakir.taketicket.ui.login.LoginActivity
+import com.mburakcakir.taketicket.ui.entry.login.LoginActivity
 import com.mburakcakir.taketicket.utils.SessionManager
 import com.mburakcakir.taketicket.utils.extOpenActivity
 import kotlinx.android.synthetic.main.activity_splash.*

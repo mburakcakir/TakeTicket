@@ -28,6 +28,16 @@ class UserRepositoryImpl(private val userDao: UserDao) : UserRepository {
     override fun checkIfUserExists(userName: String, password: String) =
         userDao.checkIfUserExists(userName, password) != 0
 
-    override suspend fun insertUser(userModel: UserModel) = userDao.insertUser(userModel)
+    override suspend fun insertUser(userModel: UserModel) = flow {
+        emit(Resource.Loading())
+        try {
+            if (!checkIfUserExists(userModel.userName, userModel.password))
+                emit(Resource.Success(true))
+            else
+                emit(Resource.Success(false))
+        } catch (e: Exception) {
+            emit(Resource.Error(e))
+        }
+    }
 
 }
