@@ -59,6 +59,8 @@ class LoginActivity : AppCompatActivity() {
             }
             if (it.error != null)
                 this@LoginActivity extToast it.error
+            if (it.warning != null)
+                this@LoginActivity extToast it.warning
             if (it.loading != null)
                 this@LoginActivity extToast it.loading
         })

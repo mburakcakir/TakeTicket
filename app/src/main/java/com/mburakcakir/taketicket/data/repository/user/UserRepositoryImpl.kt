@@ -13,7 +13,10 @@ class UserRepositoryImpl(private val userDao: UserDao) : UserRepository {
     override fun getUserByUsername(username: String, password: String) = flow {
         emit(Resource.Loading())
         try {
-            emit(Resource.Success(userDao.getUserByUsername(username, password)))
+            if (checkIfUserExists(username, password))
+                emit(Resource.Success(userDao.getUserByUsername(username, password)))
+            else
+                emit(Resource.Success(UserModel("", "", "", "")))
         } catch (e: Exception) {
             emit(Resource.Error(e))
         }
@@ -33,8 +36,11 @@ class UserRepositoryImpl(private val userDao: UserDao) : UserRepository {
         try {
             if (!checkIfUserExists(userModel.userName, userModel.password))
                 emit(Resource.Success(true))
-            else
+            else {
                 emit(Resource.Success(false))
+                userDao.insertUser(userModel)
+            }
+
         } catch (e: Exception) {
             emit(Resource.Error(e))
         }

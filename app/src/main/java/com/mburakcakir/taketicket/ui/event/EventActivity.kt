@@ -23,6 +23,7 @@ import com.mburakcakir.taketicket.utils.extToast
 class EventActivity : AppCompatActivity() {
     private lateinit var eventViewModel: EventViewModel
     private lateinit var binding: ActivityEventBinding
+    var message: String = ""
     var backPressedTime: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,14 +41,8 @@ class EventActivity : AppCompatActivity() {
 
         binding.rvEvent.adapter = EventAdapter {
             DetailDialog(
-                ticketModel = it,
-                onClickApproved = {
-                    this extToast getString(R.string.success_ticket)
-                    this extOpenActivity TicketActivity::class.java
-                },
-                onClickDenied = {
-                    this extToast getString(R.string.warn_ticket)
-                }).show(supportFragmentManager, "DetailDialog")
+                ticketModel = it
+            ).show(supportFragmentManager, "DetailDialog")
         }
         binding.rvEvent.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -57,6 +52,16 @@ class EventActivity : AppCompatActivity() {
                 (binding.rvEvent.adapter as EventAdapter).submitList(allEvents)
                 Log.d("tag2", allEvents.toString())
             }
+        })
+
+        eventViewModel.result.observe(this, {
+            when {
+                it.success != null -> message = it.success
+                it.error != null -> message = it.error
+                it.loading != null -> message = it.loading
+                it.warning != null -> message = it.warning
+            }
+            this@EventActivity extToast message
         })
     }
 

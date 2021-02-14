@@ -24,11 +24,15 @@ class TicketViewModel(
     private val sessionManager: SessionManager
     private val eventRepository: EventRepository
     private val ticketRepository: TicketRepository
+
     private val _allTickets = MutableLiveData<List<TicketModel>>()
     val allTickets: LiveData<List<TicketModel>> = _allTickets
 
     private val _allEvents = MutableLiveData<List<EventModel>>()
     val allEvents: LiveData<List<EventModel>> = _allEvents
+
+    private val _newTicketResult = MutableLiveData<Result>()
+    val newTicketResult: LiveData<Result> = _newTicketResult
 
     init {
         sessionManager = SessionManager(application)
@@ -57,6 +61,19 @@ class TicketViewModel(
         }
     }
 
+    fun insertTicket(ticketModel: TicketModel) = viewModelScope.launch {
+        ticketRepository.insertTicket(ticketModel).collect {
+            when (it.status) {
+                Status.LOADING -> _newTicketResult.value = Result(loading = "Bilet Kaydediliyor...")
+                Status.SUCCESS -> {
+                    _newTicketResult.value =
+                        if (it.data!!) Result(success = "Bilet Kaydedildi.") else Result(warning = "Bilet Zaten Alınmış.")
+                }
+                Status.ERROR -> _newTicketResult.value = Result(error = "Bilet Kaydedilemedi.")
+            }
+        }
+
+    }
 
     fun getAllTickets() = viewModelScope.launch {
         ticketRepository.getAllTickets(sessionManager.getUsername()).collect {

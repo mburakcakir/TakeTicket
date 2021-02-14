@@ -51,6 +51,7 @@ class TicketViewHolder(
             imgDeleteTicket.setOnClickListener {
                 onClick(ticketModel)
             }
+
         }
     }
 

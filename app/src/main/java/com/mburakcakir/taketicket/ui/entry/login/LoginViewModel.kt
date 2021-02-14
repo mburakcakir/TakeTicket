@@ -35,11 +35,15 @@ class LoginViewModel(
                 when (it.status) {
                     Status.LOADING -> _result.value = Result(loading = "Giriş Yapılıyor...")
                     Status.SUCCESS -> {
-                        startSession(it.data!!)
-                        _result.value = Result("Giriş Başarılı")
+                        if (it.data?.userName.isNullOrEmpty())
+                            _result.value = Result(warning = "Kullanıcı Kayıtlı Değil")
+                        else {
+                            startSession(it.data!!)
+                            _result.value = Result(success = "Giriş Başarılı")
+                        }
                     }
                     Status.ERROR -> _result.value = Result(
-                        error = "Error"
+                        error = "Giriş Başarısız."
                     )
                 }
             }

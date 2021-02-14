@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.mburakcakir.taketicket.data.db.TicketDatabase
 import com.mburakcakir.taketicket.data.db.entity.EventModel
-import com.mburakcakir.taketicket.data.db.entity.TicketModel
 import com.mburakcakir.taketicket.data.repository.event.EventRepository
 import com.mburakcakir.taketicket.data.repository.event.EventRepositoryImpl
 import com.mburakcakir.taketicket.data.repository.ticket.TicketRepository
@@ -15,7 +14,6 @@ import com.mburakcakir.taketicket.ui.BaseViewModel
 import com.mburakcakir.taketicket.utils.Result
 import com.mburakcakir.taketicket.utils.SessionManager
 import com.mburakcakir.taketicket.utils.Status
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -28,16 +26,15 @@ class EventViewModel(
     private val _allEvents = MutableLiveData<List<EventModel>>()
     val allEvents: LiveData<List<EventModel>> = _allEvents
 
+    private val _ticketResult = MutableLiveData<List<EventModel>>()
+    val ticketResult: LiveData<List<EventModel>> = _ticketResult
+
     init {
         sessionManager = SessionManager(application)
         val database = TicketDatabase.getDatabase(application, viewModelScope)
         eventRepository = EventRepositoryImpl(database.eventDao())
         ticketRepository = TicketRepositoryImpl(database.ticketDao())
         getAllEvents()
-    }
-
-    fun insertTicket(ticketModel: TicketModel) = viewModelScope.launch(Dispatchers.IO) {
-        ticketRepository.insertTicket(ticketModel)
     }
 
     fun getAllEvents() = viewModelScope.launch {
