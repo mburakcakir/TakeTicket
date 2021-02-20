@@ -32,9 +32,8 @@ class RegisterViewModel(
                     Status.LOADING -> _result.value = Result(loading = "Kayıt Oluşturuluyor")
                     Status.SUCCESS -> {
                         _result.value =
-                            if (it.data!!) Result(success = "Kayıt Başarılı") else Result(
-                                error = "Kullanıcı Kayıtlı"
-                            )
+                            if (it.data!!) Result(success = "Kayıt Başarılı")
+                            else Result(error = "Kullanıcı Kayıtlı")
                     }
                     Status.ERROR -> _result.value = Result(
                         error = "Kullanıcı kaydında bir hata oluştu."

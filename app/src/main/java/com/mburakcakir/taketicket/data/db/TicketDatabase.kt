@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 
 @Database(
     entities = [UserModel::class, EventModel::class, TicketModel::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class TicketDatabase : RoomDatabase() {

@@ -68,20 +68,20 @@ class LoginFragment : Fragment() {
         })
 
         loginViewModel.result.observe(requireActivity(), {
-            if (it.success != null) {
+            if (!it.success.isNullOrEmpty()) {
                 this.navigate(R.id.action_loginFragment_to_eventFragment)
             }
-            if (it.error != null)
+            if (!it.error.isNullOrEmpty())
                 requireContext() extToast it.error
-            if (it.warning != null)
+            if (!it.warning.isNullOrEmpty())
                 requireContext() extToast it.warning
-            if (it.loading != null)
+            if (!it.loading.isNullOrEmpty())
                 requireContext() extToast it.loading
         })
 
     }
 
-    fun dataChanged() {
+    private fun dataChanged() {
         loginViewModel.loginDataChanged(
             binding.edtUsername.text.toString(),
             binding.edtPassword.text.toString()

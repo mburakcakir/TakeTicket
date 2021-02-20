@@ -9,7 +9,7 @@ class TicketRepositoryImpl(private val ticketDao: TicketDao) : TicketRepository 
     override suspend fun insertTicket(ticketModel: TicketModel) = flow {
         emit(Resource.Loading())
         try {
-            if (checkIfTicketExists(ticketModel.eventID))
+            if (checkIfTicketExists(ticketModel.eventID, ticketModel.username))
                 emit(Resource.Success(false))
             else {
                 emit(Resource.Success(true))
@@ -20,17 +20,17 @@ class TicketRepositoryImpl(private val ticketDao: TicketDao) : TicketRepository 
         }
     }
 
-    override fun getAllTickets(username: String?) = flow {
+    override fun getAllTickets(username: String) = flow {
         emit(Resource.Loading())
         try {
-            emit(Resource.Success(ticketDao.getAllTickets(username!!)))
+            emit(Resource.Success(ticketDao.getAllTickets(username)))
         } catch (e: Exception) {
             emit(Resource.Error(e))
         }
     }
 
-    override fun checkIfTicketExists(eventID: Int): Boolean =
-        ticketDao.checkIfTicketExists(eventID) != 0
+    override fun checkIfTicketExists(eventID: Int, username: String): Boolean =
+        ticketDao.checkIfTicketExists(eventID, username) != 0
 
     override suspend fun deleteTicket(id: Int) = ticketDao.deleteTicket(id)
 }

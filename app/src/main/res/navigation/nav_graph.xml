@@ -29,6 +29,12 @@
         <action
             android:id="@+id/action_eventFragment_to_ticketFragment"
             app:destination="@id/ticketFragment" />
+        <action
+            android:id="@+id/action_eventFragment_to_detailDialog"
+            app:destination="@id/detailDialog" />
+        <action
+            android:id="@+id/action_eventFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -61,4 +67,17 @@
         android:name="com.mburakcakir.taketicket.ui.ticket.TicketFragment"
         android:label="Biletlerim"
         tools:layout="@layout/fragment_ticket" />
+
+
+    <dialog
+        android:id="@+id/detailDialog"
+        android:name="com.mburakcakir.taketicket.ui.event.DetailDialog"
+        android:label="DetailDialog">
+        <action
+            android:id="@+id/action_detailDialog_to_ticketFragment"
+            app:destination="@id/ticketFragment" />
+        <argument
+            android:name="ticketModel"
+            app:argType="com.mburakcakir.taketicket.data.db.entity.TicketModel" />
+    </dialog>
 </navigation>

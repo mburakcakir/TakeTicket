@@ -2,20 +2,25 @@ package com.mburakcakir.taketicket.ui.event
 
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.databinding.FragmentEventBinding
+import com.mburakcakir.taketicket.ui.MainActivity
 import com.mburakcakir.taketicket.ui.viewmodel.EventViewModel
 import com.mburakcakir.taketicket.utils.extToast
-import kotlinx.android.synthetic.main.activity_welcome.*
+import com.mburakcakir.taketicket.utils.navigate
 
 class EventFragment : Fragment() {
     private lateinit var eventViewModel: EventViewModel
     private var _binding: FragmentEventBinding? = null
     private val binding get() = _binding!!
-
+    private var adapter: EventAdapter = EventAdapter()
     var message: String = ""
     var backPressedTime: Long = 0
 
@@ -33,20 +38,32 @@ class EventFragment : Fragment() {
         init()
     }
 
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
+
     fun init() {
-        requireActivity().toolbar.visibility = View.VISIBLE
+        (requireActivity() as MainActivity).changeToolbarVisibility(View.VISIBLE)
         setHasOptionsMenu(true)
-
         eventViewModel = ViewModelProvider(this).get(EventViewModel::class.java)
-        requireActivity().toolbar.title = "Hoşgeldin ${eventViewModel.getUsername()}"
 
-        binding.rvEvent.adapter = EventAdapter {
-            DetailDialog(
-                ticketModel = it
-            ).show(requireActivity().supportFragmentManager, "DetailDialog")
+        requireActivity().onBackPressedDispatcher.addCallback(backpressedCallback)
+
+        (requireActivity() as MainActivity).apply {
+            changeToolbarVisibility(View.VISIBLE)
+            changeToolbarTitle("Hoşgeldin ${eventViewModel.getUsername()}")
         }
+
         binding.rvEvent.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        adapter.setOnClickEvent {
+            EventFragmentDirections.actionEventFragmentToDetailDialog(it).let { navDirection ->
+                this.navigate(navDirection)
+            }
+        }
+        binding.rvEvent.adapter = adapter
+
 
         eventViewModel.allEvents.observe(requireActivity(), { allEvents ->
             allEvents?.let {
@@ -66,27 +83,22 @@ class EventFragment : Fragment() {
         })
     }
 
-//    override fun onBackPressed() {
-//        if (backPressedTime + 5000 > System.currentTimeMillis())
-//            endSession()
-//        else
-//            Toast.makeText(requireContext(), getString(R.string.exit_app), Toast.LENGTH_SHORT).show()
-//
-//        backPressedTime = System.currentTimeMillis()
-//    }
+    private val backpressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            if (backPressedTime + 5000 > System.currentTimeMillis())
+                endSession()
+            else
+                requireContext() extToast getString(R.string.exit_app)
 
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//            R.id.action_list -> this.navigate(R.id.action_eventFragment_to_ticketFragment)
-//            R.id.action_info -> this.navigate(R.id.action_eventFragment_to_infoFragment)
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
+            backPressedTime = System.currentTimeMillis()
+        }
 
-//    fun endSession() {
-//        requireContext() extToast getString(R.string.login_again)
-//        finish()
-//        eventViewModel.endSession()
-//        this extOpenActivity LoginActivity::class.java
-//    }
+    }
+
+    fun endSession() {
+        requireContext() extToast getString(R.string.login_again)
+        eventViewModel.endSession()
+        (requireActivity() as MainActivity).changeToolbarVisibility(View.GONE)
+        this.navigate(R.id.action_eventFragment_to_loginFragment)
+    }
 }

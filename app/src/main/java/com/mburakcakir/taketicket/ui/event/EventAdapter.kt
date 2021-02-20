@@ -12,9 +12,12 @@ import com.mburakcakir.taketicket.databinding.RvItemEventBinding
 import com.mburakcakir.taketicket.utils.SessionManager
 import com.mburakcakir.taketicket.utils.getCurrentTime
 
-class EventAdapter(
-    private inline val onClickEvent: (ticketModel: TicketModel) -> Unit
-) : ListAdapter<EventModel, EventViewHolder>(EventCallback()) {
+class EventAdapter : ListAdapter<EventModel, EventViewHolder>(EventCallback()) {
+    private lateinit var onClickEvent: (ticketModel: TicketModel) -> Unit
+
+    fun setOnClickEvent(onClickEvent: (TicketModel) -> Unit) {
+        this.onClickEvent = onClickEvent
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         val binding = RvItemEventBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -42,7 +45,7 @@ class EventViewHolder(
     fun bind(eventModel: EventModel) {
         val sessionManager = SessionManager(itemView.context)
         with(binding) {
-            txtEventTitle.text = "${eventModel.title}"
+            txtEventTitle.text = eventModel.title
             txtEventSubtitle.text = eventModel.subTitle
             txtEventTime.text = eventModel.time
             txtEventOrder.text = eventModel.category
@@ -52,7 +55,7 @@ class EventViewHolder(
 
         itemView.setOnClickListener {
             val ticketModel = TicketModel(
-                sessionManager.getName()!!,
+                sessionManager.getUsername()!!,
                 sessionManager.getUserEmail()!!,
                 getCurrentTime(),
                 eventModel.eventID
