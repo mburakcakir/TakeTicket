@@ -28,7 +28,6 @@ class LoginViewModel(
         sessionManager.startSession(userModel)
     }
 
-
     fun login(username: String, password: String) = viewModelScope.launch {
         userRepository.getUserByUsername(username, password).collect {
             it.let {

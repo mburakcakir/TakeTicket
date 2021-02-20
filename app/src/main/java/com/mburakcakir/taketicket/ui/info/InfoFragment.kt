@@ -30,6 +30,11 @@ class InfoFragment : Fragment() {
         init()
     }
 
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
+
     private fun init() {
         binding.rvInfo.adapter = InfoAdapter()
         binding.rvInfo.layoutManager =
@@ -44,7 +49,6 @@ class InfoFragment : Fragment() {
             if (it.loading != null)
                 requireContext() extToast it.loading
         })
-
         infoViewModel.allInfo.observe(requireActivity(), {
             (binding.rvInfo.adapter as InfoAdapter).submitList(it)
         })

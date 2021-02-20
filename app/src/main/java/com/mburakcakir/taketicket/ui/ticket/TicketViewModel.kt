@@ -76,7 +76,7 @@ class TicketViewModel(
     }
 
     fun getAllTickets() = viewModelScope.launch {
-        ticketRepository.getAllTickets(sessionManager.getUsername()).collect {
+        ticketRepository.getAllTickets(sessionManager.getUsername()!!).collect {
             it.let {
                 when (it.status) {
                     Status.LOADING -> _result.value = Result(loading = "Biletler Yükleniyor")

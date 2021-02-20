@@ -32,7 +32,7 @@
         app:layout_constraintTop_toBottomOf="@id/imgTicketImage" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/txtTicketName"
+        android:id="@+id/txtTicketUsername"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:maxLines="2"
@@ -51,7 +51,7 @@
         android:layout_marginTop="10dp"
         android:text="@string/time"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtTicketName" />
+        app:layout_constraintTop_toBottomOf="@id/txtTicketUsername" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/txtTicketTime"

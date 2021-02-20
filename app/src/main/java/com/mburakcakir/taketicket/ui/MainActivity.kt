@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
         setupActionBarWithNavController(navController)
-        binding.toolbar.visibility = View.GONE
+        changeToolbarVisibility(View.GONE)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -43,6 +43,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+
+    fun changeToolbarVisibility(visibility: Int) {
+        binding.toolbar.visibility = visibility
+    }
+
+    fun changeToolbarTitle(title: String) {
+        binding.toolbar.title = title
     }
 }
 

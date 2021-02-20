@@ -13,7 +13,8 @@ import com.mburakcakir.taketicket.utils.extToast
 
 class TicketFragment : Fragment() {
     private lateinit var ticketViewModel: TicketViewModel
-    private lateinit var binding: FragmentTicketBinding
+    private var _binding: FragmentTicketBinding? = null
+    private val binding get() = _binding!!
     var message: String = ""
 
     override fun onCreateView(
@@ -21,7 +22,7 @@ class TicketFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentTicketBinding.inflate(inflater, container, false)
+        _binding = FragmentTicketBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
         return binding.root
     }
@@ -30,6 +31,11 @@ class TicketFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         init()
+    }
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 
     fun init() {
