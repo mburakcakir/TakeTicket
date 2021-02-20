@@ -14,9 +14,11 @@
         <activity android:name=".ui.info.InfoActivity" />
         <activity android:name=".ui.ticket.TicketActivity" />
         <activity android:name=".ui.activity.EventActivity" />
-        <activity android:name="com.mburakcakir.taketicket.ui.entry.register.RegisterActivity" />
-        <activity android:name="com.mburakcakir.taketicket.ui.entry.login.LoginActivity" />
-        <activity android:name=".ui.splash.SplashActivity">
+        <activity android:name=".ui.entry.register.RegisterActivity" />
+        <activity android:name=".ui.entry.login.LoginActivity" />
+        <activity
+            android:name=".ui.MainActivity"
+            android:theme="@style/SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

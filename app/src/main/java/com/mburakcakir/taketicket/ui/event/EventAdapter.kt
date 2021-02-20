@@ -15,6 +15,7 @@ import com.mburakcakir.taketicket.utils.getCurrentTime
 class EventAdapter(
     private inline val onClickEvent: (ticketModel: TicketModel) -> Unit
 ) : ListAdapter<EventModel, EventViewHolder>(EventCallback()) {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         val binding = RvItemEventBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return EventViewHolder(binding, onClickEvent)

@@ -3,7 +3,6 @@ package com.mburakcakir.taketicket.ui.activity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
-import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -13,8 +12,6 @@ import com.mburakcakir.taketicket.databinding.ActivityEventBinding
 import com.mburakcakir.taketicket.ui.entry.login.LoginActivity
 import com.mburakcakir.taketicket.ui.event.DetailDialog
 import com.mburakcakir.taketicket.ui.event.EventAdapter
-import com.mburakcakir.taketicket.ui.info.InfoActivity
-import com.mburakcakir.taketicket.ui.ticket.TicketActivity
 import com.mburakcakir.taketicket.ui.viewmodel.EventViewModel
 import com.mburakcakir.taketicket.utils.extOpenActivity
 import com.mburakcakir.taketicket.utils.extToast
@@ -36,8 +33,8 @@ class EventActivity : AppCompatActivity() {
 
     fun init() {
         eventViewModel = ViewModelProvider(this).get(EventViewModel::class.java)
-        binding.toolbar.title = "Hoşgeldin ${eventViewModel.getUsername()}"
-        setSupportActionBar(binding.toolbar)
+        binding.toolbarEvent.title = "Hoşgeldin ${eventViewModel.getUsername()}"
+        setSupportActionBar(binding.toolbarEvent)
 
         binding.rvEvent.adapter = EventAdapter {
             DetailDialog(
@@ -80,13 +77,13 @@ class EventActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_list -> this@EventActivity extOpenActivity TicketActivity::class.java
-            R.id.action_info -> this@EventActivity extOpenActivity InfoActivity::class.java
-        }
-        return super.onOptionsItemSelected(item)
-    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when (item.itemId) {
+//            R.id.action_list -> this@EventActivity extOpenActivity TicketActivity::class.java
+//            R.id.action_info -> this@EventActivity extOpenActivity InfoActivity::class.java
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 
     fun endSession() {
         this extToast getString(R.string.login_again)

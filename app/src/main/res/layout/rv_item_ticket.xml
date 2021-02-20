@@ -44,7 +44,7 @@
             card_view:layout_constraintEnd_toStartOf="@id/txtTicketTitle"
             card_view:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/txtTicketTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
             card_view:layout_constraintStart_toEndOf="@id/guideline"
             card_view:layout_constraintTop_toBottomOf="@id/txtTicketTitle" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/txtTicketPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
             card_view:layout_constraintTop_toBottomOf="@id/txtTicketTitle"
             tools:text="@string/price" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/txtTicketCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
             card_view:layout_constraintStart_toStartOf="@id/guideline3"
             card_view:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/txtTicketBoughtTime"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -133,7 +133,7 @@
             card_view:layout_constraintStart_toStartOf="@id/guideline3"
             card_view:layout_constraintTop_toBottomOf="@id/imgTime" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/txtTicketLastTime"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

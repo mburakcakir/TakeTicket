@@ -16,7 +16,7 @@ class UserRepositoryImpl(private val userDao: UserDao) : UserRepository {
             if (checkIfUserExists(username, password))
                 emit(Resource.Success(userDao.getUserByUsername(username, password)))
             else
-                emit(Resource.Success(UserModel("", "", "", "")))
+                emit(Resource.Success(null))
         } catch (e: Exception) {
             emit(Resource.Error(e))
         }

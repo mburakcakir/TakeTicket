@@ -14,7 +14,6 @@
         android:layout_height="wrap_content"
         android:padding="10dp">
 
-
         <ImageView
             android:id="@+id/imgEventImage"
             android:layout_width="wrap_content"
@@ -23,7 +22,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/txtEventTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,7 +34,7 @@
             app:layout_constraintTop_toBottomOf="@id/imgEventImage"
             tools:text="subject" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/txtEventTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,7 +44,7 @@
             app:layout_constraintTop_toBottomOf="@id/imgEventImage"
             tools:text="time" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/txtEventSubtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,7 +54,7 @@
             app:layout_constraintTop_toBottomOf="@id/txtEventTitle"
             tools:text="link" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/txtEventOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,7 +67,7 @@
             app:layout_constraintTop_toBottomOf="@id/txtEventSubtitle"
             tools:text="day" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/txtEventCapacity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
