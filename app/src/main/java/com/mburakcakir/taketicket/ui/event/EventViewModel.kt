@@ -38,14 +38,16 @@ class EventViewModel(
     }
 
     fun getAllEvents() = viewModelScope.launch {
-        eventRepository.getAllEvents().collect {
+        eventRepository.getAllEvents().collect { it ->
             when (it.status) {
                 Status.LOADING -> _result.value = Result(loading = "Etkinlikler Yükleniyor")
                 Status.SUCCESS -> {
-                    _allEvents.value = it.data
-                    _result.value = Result("Etkinlikler Yüklendi")
+                    it.data!!.let { eventList ->
+                        _allEvents.value = eventList
+                        _result.value = Result("Etkinlikler Yüklendi")
+                    }
                 }
-                Status.ERROR -> _result.value = Result(loading = "Bir hata oluştu.")
+                Status.ERROR -> _result.value = Result(error = "Bir hata oluştu.")
             }
         }
     }

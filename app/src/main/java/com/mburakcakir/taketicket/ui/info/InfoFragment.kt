@@ -14,12 +14,13 @@ class InfoFragment : Fragment() {
     private lateinit var infoViewModel: InfoViewModel
     private var _binding: FragmentInfoBinding? = null
     private val binding get() = _binding!!
+    var message: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentInfoBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -42,30 +43,16 @@ class InfoFragment : Fragment() {
         infoViewModel = ViewModelProvider(this).get(InfoViewModel::class.java)
 
         infoViewModel.result.observe(requireActivity(), {
-            if (it.success != null)
-                requireContext() extToast it.success
-            if (it.error != null)
-                requireContext() extToast it.error
-            if (it.loading != null)
-                requireContext() extToast it.loading
+            when {
+                !it.success.isNullOrEmpty() -> message = it.success
+                !it.error.isNullOrEmpty() -> message = it.error
+                !it.loading.isNullOrEmpty() -> message = it.loading
+            }
+            requireContext() extToast message
         })
+
         infoViewModel.allInfo.observe(requireActivity(), {
             (binding.rvInfo.adapter as InfoAdapter).submitList(it)
         })
-
-//        viewModel.allInfo.observe(this, {
-//            it?.let {
-//                (binding.rvInfo.adapter as InfoAdapter).submitList(it)
-//                Log.d("tag2", it.toString())
-//            }
-//        })
     }
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//            R.id.action_list -> this.navigate(R.id.action_infoFragment_to_ticketFragment)
-//            R.id.action_info -> this.navigate(R.id.action_eventFragment_to_infoFragment)
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
 }

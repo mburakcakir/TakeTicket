@@ -19,6 +19,7 @@ class UserRepositoryImpl(private val userDao: UserDao) : UserRepository {
                 emit(Resource.Success(null))
         } catch (e: Exception) {
             emit(Resource.Error(e))
+            e.printStackTrace()
         }
     }
 
@@ -43,6 +44,7 @@ class UserRepositoryImpl(private val userDao: UserDao) : UserRepository {
 
         } catch (e: Exception) {
             emit(Resource.Error(e))
+            e.printStackTrace()
         }
     }
 

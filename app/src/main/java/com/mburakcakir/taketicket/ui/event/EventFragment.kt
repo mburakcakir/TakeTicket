@@ -28,7 +28,7 @@ class EventFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentEventBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -74,14 +74,28 @@ class EventFragment : Fragment() {
 
         eventViewModel.result.observe(requireActivity(), {
             when {
-                it.success != null -> message = it.success
-                it.error != null -> message = it.error
-                it.loading != null -> message = it.loading
-                it.warning != null -> message = it.warning
+                !it.success.isNullOrEmpty() -> message = it.success
+                !it.error.isNullOrEmpty() -> message = it.error
+                !it.loading.isNullOrEmpty() -> message = it.loading
             }
             requireContext() extToast message
         })
+
+
+//        eventViewModel.result.observe(requireActivity(), { result ->
+//            result.success?.let {
+//                message = it
+//            }
+//            result.error?.let {
+//                message = it
+//            }
+//            result.loading?.let {
+//                message = it
+//            }
+//            requireContext() extToast message
+//        })
     }
+
 
     private val backpressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {

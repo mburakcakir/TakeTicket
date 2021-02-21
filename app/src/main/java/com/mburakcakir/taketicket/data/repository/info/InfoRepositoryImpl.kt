@@ -20,6 +20,7 @@ class InfoRepositoryImpl(
                 }
         } catch (e: Exception) {
             emit(Resource.Error(e))
+            e.printStackTrace()
         }
     }
 

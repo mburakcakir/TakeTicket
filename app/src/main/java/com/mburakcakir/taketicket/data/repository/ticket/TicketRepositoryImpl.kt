@@ -17,6 +17,7 @@ class TicketRepositoryImpl(private val ticketDao: TicketDao) : TicketRepository 
             }
         } catch (e: Exception) {
             emit(Resource.Error(e))
+            e.printStackTrace()
         }
     }
 
@@ -26,6 +27,7 @@ class TicketRepositoryImpl(private val ticketDao: TicketDao) : TicketRepository 
             emit(Resource.Success(ticketDao.getAllTickets(username)))
         } catch (e: Exception) {
             emit(Resource.Error(e))
+            e.printStackTrace()
         }
     }
 

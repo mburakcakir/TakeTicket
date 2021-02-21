@@ -7,11 +7,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.NavHostFragment
 
-infix fun <T> Context.extOpenActivity(cls: Class<T>) {
-    val intent = Intent(this, cls)
-    startActivity(intent)
-}
-
 infix fun Fragment.navigate(action: Int) {
     NavHostFragment.findNavController(this).navigate(action)
 }

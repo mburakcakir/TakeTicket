@@ -7,6 +7,6 @@ import kotlinx.coroutines.flow.Flow
 interface TicketRepository{
     suspend fun insertTicket(ticketModel: TicketModel): Flow<Resource<Boolean>>
     fun getAllTickets(username: String): Flow<Resource<List<TicketModel>>>
-    fun checkIfTicketExists(ticketID: Int, username: String): Boolean
+    fun checkIfTicketExists(eventID: Int, username: String): Boolean
     suspend fun deleteTicket(id: Int)
 }

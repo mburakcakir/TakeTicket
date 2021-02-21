@@ -21,7 +21,7 @@
     <fragment
         android:id="@+id/eventFragment"
         android:name="com.mburakcakir.taketicket.ui.event.EventFragment"
-        android:label="fragment_event"
+        android:label="Etkinlikler"
         tools:layout="@layout/fragment_event">
         <action
             android:id="@+id/action_eventFragment_to_infoFragment"

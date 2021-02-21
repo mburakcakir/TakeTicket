@@ -21,7 +21,7 @@ class TicketFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentTicketBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
         return binding.root
@@ -54,20 +54,12 @@ class TicketFragment : Fragment() {
 
         ticketViewModel.result.observe(requireActivity(), {
             when {
-                it.success != null -> message = it.success
-                it.error != null -> message = it.error
-                it.loading != null -> message = it.loading
-                it.warning != null -> message = it.warning
+                !it.success.isNullOrEmpty() -> message = it.success
+                !it.error.isNullOrEmpty() -> message = it.error
+                !it.loading.isNullOrEmpty() -> message = it.loading
+                !it.warning.isNullOrEmpty() -> message = it.warning
             }
             requireContext() extToast message
         })
     }
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//            R.id.action_list -> this.navigate(R.id.action_eventFragment_to_ticketFragment)
-//            R.id.action_info -> this.navigate(R.id.action_ticketFragment_to_infoFragment)
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
 }

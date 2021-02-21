@@ -49,41 +49,41 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
-    // test
-    testImplementation 'junit:junit:4.13.1'
+    // Test
+    testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    //material
+    // Material
     implementation "com.google.android.material:material:$materialVersion"
 
-    // room
+    // Room
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
 
-    // coroutines
+    // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
 
-    // viewmodel and livedata
+    // Viewmodel and Livedata
     implementation "androidx.lifecycle:lifecycle-extensions:$liveDataVersion"
-    api "androidx.lifecycle:lifecycle-livedata-ktx:$liveDataVersion"
-    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$liveDataVersion"
+    api "androidx.lifecycle:lifecycle-livedata-ktx:$lifeCycleLiveDataVersion"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifeCycleViewModelVersion"
 
-    //glide
+    //Glide
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     kapt "com.github.bumptech.glide:compiler:$glideVersion"
 
-    //lottiefiles
+    //Lottiefiles
     implementation "com.airbnb.android:lottie:$lottieVersion"
 
-    //retrofit
+    //Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofitLibraryVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitLibraryVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitLibraryVersion"
     implementation "com.squareup.okhttp:okhttp:$okHttpVersion"
 
-    // firebase Storage
+    // Firebase Storage
     implementation "com.firebaseui:firebase-ui-storage:$firebaseUiVersion"
 
     // Navigation Component
