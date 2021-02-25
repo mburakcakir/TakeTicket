@@ -14,7 +14,7 @@ class InfoFragment : Fragment() {
     private lateinit var infoViewModel: InfoViewModel
     private var _binding: FragmentInfoBinding? = null
     private val binding get() = _binding!!
-    var message: String = ""
+    private var message: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,

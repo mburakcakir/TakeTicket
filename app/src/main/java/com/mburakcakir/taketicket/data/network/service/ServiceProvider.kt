@@ -5,7 +5,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class ServiceProvider {
-    internal lateinit var serviceApi: ServiceApiClient
+    private lateinit var serviceApi: ServiceApiClient
 
     fun getServiceApi(): ServiceApiClient {
         serviceApi = instance!!.create(ServiceApiClient::class.java)
@@ -14,7 +14,7 @@ class ServiceProvider {
 
     companion object {
         private var retrofit: Retrofit? = null
-        val BASE_URL = "https://taketicketandroid-default-rtdb.firebaseio.com/"
+        private val BASE_URL = "https://taketicketandroid-default-rtdb.firebaseio.com/"
 
         private val instance: Retrofit?
             get() {

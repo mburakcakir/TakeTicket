@@ -21,8 +21,8 @@ class EventFragment : Fragment() {
     private var _binding: FragmentEventBinding? = null
     private val binding get() = _binding!!
     private var adapter: EventAdapter = EventAdapter()
-    var message: String = ""
-    var backPressedTime: Long = 0
+    private var message: String = ""
+    private var backPressedTime: Long = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,7 +43,7 @@ class EventFragment : Fragment() {
         super.onDestroyView()
     }
 
-    fun init() {
+    private fun init() {
         (requireActivity() as MainActivity).changeToolbarVisibility(View.VISIBLE)
         setHasOptionsMenu(true)
         eventViewModel = ViewModelProvider(this).get(EventViewModel::class.java)
@@ -109,7 +109,7 @@ class EventFragment : Fragment() {
 
     }
 
-    fun endSession() {
+    private fun endSession() {
         requireContext() extToast getString(R.string.login_again)
         eventViewModel.endSession()
         (requireActivity() as MainActivity).changeToolbarVisibility(View.GONE)

@@ -19,7 +19,7 @@ class OnboardingFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentOnboardingBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -32,14 +32,13 @@ class OnboardingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        sessionManager = SessionManager(requireContext())
-        val ifUserLoggedIn = sessionManager.ifUserLoggedIn()
-
-        if (ifUserLoggedIn)
-            this.navigate(R.id.action_onboardingFragment_to_eventFragment)
-        else
-            this.navigate(R.id.action_onboardingFragment_to_loginFragment)
-
+        this.navigate(
+            sessionManager.ifUserLoggedIn().run {
+                if (this)
+                    R.id.action_onboardingFragment_to_eventFragment
+                else
+                    R.id.action_onboardingFragment_to_loginFragment
+            })
     }
 }
 

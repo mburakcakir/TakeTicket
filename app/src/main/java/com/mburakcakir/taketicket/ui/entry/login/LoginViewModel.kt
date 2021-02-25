@@ -24,7 +24,7 @@ class LoginViewModel(
         userRepository = UserRepositoryImpl(database.userDao())
     }
 
-    fun startSession(userModel: UserModel) {
+    private fun startSession(userModel: UserModel) {
         sessionManager.startSession(userModel)
     }
 

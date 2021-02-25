@@ -3,9 +3,9 @@ package com.mburakcakir.taketicket.utils
 import android.content.Context
 import com.mburakcakir.taketicket.data.db.entity.UserModel
 
-class SessionManager(private val context: Context) {
-    var sharedPreferences = context.getSharedPreferences(PREF_NAME, 0)
-    val editor = sharedPreferences.edit()
+class SessionManager(context: Context) {
+    private var sharedPreferences = context.getSharedPreferences(PREF_NAME, 0)
+    private val editor = sharedPreferences.edit()
 
     companion object {
         val PREF_NAME: String = "TicketApp"

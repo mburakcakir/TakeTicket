@@ -48,12 +48,12 @@ class TicketViewModel(
         getAllTickets()
     }
 
-    fun getAllEvents() = viewModelScope.launch {
+    private fun getAllEvents() = viewModelScope.launch {
         eventRepository.getAllEvents().collect {
             when (it.status) {
                 Status.LOADING -> _result.value = Result(loading = "Etkinlikler Yükleniyor")
-                Status.SUCCESS -> {
-                    _allEvents.value = it.data
+                Status.SUCCESS -> it.data?.let { listEventModel ->
+                    _allEvents.value = listEventModel
                     _result.value = Result("Etkinlikler Yüklendi")
                 }
                 Status.ERROR -> _result.value = Result(loading = "Bir hata oluştu.")
@@ -75,12 +75,14 @@ class TicketViewModel(
 
     }
 
-    fun getAllTickets() = viewModelScope.launch {
+    private fun getAllTickets() = viewModelScope.launch {
         ticketRepository.getAllTickets(sessionManager.getUsername()!!).collect {
             it.let {
                 when (it.status) {
                     Status.LOADING -> _result.value = Result(loading = "Biletler Yükleniyor")
-                    Status.SUCCESS -> _allTickets.value = it.data
+                    Status.SUCCESS -> it.data?.let { listTicketModel ->
+                        _allTickets.value = listTicketModel
+                    }
                     Status.ERROR -> _result.value = Result(error = "Bir hata oluştu")
                 }
             }

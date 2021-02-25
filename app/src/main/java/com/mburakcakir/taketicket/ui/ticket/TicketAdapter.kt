@@ -40,6 +40,7 @@ class TicketViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(ticketModel: TicketModel) {
         val eventModel = eventList[ticketModel.eventID - 1]
+
         with(binding) {
             txtTicketTitle.text = eventModel.title
             txtTicketPrice.text = eventModel.price

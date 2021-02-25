@@ -21,8 +21,8 @@ class InfoViewModel(
 
     private val _allInfo = MutableLiveData<List<InfoModel>>()
     val allInfo: LiveData<List<InfoModel>> = _allInfo
-    val infoRepository: InfoRepository
-    val serviceClient: ServiceApiClient
+    private val infoRepository: InfoRepository
+    private val serviceClient: ServiceApiClient
 
     init {
         serviceClient = ServiceProvider().getServiceApi()
@@ -30,7 +30,7 @@ class InfoViewModel(
         getAllInfo()
     }
 
-    fun getAllInfo() = viewModelScope.launch {
+    private fun getAllInfo() = viewModelScope.launch {
         infoRepository.getAllInfo().collect {
             it.let {
                 when (it.status) {

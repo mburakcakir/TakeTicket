@@ -37,7 +37,7 @@ class EventViewModel(
         getAllEvents()
     }
 
-    fun getAllEvents() = viewModelScope.launch {
+    private fun getAllEvents() = viewModelScope.launch {
         eventRepository.getAllEvents().collect { it ->
             when (it.status) {
                 Status.LOADING -> _result.value = Result(loading = "Etkinlikler Yükleniyor")
@@ -51,9 +51,6 @@ class EventViewModel(
             }
         }
     }
-
-    fun checkIfTicketExists(ticketID: Int) =
-        ticketRepository.checkIfTicketExists(ticketID, sessionManager.getUsername()!!)
 
     fun getEventById(ID: Int) = eventRepository.getEventById(ID)
     fun endSession() = sessionManager.endSession()

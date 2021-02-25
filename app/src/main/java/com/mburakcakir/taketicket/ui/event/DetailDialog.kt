@@ -23,7 +23,7 @@ class DetailDialog : BottomSheetDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DialogTicketBinding.inflate(inflater, container, false)
         val dialogView = binding.root
         isCancelable = true

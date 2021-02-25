@@ -21,7 +21,6 @@ open class EntryViewModel(application: Application) : BaseViewModel(application)
         }
     }
 
-    // A placeholder username validation check
     private fun isUserNameValid(username: String): Boolean {
         return if (username.contains('@')) {
             Patterns.EMAIL_ADDRESS.matcher(username).matches()
@@ -30,7 +29,6 @@ open class EntryViewModel(application: Application) : BaseViewModel(application)
         }
     }
 
-    // A placeholder password validation check
     private fun isPasswordValid(password: String): Boolean {
         return password.isNotEmpty()
     }

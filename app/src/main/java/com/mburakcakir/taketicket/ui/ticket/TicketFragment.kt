@@ -15,7 +15,7 @@ class TicketFragment : Fragment() {
     private lateinit var ticketViewModel: TicketViewModel
     private var _binding: FragmentTicketBinding? = null
     private val binding get() = _binding!!
-    var message: String = ""
+    private var message: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,7 +29,6 @@ class TicketFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         init()
     }
 
@@ -38,7 +37,7 @@ class TicketFragment : Fragment() {
         super.onDestroyView()
     }
 
-    fun init() {
+    private fun init() {
         ticketViewModel = ViewModelProvider(this).get(TicketViewModel::class.java)
 
         binding.rvTicket.layoutManager =

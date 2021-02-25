@@ -42,7 +42,4 @@ class RegisterViewModel(
             }
         }
     }
-
-    fun checkIfUserExists(username: String, password: String) =
-        userRepository.checkIfUserExists(username, password)
 }
