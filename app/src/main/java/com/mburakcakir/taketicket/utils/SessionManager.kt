@@ -13,6 +13,7 @@ class SessionManager(context: Context) {
         val NAME: String = "NAME"
         val PASSWORD: String = "PASSWORD"
         val EMAIL: String = "EMAIL"
+        val URI: String = "URI"
         val IS_LOGGED_IN: String = "IS_LOGGED_IN"
     }
 
@@ -23,6 +24,13 @@ class SessionManager(context: Context) {
             putString(USERNAME, userModel.userName)
             putString(PASSWORD, userModel.password)
             putString(EMAIL, userModel.email)
+            commit()
+        }
+    }
+
+    fun saveImageUri(uri: String) {
+        editor.apply {
+            putString(URI, uri)
             commit()
         }
     }
@@ -38,4 +46,5 @@ class SessionManager(context: Context) {
     fun getUsername() = sharedPreferences.getString(USERNAME, "")
     fun getUserEmail() = sharedPreferences.getString(EMAIL, "")
     fun getName() = sharedPreferences.getString(NAME, "")
+    fun getImageUri() = sharedPreferences.getString(URI, "")
 }

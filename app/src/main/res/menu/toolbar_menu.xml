@@ -14,4 +14,10 @@
         android:title="Search"
         app:showAsAction="always|collapseActionView" />
 
+    <item
+        android:id="@+id/profileFragment"
+        android:title="ProfileImage"
+        app:actionLayout="@layout/layout_profile"
+        app:showAsAction="always" />
+
 </menu>

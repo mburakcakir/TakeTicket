@@ -13,7 +13,6 @@ import com.mburakcakir.taketicket.data.repository.ticket.TicketRepository
 import com.mburakcakir.taketicket.data.repository.ticket.TicketRepositoryImpl
 import com.mburakcakir.taketicket.ui.BaseViewModel
 import com.mburakcakir.taketicket.utils.Result
-import com.mburakcakir.taketicket.utils.SessionManager
 import com.mburakcakir.taketicket.utils.Status
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -21,7 +20,6 @@ import kotlinx.coroutines.launch
 class TicketViewModel(
     application: Application
 ) : BaseViewModel(application) {
-    private val sessionManager: SessionManager
     private val eventRepository: EventRepository
     private val ticketRepository: TicketRepository
 
@@ -35,7 +33,6 @@ class TicketViewModel(
     val newTicketResult: LiveData<Result> = _newTicketResult
 
     init {
-        sessionManager = SessionManager(application)
         val database = TicketDatabase.getDatabase(application, viewModelScope)
         eventRepository = EventRepositoryImpl(database.eventDao())
         ticketRepository = TicketRepositoryImpl(database.ticketDao())

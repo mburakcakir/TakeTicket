@@ -5,11 +5,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.databinding.FragmentEventBinding
 import com.mburakcakir.taketicket.ui.MainActivity
 import com.mburakcakir.taketicket.ui.viewmodel.EventViewModel
@@ -22,7 +20,6 @@ class EventFragment : Fragment() {
     private val binding get() = _binding!!
     private var adapter: EventAdapter = EventAdapter()
     private var message: String = ""
-    private var backPressedTime: Long = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,15 +41,14 @@ class EventFragment : Fragment() {
     }
 
     private fun init() {
-        (requireActivity() as MainActivity).changeToolbarVisibility(View.VISIBLE)
-        setHasOptionsMenu(true)
         eventViewModel = ViewModelProvider(this).get(EventViewModel::class.java)
-
-        requireActivity().onBackPressedDispatcher.addCallback(backpressedCallback)
+        eventViewModel.loadImage(eventViewModel.sessionManager.getUsername()!!)
 
         (requireActivity() as MainActivity).apply {
             changeToolbarVisibility(View.VISIBLE)
+            initToolbarProfile()
             changeToolbarTitle("Hoşgeldin ${eventViewModel.getUsername()}")
+
         }
 
         binding.rvEvent.layoutManager =
@@ -94,25 +90,5 @@ class EventFragment : Fragment() {
 //            }
 //            requireContext() extToast message
 //        })
-    }
-
-
-    private val backpressedCallback = object : OnBackPressedCallback(true) {
-        override fun handleOnBackPressed() {
-            if (backPressedTime + 5000 > System.currentTimeMillis())
-                endSession()
-            else
-                requireContext() extToast getString(R.string.exit_app)
-
-            backPressedTime = System.currentTimeMillis()
-        }
-
-    }
-
-    private fun endSession() {
-        requireContext() extToast getString(R.string.login_again)
-        eventViewModel.endSession()
-        (requireActivity() as MainActivity).changeToolbarVisibility(View.GONE)
-        this.navigate(R.id.action_eventFragment_to_loginFragment)
     }
 }

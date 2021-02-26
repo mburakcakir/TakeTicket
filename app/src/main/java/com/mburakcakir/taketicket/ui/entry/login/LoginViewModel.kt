@@ -8,7 +8,6 @@ import com.mburakcakir.taketicket.data.repository.user.UserRepository
 import com.mburakcakir.taketicket.data.repository.user.UserRepositoryImpl
 import com.mburakcakir.taketicket.ui.entry.EntryViewModel
 import com.mburakcakir.taketicket.utils.Result
-import com.mburakcakir.taketicket.utils.SessionManager
 import com.mburakcakir.taketicket.utils.Status
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -16,7 +15,6 @@ import kotlinx.coroutines.launch
 class LoginViewModel(
     application: Application
 ) : EntryViewModel(application) {
-    private val sessionManager: SessionManager = SessionManager(application)
     private val userRepository: UserRepository
 
     init {

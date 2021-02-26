@@ -21,6 +21,7 @@ class OnboardingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentOnboardingBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
@@ -31,6 +32,7 @@ class OnboardingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sessionManager = SessionManager(requireContext())
 
         this.navigate(
             sessionManager.ifUserLoggedIn().run {

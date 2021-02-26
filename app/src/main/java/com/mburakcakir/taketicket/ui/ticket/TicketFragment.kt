@@ -23,7 +23,6 @@ class TicketFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentTicketBinding.inflate(inflater, container, false)
-        setHasOptionsMenu(true)
         return binding.root
     }
 
