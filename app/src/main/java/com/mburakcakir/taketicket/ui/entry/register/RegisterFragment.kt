@@ -65,12 +65,16 @@ class RegisterFragment : Fragment() {
 //
 //    }
 
+    fun uploadAndSaveFile(username: String) {
+        registerViewModel.uploadFile(binding.edtUsername.text.toString(), filePath)
+        registerViewModel.loadImage(username)
+    }
+
     fun init() {
         registerViewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
 
         binding.btnRegister.setOnClickListener {
-
-            registerViewModel.uploadFile(binding.edtUsername.text.toString(), filePath)
+            uploadAndSaveFile(binding.edtUsername.text.toString())
 //            val imageUri = getUri()
             val userModel = UserModel(
                 binding.edtName.text.toString(),

@@ -35,10 +35,7 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
-        (requireActivity() as MainActivity).changeToolbarVisibility(View.GONE)
-//        viewModel.loadImage(viewModel.sessionManager.getUsername()!!,){
-//            Glide.with(this).load(it).into(binding.imgProfilePicture)
-//        }
+
         Glide.with(this).load(Uri.parse(viewModel.sessionManager.getImageUri()))
             .into(binding.imgProfilePicture)
         binding.viewExit.setOnClickListener {

@@ -1,5 +1,6 @@
 package com.mburakcakir.taketicket.ui.event
 
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -40,15 +41,12 @@ class EventFragment : Fragment() {
         super.onDestroyView()
     }
 
+
     private fun init() {
         eventViewModel = ViewModelProvider(this).get(EventViewModel::class.java)
-        eventViewModel.loadImage(eventViewModel.sessionManager.getUsername()!!)
-
         (requireActivity() as MainActivity).apply {
             changeToolbarVisibility(View.VISIBLE)
-            initToolbarProfile()
-            changeToolbarTitle("Hoşgeldin ${eventViewModel.getUsername()}")
-
+            changeToolbarProfileUri(Uri.parse(eventViewModel.sessionManager.getImageUri()))
         }
 
         binding.rvEvent.layoutManager =

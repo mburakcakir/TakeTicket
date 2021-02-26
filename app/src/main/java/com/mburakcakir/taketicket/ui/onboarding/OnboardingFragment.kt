@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.databinding.FragmentOnboardingBinding
 import com.mburakcakir.taketicket.utils.SessionManager
@@ -12,6 +13,7 @@ import com.mburakcakir.taketicket.utils.navigate
 
 class OnboardingFragment : Fragment() {
     lateinit var sessionManager: SessionManager
+    lateinit var onboardingViewModel: OnboardingViewModel
     private var _binding: FragmentOnboardingBinding? = null
     private val binding get() = _binding!!
 
@@ -21,7 +23,6 @@ class OnboardingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentOnboardingBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
@@ -30,10 +31,11 @@ class OnboardingFragment : Fragment() {
         super.onDestroyView()
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        onboardingViewModel = ViewModelProvider(this).get(OnboardingViewModel::class.java)
         sessionManager = SessionManager(requireContext())
-
         this.navigate(
             sessionManager.ifUserLoggedIn().run {
                 if (this)

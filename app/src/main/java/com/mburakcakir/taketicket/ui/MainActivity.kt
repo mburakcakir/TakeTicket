@@ -2,7 +2,6 @@ package com.mburakcakir.taketicket.ui
 
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -24,7 +23,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     lateinit var navController: NavController
     lateinit var sessionManager: SessionManager
-
+    lateinit var profileFragmentItem: MenuItem
+    lateinit var profileImage: CircleImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
@@ -44,6 +44,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu, menu)
+        profileFragmentItem = binding.toolbar.menu.findItem(R.id.profileFragment)
+        profileImage = profileFragmentItem.actionView.findViewById(R.id.imgProfilePicture)
+        if (sessionManager.ifUserLoggedIn())
+            Glide.with(this).load(Uri.parse(sessionManager.getImageUri())).into(profileImage)
+        profileFragmentItem.actionView.setOnClickListener {
+            findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_profileFragment)
+        }
         return true
     }
 
@@ -63,17 +70,10 @@ class MainActivity : AppCompatActivity() {
         binding.toolbar.title = title
     }
 
-    fun initToolbarProfile() {
-        val profileFragmentItem = binding.toolbar.menu.findItem(R.id.profileFragment)
-        val profileImage =
-            profileFragmentItem.actionView.findViewById<CircleImageView>(R.id.imgProfilePicture)
-        val imageUri = Uri.parse(sessionManager.getImageUri())
-        Log.v("mainImageUri", sessionManager.getImageUri()!!)
-        Glide.with(this).load(imageUri).into(profileImage)
-
-        profileFragmentItem.actionView.setOnClickListener {
-            findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_profileFragment)
-        }
+    fun changeToolbarProfileUri(uri: Uri) {
+        profileFragmentItem = binding.toolbar.menu.findItem(R.id.profileFragment)
+        profileImage = profileFragmentItem.actionView.findViewById(R.id.imgProfilePicture)
+        Glide.with(this).load(uri).into(profileImage)
     }
 }
 
