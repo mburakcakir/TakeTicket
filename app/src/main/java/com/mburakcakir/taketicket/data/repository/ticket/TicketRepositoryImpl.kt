@@ -2,7 +2,7 @@ package com.mburakcakir.taketicket.data.repository.ticket
 
 import com.mburakcakir.taketicket.data.db.dao.TicketDao
 import com.mburakcakir.taketicket.data.db.entity.TicketModel
-import com.mburakcakir.taketicket.utils.Resource
+import com.mburakcakir.taketicket.util.Resource
 import kotlinx.coroutines.flow.flow
 
 class TicketRepositoryImpl(private val ticketDao: TicketDao) : TicketRepository {

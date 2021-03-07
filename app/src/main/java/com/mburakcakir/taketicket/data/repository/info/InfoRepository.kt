@@ -1,7 +1,7 @@
 package com.mburakcakir.taketicket.data.repository.info
 
-import com.mburakcakir.taketicket.data.network.model.InfoModel
-import com.mburakcakir.taketicket.utils.Resource
+import com.mburakcakir.taketicket.network.model.InfoModel
+import com.mburakcakir.taketicket.util.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface InfoRepository {

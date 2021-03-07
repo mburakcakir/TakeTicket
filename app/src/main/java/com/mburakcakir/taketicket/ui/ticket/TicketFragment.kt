@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mburakcakir.taketicket.databinding.FragmentTicketBinding
-import com.mburakcakir.taketicket.utils.extToast
+import com.mburakcakir.taketicket.util.extToast
 
 
 class TicketFragment : Fragment() {
@@ -16,6 +16,7 @@ class TicketFragment : Fragment() {
     private var _binding: FragmentTicketBinding? = null
     private val binding get() = _binding!!
     private var message: String = ""
+    private val ticketAdapter = TicketAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,15 +40,20 @@ class TicketFragment : Fragment() {
     private fun init() {
         ticketViewModel = ViewModelProvider(this).get(TicketViewModel::class.java)
 
+        binding.rvTicket.adapter = ticketAdapter
+
         binding.rvTicket.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
-        binding.rvTicket.adapter = TicketAdapter(ticketViewModel.allEvents.value!!) {
-            ticketViewModel.deleteTicket(it.ticketID)
+        ticketAdapter.apply {
+            setEventList(ticketViewModel.allEvents.value!!)
+            setOnClickEvent {
+                ticketViewModel.deleteTicket(it.ticketID)
+            }
         }
 
         ticketViewModel.allTickets.observe(requireActivity(), {
-            (binding.rvTicket.adapter as TicketAdapter).submitList(it)
+            ticketAdapter.submitList(it)
         })
 
         ticketViewModel.result.observe(requireActivity(), {

@@ -1,4 +1,4 @@
-package com.mburakcakir.taketicket.utils
+package com.mburakcakir.taketicket.util
 
 data class Result(
     val success: String? = null,

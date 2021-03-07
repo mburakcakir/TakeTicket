@@ -1,6 +1,6 @@
-package com.mburakcakir.taketicket.data.network.service
+package com.mburakcakir.taketicket.network.service
 
-import com.mburakcakir.taketicket.data.network.model.InfoModel
+import com.mburakcakir.taketicket.network.model.InfoModel
 import retrofit2.Response
 import retrofit2.http.GET
 

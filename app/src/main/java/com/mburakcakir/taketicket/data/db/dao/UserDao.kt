@@ -6,16 +6,23 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.mburakcakir.taketicket.data.db.entity.UserModel
 
+
 @Dao
 interface UserDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertUser(userModel : UserModel)
+    suspend fun insertUser(userModel: UserModel)
 
     @Query("SELECT COUNT(*) FROM table_user WHERE userName =:username AND password =:password")
-    fun checkIfUserExists(username : String, password: String) : Int
+    fun checkIfUserExists(username: String, password: String): Int
 
     @Query("SELECT * FROM table_user WHERE userName =:username AND password =:password")
     fun getUserByUsername(username: String, password: String): UserModel
+
+    @Query("UPDATE table_user SET profileImageUri=:uri WHERE userName =:username")
+    fun setUserImageUri(uri: String, username: String)
+
+    @Query("SELECT profileImageUri FROM table_user WHERE userName =:username")
+    fun getUserImageUri(username: String): String
 
 
 }

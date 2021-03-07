@@ -12,8 +12,8 @@ import com.mburakcakir.taketicket.data.repository.event.EventRepositoryImpl
 import com.mburakcakir.taketicket.data.repository.ticket.TicketRepository
 import com.mburakcakir.taketicket.data.repository.ticket.TicketRepositoryImpl
 import com.mburakcakir.taketicket.ui.BaseViewModel
-import com.mburakcakir.taketicket.utils.Result
-import com.mburakcakir.taketicket.utils.Status
+import com.mburakcakir.taketicket.util.Result
+import com.mburakcakir.taketicket.util.Status
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -73,7 +73,7 @@ class TicketViewModel(
     }
 
     private fun getAllTickets() = viewModelScope.launch {
-        ticketRepository.getAllTickets(sessionManager.getUsername()!!).collect {
+        ticketRepository.getAllTickets(sessionManager.getUsername()).collect {
             it.let {
                 when (it.status) {
                     Status.LOADING -> _result.value = Result(loading = "Biletler Yükleniyor")

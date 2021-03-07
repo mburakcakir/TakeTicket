@@ -1,4 +1,4 @@
-package com.mburakcakir.taketicket.utils
+package com.mburakcakir.taketicket.util
 
 sealed class Resource<out T>(val status: Status, val data: T?, val message: Throwable?) {
 

@@ -1,4 +1,4 @@
-package com.mburakcakir.taketicket.utils
+package com.mburakcakir.taketicket.util
 
 import android.content.Context
 import com.mburakcakir.taketicket.data.db.entity.UserModel
@@ -24,6 +24,7 @@ class SessionManager(context: Context) {
             putString(USERNAME, userModel.userName)
             putString(PASSWORD, userModel.password)
             putString(EMAIL, userModel.email)
+            putString(URI, userModel.profileImageUri)
             commit()
         }
     }
@@ -43,8 +44,8 @@ class SessionManager(context: Context) {
     }
 
     fun ifUserLoggedIn() = sharedPreferences.getBoolean(IS_LOGGED_IN, false)
-    fun getUsername() = sharedPreferences.getString(USERNAME, "")
-    fun getUserEmail() = sharedPreferences.getString(EMAIL, "")
+    fun getUsername() = sharedPreferences.getString(USERNAME, "")!!
+    fun getUserEmail() = sharedPreferences.getString(EMAIL, "")!!
     fun getName() = sharedPreferences.getString(NAME, "")
     fun getImageUri() = sharedPreferences.getString(URI, "")
 }

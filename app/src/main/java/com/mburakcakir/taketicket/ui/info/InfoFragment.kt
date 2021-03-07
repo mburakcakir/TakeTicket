@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mburakcakir.taketicket.databinding.FragmentInfoBinding
-import com.mburakcakir.taketicket.utils.extToast
+import com.mburakcakir.taketicket.util.extToast
 
 class InfoFragment : Fragment() {
     private lateinit var infoViewModel: InfoViewModel

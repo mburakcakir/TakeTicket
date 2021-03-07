@@ -1,4 +1,4 @@
-package com.mburakcakir.taketicket.utils
+package com.mburakcakir.taketicket.util
 
 import java.text.SimpleDateFormat
 import java.util.*

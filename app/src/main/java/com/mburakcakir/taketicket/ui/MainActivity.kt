@@ -8,23 +8,21 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.bumptech.glide.Glide
 import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.databinding.ActivityMainBinding
-import com.mburakcakir.taketicket.utils.SessionManager
+import com.mburakcakir.taketicket.util.SessionManager
 import de.hdodenhof.circleimageview.CircleImageView
 
 class MainActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMainBinding
-    lateinit var navController: NavController
-    lateinit var sessionManager: SessionManager
-    lateinit var profileFragmentItem: MenuItem
-    lateinit var profileImage: CircleImageView
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
+    private lateinit var sessionManager: SessionManager
+    private lateinit var profileFragmentItem: MenuItem
+    private lateinit var profileImage: CircleImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
@@ -32,9 +30,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         sessionManager = SessionManager(this)
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        navController = navHostFragment.findNavController()
+
+        navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration.Builder(R.id.eventFragment).build()
         setSupportActionBar(binding.toolbar)
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -48,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         profileImage = profileFragmentItem.actionView.findViewById(R.id.imgProfilePicture)
         if (sessionManager.ifUserLoggedIn())
             Glide.with(this).load(Uri.parse(sessionManager.getImageUri())).into(profileImage)
+
         profileFragmentItem.actionView.setOnClickListener {
             findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_profileFragment)
         }

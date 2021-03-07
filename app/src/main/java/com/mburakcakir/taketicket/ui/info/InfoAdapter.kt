@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.storage.FirebaseStorage
-import com.mburakcakir.taketicket.data.network.model.InfoModel
 import com.mburakcakir.taketicket.databinding.RvItemInfoBinding
-import com.mburakcakir.taketicket.utils.GlideApp
-import com.mburakcakir.taketicket.utils.shareText
+import com.mburakcakir.taketicket.network.model.InfoModel
+import com.mburakcakir.taketicket.util.GlideApp
+import com.mburakcakir.taketicket.util.shareText
 
 
 class InfoAdapter : ListAdapter<InfoModel, InfoViewHolder>(InfoCallBack()) {

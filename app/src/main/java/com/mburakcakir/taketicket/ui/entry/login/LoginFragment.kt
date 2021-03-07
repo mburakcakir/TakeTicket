@@ -9,10 +9,9 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.databinding.FragmentLoginBinding
-import com.mburakcakir.taketicket.utils.extToast
-import com.mburakcakir.taketicket.utils.navigate
+import com.mburakcakir.taketicket.util.extToast
+import com.mburakcakir.taketicket.util.navigate
 
 class LoginFragment : Fragment() {
     private lateinit var loginViewModel: LoginViewModel
@@ -42,7 +41,7 @@ class LoginFragment : Fragment() {
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
         binding.btnRegister.setOnClickListener {
-            this.navigate(R.id.action_loginFragment_to_registerFragment)
+            this.navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
         }
 
         binding.btnLogin.setOnClickListener {
@@ -69,7 +68,7 @@ class LoginFragment : Fragment() {
 
         loginViewModel.result.observe(requireActivity(), {
             if (!it.success.isNullOrEmpty()) {
-                this.navigate(R.id.action_loginFragment_to_eventFragment)
+                this.navigate(LoginFragmentDirections.actionLoginFragmentToEventFragment())
             }
             if (!it.error.isNullOrEmpty())
                 requireContext() extToast it.error

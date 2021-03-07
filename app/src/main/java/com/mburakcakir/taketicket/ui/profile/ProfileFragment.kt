@@ -11,8 +11,8 @@ import com.bumptech.glide.Glide
 import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.databinding.FragmentProfileBinding
 import com.mburakcakir.taketicket.ui.MainActivity
-import com.mburakcakir.taketicket.utils.extToast
-import com.mburakcakir.taketicket.utils.navigate
+import com.mburakcakir.taketicket.util.extToast
+import com.mburakcakir.taketicket.util.navigate
 
 class ProfileFragment : Fragment() {
     private lateinit var viewModel: ProfileViewModel
@@ -38,16 +38,19 @@ class ProfileFragment : Fragment() {
 
         Glide.with(this).load(Uri.parse(viewModel.sessionManager.getImageUri()))
             .into(binding.imgProfilePicture)
+        binding.nameSurname.text = viewModel.sessionManager.getName()
+        binding.email.text = viewModel.sessionManager.getUserEmail()
         binding.viewExit.setOnClickListener {
             endSession()
         }
     }
 
     private fun endSession() {
+        this.navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
         requireContext() extToast getString(R.string.login_again)
         viewModel.endSession()
         (requireActivity() as MainActivity).changeToolbarVisibility(View.GONE)
-        this.navigate(R.id.action_profileFragment_to_loginFragment)
+
     }
 
 }

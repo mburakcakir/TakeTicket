@@ -9,8 +9,8 @@ import com.bumptech.glide.Glide
 import com.mburakcakir.taketicket.data.db.entity.EventModel
 import com.mburakcakir.taketicket.data.db.entity.TicketModel
 import com.mburakcakir.taketicket.databinding.RvItemEventBinding
-import com.mburakcakir.taketicket.utils.SessionManager
-import com.mburakcakir.taketicket.utils.getCurrentTime
+import com.mburakcakir.taketicket.util.SessionManager
+import com.mburakcakir.taketicket.util.getCurrentTime
 
 class EventAdapter : ListAdapter<EventModel, EventViewHolder>(EventCallback()) {
     private lateinit var onClickEvent: (ticketModel: TicketModel) -> Unit
@@ -55,8 +55,8 @@ class EventViewHolder(
 
         itemView.setOnClickListener {
             val ticketModel = TicketModel(
-                sessionManager.getUsername()!!,
-                sessionManager.getUserEmail()!!,
+                sessionManager.getUsername(),
+                sessionManager.getUserEmail(),
                 getCurrentTime(),
                 eventModel.eventID
             )

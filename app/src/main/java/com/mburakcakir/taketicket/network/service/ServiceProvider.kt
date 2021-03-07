@@ -1,4 +1,4 @@
-package com.mburakcakir.taketicket.data.network.service
+package com.mburakcakir.taketicket.network.service
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -14,7 +14,7 @@ class ServiceProvider {
 
     companion object {
         private var retrofit: Retrofit? = null
-        private val BASE_URL = "https://taketicketandroid-default-rtdb.firebaseio.com/"
+        private const val BASE_URL = "https://taketicketandroid-default-rtdb.firebaseio.com/"
 
         private val instance: Retrofit?
             get() {

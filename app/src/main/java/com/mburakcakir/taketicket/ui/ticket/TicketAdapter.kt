@@ -10,14 +10,25 @@ import com.mburakcakir.taketicket.data.db.entity.EventModel
 import com.mburakcakir.taketicket.data.db.entity.TicketModel
 import com.mburakcakir.taketicket.databinding.RvItemTicketBinding
 
-class TicketAdapter(
-    private val eventList: List<EventModel>,
-    private inline val onClick: (ticketModel: TicketModel) -> Unit
-) : ListAdapter<TicketModel, TicketViewHolder>(TicketCallback()) {
+class TicketAdapter : ListAdapter<TicketModel, TicketViewHolder>(TicketCallback()) {
+
+    private lateinit var onClickEvent: (ticketModel: TicketModel) -> Unit
+    private lateinit var eventList: List<EventModel>
+
+    fun setOnClickEvent(onClickEvent: (TicketModel) -> Unit) {
+        this.onClickEvent = onClickEvent
+    }
+
+    fun setEventList(eventList: List<EventModel>) {
+        this.eventList = eventList
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TicketViewHolder {
-        val binding =
-            RvItemTicketBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return TicketViewHolder(binding, eventList, onClick)
+        return TicketViewHolder(
+            RvItemTicketBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            eventList,
+            onClickEvent
+        )
     }
 
     override fun onBindViewHolder(holder: TicketViewHolder, position: Int) =
@@ -27,21 +38,22 @@ class TicketAdapter(
 
 class TicketCallback : DiffUtil.ItemCallback<TicketModel>() {
     override fun areItemsTheSame(oldItem: TicketModel, newItem: TicketModel) =
-        oldItem == newItem
+        oldItem.ticketID == newItem.ticketID
 
-    override fun areContentsTheSame(oldItem: TicketModel, newItem: TicketModel) = false
+    override fun areContentsTheSame(oldItem: TicketModel, newItem: TicketModel) = oldItem == newItem
 
 }
 
 class TicketViewHolder(
     private val binding: RvItemTicketBinding,
     private val eventList: List<EventModel>,
-    private inline val onClick: (ticketModel: TicketModel) -> Unit
+    private val onClick: (ticketModel: TicketModel) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
+
     fun bind(ticketModel: TicketModel) {
         val eventModel = eventList[ticketModel.eventID - 1]
-
         with(binding) {
+
             txtTicketTitle.text = eventModel.title
             txtTicketPrice.text = eventModel.price
             txtTicketLastTime.text = eventModel.time
@@ -50,7 +62,7 @@ class TicketViewHolder(
             Glide.with(itemView.context).load(eventModel.url).into(imgTicketLastImage)
 
             imgDeleteTicket.setOnClickListener {
-                onClick(ticketModel)
+
             }
 
         }

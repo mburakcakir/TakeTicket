@@ -1,4 +1,4 @@
-package com.mburakcakir.taketicket.data.network.model
+package com.mburakcakir.taketicket.network.model
 
 import com.google.gson.annotations.SerializedName
 

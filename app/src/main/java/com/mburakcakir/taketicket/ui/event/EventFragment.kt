@@ -12,14 +12,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mburakcakir.taketicket.databinding.FragmentEventBinding
 import com.mburakcakir.taketicket.ui.MainActivity
 import com.mburakcakir.taketicket.ui.viewmodel.EventViewModel
-import com.mburakcakir.taketicket.utils.extToast
-import com.mburakcakir.taketicket.utils.navigate
+import com.mburakcakir.taketicket.util.extToast
+import com.mburakcakir.taketicket.util.navigate
 
 class EventFragment : Fragment() {
     private lateinit var eventViewModel: EventViewModel
     private var _binding: FragmentEventBinding? = null
     private val binding get() = _binding!!
-    private var adapter: EventAdapter = EventAdapter()
+    private var eventAdapter: EventAdapter = EventAdapter()
     private var message: String = ""
 
     override fun onCreateView(
@@ -41,7 +41,6 @@ class EventFragment : Fragment() {
         super.onDestroyView()
     }
 
-
     private fun init() {
         eventViewModel = ViewModelProvider(this).get(EventViewModel::class.java)
         (requireActivity() as MainActivity).apply {
@@ -49,22 +48,25 @@ class EventFragment : Fragment() {
             changeToolbarProfileUri(Uri.parse(eventViewModel.sessionManager.getImageUri()))
         }
 
+        binding.rvEvent.adapter = eventAdapter
+
         binding.rvEvent.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        adapter.setOnClickEvent {
+
+        eventAdapter.setOnClickEvent {
             EventFragmentDirections.actionEventFragmentToDetailDialog(it).let { navDirection ->
                 this.navigate(navDirection)
             }
         }
-        binding.rvEvent.adapter = adapter
-
 
         eventViewModel.allEvents.observe(requireActivity(), { allEvents ->
             allEvents?.let {
-                (binding.rvEvent.adapter as EventAdapter).submitList(allEvents)
+                eventAdapter.submitList(allEvents)
                 Log.d("tag2", allEvents.toString())
             }
         })
+
+
 
         eventViewModel.result.observe(requireActivity(), {
             when {
@@ -74,7 +76,6 @@ class EventFragment : Fragment() {
             }
             requireContext() extToast message
         })
-
 
 //        eventViewModel.result.observe(requireActivity(), { result ->
 //            result.success?.let {

@@ -4,15 +4,17 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.mburakcakir.taketicket.data.network.model.InfoModel
-import com.mburakcakir.taketicket.data.network.service.ServiceApiClient
-import com.mburakcakir.taketicket.data.network.service.ServiceProvider
 import com.mburakcakir.taketicket.data.repository.info.InfoRepository
 import com.mburakcakir.taketicket.data.repository.info.InfoRepositoryImpl
+import com.mburakcakir.taketicket.network.model.InfoModel
+import com.mburakcakir.taketicket.network.service.ServiceApiClient
+import com.mburakcakir.taketicket.network.service.ServiceProvider
 import com.mburakcakir.taketicket.ui.BaseViewModel
-import com.mburakcakir.taketicket.utils.Result
-import com.mburakcakir.taketicket.utils.Status
+import com.mburakcakir.taketicket.util.Result
+import com.mburakcakir.taketicket.util.Status
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 class InfoViewModel(
@@ -30,19 +32,39 @@ class InfoViewModel(
         getAllInfo()
     }
 
+//    private fun getAllInfo() = viewModelScope.launch {
+//        infoRepository.getAllInfo().collect {
+//            it.let {
+//                when (it.status) {
+//                    Status.LOADING -> _result.value =
+//                        Result(loading = "Geliştirici Bilgileri Yükleniyor..")
+//                    Status.SUCCESS -> {
+//                        _allInfo.value = it.data!!
+//                        _result.value = Result("Bilgiler Yüklendi.")
+//                    }
+//                    Status.ERROR -> _result.value = Result(loading = "Bir hata oluştu.")
+//                }
+//            }
+//        }
+//    }
+
     private fun getAllInfo() = viewModelScope.launch {
-        infoRepository.getAllInfo().collect {
-            it.let {
+        infoRepository.getAllInfo()
+            .onStart {
+                _result.value =
+                    Result(loading = "Geliştirici Bilgileri Yükleniyor..")
+            }
+            .catch {
+                _result.value = Result(error = it.message)
+            }
+            .collect {
                 when (it.status) {
-                    Status.LOADING -> _result.value =
-                        Result(loading = "Geliştirici Bilgileri Yükleniyor..")
                     Status.SUCCESS -> {
                         _allInfo.value = it.data!!
                         _result.value = Result("Bilgiler Yüklendi.")
                     }
-                    Status.ERROR -> _result.value = Result(loading = "Bir hata oluştu.")
+                    Status.ERROR -> _result.value = Result(error = "Bir hata oluştu.")
                 }
             }
-        }
     }
 }

@@ -12,14 +12,13 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.data.db.entity.UserModel
 import com.mburakcakir.taketicket.databinding.FragmentRegisterBinding
-import com.mburakcakir.taketicket.utils.extToast
-import com.mburakcakir.taketicket.utils.navigate
+import com.mburakcakir.taketicket.util.extToast
+import com.mburakcakir.taketicket.util.navigate
 
 class RegisterFragment : Fragment() {
-    lateinit var registerViewModel: RegisterViewModel
+    private lateinit var registerViewModel: RegisterViewModel
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
     private var filePath: Uri? = null
@@ -66,8 +65,7 @@ class RegisterFragment : Fragment() {
 //    }
 
     fun uploadAndSaveFile(username: String) {
-        registerViewModel.uploadFile(binding.edtUsername.text.toString(), filePath)
-        registerViewModel.loadImage(username)
+        registerViewModel.uploadFile(username, filePath)
     }
 
     fun init() {
@@ -102,7 +100,7 @@ class RegisterFragment : Fragment() {
                 requireContext() extToast it.error
             if (it.success != null) {
                 requireContext() extToast it.success
-                this.navigate(R.id.action_registerFragment_to_loginFragment)
+                this.navigate(RegisterFragmentDirections.actionRegisterFragmentToLoginFragment())
             }
         })
 
