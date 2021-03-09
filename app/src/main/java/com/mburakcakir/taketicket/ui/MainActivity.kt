@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.bumptech.glide.Glide
 import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.databinding.ActivityMainBinding
 import com.mburakcakir.taketicket.util.SessionManager
@@ -36,21 +37,22 @@ class MainActivity : AppCompatActivity() {
 //        val host: NavHostFragment = supportFragmentManager
 //            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment? ?: return
 //        binding.toolbar.setupWithNavController(host.navController, appBarConfiguration)
+
         setSupportActionBar(binding.toolbar)
         setupActionBarWithNavController(navController)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu, menu)
-//        profileFragmentItem = binding.toolbar.menu.findItem(R.id.profileFragment)
-//        bindingToolbar = binding.toolbar
-//        profileImage = profileFragmentItem.actionView.findViewById(R.id.imgProfilePicture)
-//        if (sessionManager.ifUserLoggedIn())
-//            Glide.with(this).load(Uri.parse(sessionManager.getImageUri())).into(profileImage)
-//
-//        profileFragmentItem.actionView.setOnClickListener {
-//            findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_profileFragment)
-//        }
+        profileFragmentItem = binding.toolbar.menu.findItem(R.id.profileFragment)
+        bindingToolbar = binding.toolbar
+        profileImage = profileFragmentItem.actionView.findViewById(R.id.imgProfilePicture)
+        if (sessionManager.ifUserLoggedIn())
+            Glide.with(this).load(Uri.parse(sessionManager.getImageUri())).into(profileImage)
+
+        profileFragmentItem.actionView.setOnClickListener {
+            findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_profileFragment)
+        }
         return true
     }
 
@@ -72,9 +74,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun changeToolbarProfileUri(uri: Uri) {
-//        profileFragmentItem = binding.toolbar.menu.findItem(R.id.profileFragment)
-//        profileImage = profileFragmentItem.actionView.findViewById(R.id.imgProfilePicture)
-//        Glide.with(this).load(uri).into(profileImage)
+        profileFragmentItem = binding.toolbar.menu.findItem(R.id.profileFragment)
+        profileImage = profileFragmentItem.actionView.findViewById(R.id.imgProfilePicture)
+        Glide.with(this).load(uri).into(profileImage)
     }
 }
 
