@@ -38,8 +38,17 @@ class ProfileFragment : Fragment() {
 
         Glide.with(this).load(Uri.parse(viewModel.sessionManager.getImageUri()))
             .into(binding.imgProfilePicture)
-        binding.nameSurname.text = viewModel.sessionManager.getName()
-        binding.email.text = viewModel.sessionManager.getUserEmail()
+        binding.txtNameSurname.text = viewModel.sessionManager.getName()
+        binding.txtEmail.text = viewModel.sessionManager.getUserEmail()
+
+        binding.viewTickets.setOnClickListener {
+            this.navigate(ProfileFragmentDirections.actionProfileFragmentToTicketFragment())
+        }
+
+        binding.viewInfo.setOnClickListener {
+            this.navigate(ProfileFragmentDirections.actionProfileFragmentToİnfoFragment())
+        }
+
         binding.viewExit.setOnClickListener {
             endSession()
         }
@@ -50,7 +59,6 @@ class ProfileFragment : Fragment() {
         requireContext() extToast getString(R.string.login_again)
         viewModel.endSession()
         (requireActivity() as MainActivity).changeToolbarVisibility(View.GONE)
-
     }
 
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     android:label="Profil"
-    app:startDestination="@id/onboardingFragment">
+    app:startDestination="@id/eventFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -16,7 +16,9 @@
             app:destination="@id/registerFragment" />
         <action
             android:id="@+id/action_loginFragment_to_eventFragment"
-            app:destination="@id/eventFragment" />
+            app:destination="@id/eventFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -24,12 +26,6 @@
         android:name="com.mburakcakir.taketicket.ui.event.EventFragment"
         android:label="Etkinlikler"
         tools:layout="@layout/fragment_event">
-        <action
-            android:id="@+id/action_eventFragment_to_infoFragment"
-            app:destination="@id/infoFragment" />
-        <action
-            android:id="@+id/action_eventFragment_to_ticketFragment"
-            app:destination="@id/ticketFragment" />
         <action
             android:id="@+id/action_eventFragment_to_detailDialog"
             app:destination="@id/detailDialog" />
@@ -94,9 +90,11 @@
             app:destination="@id/ticketFragment" />
         <action
             android:id="@+id/action_profileFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/profileFragment"
+            app:popUpToInclusive="true" />
     </fragment>
-    <action
-        android:id="@+id/action_global_profileFragment"
-        app:destination="@id/profileFragment" />
+    <!--    <action-->
+    <!--        android:id="@+id/action_global_profileFragment"-->
+    <!--        app:destination="@id/profileFragment" />-->
 </navigation>

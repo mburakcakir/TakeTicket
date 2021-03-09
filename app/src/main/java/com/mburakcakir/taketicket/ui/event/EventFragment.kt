@@ -33,7 +33,9 @@ class EventFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init()
+        eventViewModel = ViewModelProvider(this).get(EventViewModel::class.java)
+        checkIfUserLoggedIn()
+
     }
 
     override fun onDestroyView() {
@@ -41,8 +43,15 @@ class EventFragment : Fragment() {
         super.onDestroyView()
     }
 
+    private fun checkIfUserLoggedIn() {
+
+        if (!eventViewModel.sessionManager.ifUserLoggedIn())
+            this.navigate(EventFragmentDirections.actionEventFragmentToLoginFragment())
+        else
+            init()
+    }
+
     private fun init() {
-        eventViewModel = ViewModelProvider(this).get(EventViewModel::class.java)
         (requireActivity() as MainActivity).apply {
             changeToolbarVisibility(View.VISIBLE)
             changeToolbarProfileUri(Uri.parse(eventViewModel.sessionManager.getImageUri()))
@@ -65,7 +74,6 @@ class EventFragment : Fragment() {
                 Log.d("tag2", allEvents.toString())
             }
         })
-
 
 
         eventViewModel.result.observe(requireActivity(), {

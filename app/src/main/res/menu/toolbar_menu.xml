@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/infoFragment"
-        android:icon="@drawable/ic_info"
-        android:title="Search"
-        app:showAsAction="always|collapseActionView" />
+    <!--    <item-->
+    <!--        android:id="@+id/infoFragment"-->
+    <!--        android:icon="@drawable/ic_info"-->
+    <!--        android:title="Search"-->
+    <!--        app:showAsAction="always|collapseActionView" />-->
 
-    <item
-        android:id="@+id/ticketFragment"
-        android:icon="@drawable/ic_list"
-        android:title="Search"
-        app:showAsAction="always|collapseActionView" />
+    <!--    <item-->
+    <!--        android:id="@+id/ticketFragment"-->
+    <!--        android:icon="@drawable/ic_list"-->
+    <!--        android:title="Search"-->
+    <!--        app:showAsAction="always|collapseActionView" />-->
 
     <item
         android:id="@+id/profileFragment"

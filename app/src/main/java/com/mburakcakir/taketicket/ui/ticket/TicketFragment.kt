@@ -57,13 +57,16 @@ class TicketFragment : Fragment() {
         })
 
         ticketViewModel.result.observe(requireActivity(), {
-            when {
-                !it.success.isNullOrEmpty() -> message = it.success
-                !it.error.isNullOrEmpty() -> message = it.error
-                !it.loading.isNullOrEmpty() -> message = it.loading
-                !it.warning.isNullOrEmpty() -> message = it.warning
+            val message = when {
+                !it.success.isNullOrEmpty() -> it.success
+                !it.loading.isNullOrEmpty() -> it.loading
+                !it.warning.isNullOrEmpty() -> it.warning
+                else -> it.error
             }
-            requireContext() extToast message
+            message?.let {
+                requireContext() extToast it
+            }
+
         })
     }
 }
