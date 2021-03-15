@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.mburakcakir.taketicket.ui.BaseViewModel
 import com.mburakcakir.taketicket.util.Constants
 import com.mburakcakir.taketicket.util.LoginState
+import com.mburakcakir.taketicket.util.ValidationUtils
 
 open class EntryViewModel(application: Application) : BaseViewModel(application) {
     private val _entryForm = MutableLiveData<EntryFormState>()
@@ -36,6 +37,10 @@ open class EntryViewModel(application: Application) : BaseViewModel(application)
                     else null
             }
         }
+        setEntryState()
+    }
+
+    private fun setEntryState() {
         _entryForm.value = EntryFormState(
             usernameError = errorUsername.value,
             passwordError = errorPassword.value,
@@ -47,21 +52,9 @@ open class EntryViewModel(application: Application) : BaseViewModel(application)
     private fun isDataValid() =
         errorUsername.value == null && errorPassword.value == null && errorEmail.value == null
 
-    private fun isEmailValid(username: String): Boolean {
-//        return if (username.contains('@')) {
-//            Patterns.EMAIL_ADDRESS.matcher(username).matches()
-//        } else {
-//            username.isNotBlank()
-//        }
-        return username.length > 1
-    }
+    private fun isUserNameValid(text: String) = ValidationUtils().isUserNameValid(text)
+    private fun isPasswordValid(text: String) = ValidationUtils().isPasswordValid(text)
+    private fun isEmailValid(text: String) = ValidationUtils().isEmailValid(text)
 
-    private fun isPasswordValid(password: String): Boolean {
-        return password.length > 1
-    }
-
-    private fun isUserNameValid(username: String): Boolean {
-        return username.length > 1
-    }
 
 }
