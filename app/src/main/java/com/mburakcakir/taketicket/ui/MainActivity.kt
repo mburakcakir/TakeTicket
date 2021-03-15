@@ -1,7 +1,7 @@
 package com.mburakcakir.taketicket.ui
 
-import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var sessionManager: SessionManager
     private lateinit var profileFragmentItem: MenuItem
     private lateinit var profileImage: CircleImageView
-    private lateinit var bindingToolbar: androidx.appcompat.widget.Toolbar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
@@ -37,18 +37,19 @@ class MainActivity : AppCompatActivity() {
 //        val host: NavHostFragment = supportFragmentManager
 //            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment? ?: return
 //        binding.toolbar.setupWithNavController(host.navController, appBarConfiguration)
-
+        Log.v("logImage", "onCreate")
         setSupportActionBar(binding.toolbar)
         setupActionBarWithNavController(navController)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu, menu)
+        Log.v("logImage", "onCreateOptionsMenu")
         profileFragmentItem = binding.toolbar.menu.findItem(R.id.profileFragment)
-        bindingToolbar = binding.toolbar
         profileImage = profileFragmentItem.actionView.findViewById(R.id.imgProfilePicture)
-        if (sessionManager.ifUserLoggedIn())
-            Glide.with(this).load(Uri.parse(sessionManager.getImageUri())).into(profileImage)
+        sessionManager.getImageUri()?.let {
+            Glide.with(this).load(it).into(profileImage)
+        }
 
         profileFragmentItem.actionView.setOnClickListener {
             findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_profileFragment)
@@ -57,26 +58,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Log.v("logImage", "onOptionsItemSelected")
         return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
 
     override fun onSupportNavigateUp(): Boolean {
+        Log.v("logImage", "onSupportNavigateUp")
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-
     fun changeToolbarVisibility(visibility: Int) {
         binding.toolbar.visibility = visibility
-    }
-
-    fun changeToolbarTitle(title: String) {
-        binding.toolbar.title = title
-    }
-
-    fun changeToolbarProfileUri(uri: Uri) {
-        profileFragmentItem = binding.toolbar.menu.findItem(R.id.profileFragment)
-        profileImage = profileFragmentItem.actionView.findViewById(R.id.imgProfilePicture)
-        Glide.with(this).load(uri).into(profileImage)
     }
 }
 

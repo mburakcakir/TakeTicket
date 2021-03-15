@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.mburakcakir.taketicket.databinding.FragmentTicketBinding
 import com.mburakcakir.taketicket.util.extToast
 
@@ -41,10 +40,6 @@ class TicketFragment : Fragment() {
         ticketViewModel = ViewModelProvider(this).get(TicketViewModel::class.java)
 
         binding.rvTicket.adapter = ticketAdapter
-
-        binding.rvTicket.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-
         ticketAdapter.apply {
             setEventList(ticketViewModel.allEvents.value!!)
             setOnClickEvent {
@@ -57,16 +52,14 @@ class TicketFragment : Fragment() {
         })
 
         ticketViewModel.result.observe(requireActivity(), {
-            val message = when {
+            when {
                 !it.success.isNullOrEmpty() -> it.success
                 !it.loading.isNullOrEmpty() -> it.loading
                 !it.warning.isNullOrEmpty() -> it.warning
                 else -> it.error
+            }?.let { message ->
+                requireContext() extToast message
             }
-            message?.let {
-                requireContext() extToast it
-            }
-
         })
     }
 }

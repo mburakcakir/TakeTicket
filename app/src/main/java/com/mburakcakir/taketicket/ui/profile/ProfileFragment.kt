@@ -15,7 +15,7 @@ import com.mburakcakir.taketicket.util.extToast
 import com.mburakcakir.taketicket.util.navigate
 
 class ProfileFragment : Fragment() {
-    private lateinit var viewModel: ProfileViewModel
+    private lateinit var profileViewModel: ProfileViewModel
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
@@ -34,12 +34,14 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
+        profileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
+        profileViewModel.sessionManager.getImageUri()?.let {
+            Glide.with(this).load(Uri.parse(profileViewModel.sessionManager.getImageUri()))
+                .into(binding.imgProfilePicture)
+        }
 
-        Glide.with(this).load(Uri.parse(viewModel.sessionManager.getImageUri()))
-            .into(binding.imgProfilePicture)
-        binding.txtNameSurname.text = viewModel.sessionManager.getName()
-        binding.txtEmail.text = viewModel.sessionManager.getUserEmail()
+        binding.txtNameSurname.text = profileViewModel.sessionManager.getName()
+        binding.txtEmail.text = profileViewModel.sessionManager.getUserEmail()
 
         binding.viewTickets.setOnClickListener {
             this.navigate(ProfileFragmentDirections.actionProfileFragmentToTicketFragment())
@@ -57,7 +59,7 @@ class ProfileFragment : Fragment() {
     private fun endSession() {
         this.navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
         requireContext() extToast getString(R.string.login_again)
-        viewModel.endSession()
+        profileViewModel.endSession()
         (requireActivity() as MainActivity).changeToolbarVisibility(View.GONE)
     }
 

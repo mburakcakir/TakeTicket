@@ -15,7 +15,7 @@ import com.mburakcakir.taketicket.util.getCurrentTime
 class EventAdapter : ListAdapter<EventModel, EventViewHolder>(EventCallback()) {
     private lateinit var onClickEvent: (ticketModel: TicketModel) -> Unit
 
-    fun setOnClickEvent(onClickEvent: (TicketModel) -> Unit) {
+    fun setEventOnClickListener(onClickEvent: (TicketModel) -> Unit) {
         this.onClickEvent = onClickEvent
     }
 

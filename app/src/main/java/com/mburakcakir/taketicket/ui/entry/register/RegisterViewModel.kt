@@ -2,7 +2,8 @@ package com.mburakcakir.taketicket.ui.entry.register
 
 import android.app.Application
 import android.net.Uri
-import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -13,7 +14,6 @@ import com.mburakcakir.taketicket.data.repository.user.UserRepositoryImpl
 import com.mburakcakir.taketicket.ui.entry.EntryViewModel
 import com.mburakcakir.taketicket.util.Result
 import com.mburakcakir.taketicket.util.Status
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
@@ -24,6 +24,9 @@ class RegisterViewModel(
     private val userRepository: UserRepository
     private var storage: FirebaseStorage? = null
     private var storageReference: StorageReference? = null
+    var imageUri: Uri? = null
+    private val _stateImageLoading = MutableLiveData<Boolean>()
+    val stateImageLoading: LiveData<Boolean> = _stateImageLoading
 
     init {
         val database = TicketDatabase.getDatabase(application, viewModelScope)
@@ -36,11 +39,6 @@ class RegisterViewModel(
     fun insertUser(userModel: UserModel) = viewModelScope.launch {
         userRepository.insertUser(userModel)
             .onStart { _result.value = Result(loading = "Kayıt Oluşturuluyor") }
-            .catch {
-                _result.value = Result(
-                    error = "Kullanıcı kaydında bir hata oluştu."
-                )
-            }
             .collect {
                 when (it.status) {
                     Status.SUCCESS -> {
@@ -67,7 +65,6 @@ class RegisterViewModel(
                     Result(error = "Görsel Yüklenemedi")
                 }
                 .addOnProgressListener {
-
                 }
         }
         return filePath.toString()
@@ -76,10 +73,11 @@ class RegisterViewModel(
     private fun successListener(imageRef: StorageReference) {
         imageRef.downloadUrl
             .addOnSuccessListener {
+                imageUri = it
                 saveImage(it)
-                Log.v("baseImageUri", it.toString())
+                _stateImageLoading.value = true
             }.addOnFailureListener {
-                Log.v("baseImageUri", "ErrorImage")
+                _stateImageLoading.value = false
             }
     }
 

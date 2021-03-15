@@ -47,5 +47,5 @@ class SessionManager(context: Context) {
     fun getUsername() = sharedPreferences.getString(USERNAME, "")!!
     fun getUserEmail() = sharedPreferences.getString(EMAIL, "")!!
     fun getName() = sharedPreferences.getString(NAME, "")
-    fun getImageUri() = sharedPreferences.getString(URI, "")
+    fun getImageUri() = sharedPreferences.getString(URI, null)
 }

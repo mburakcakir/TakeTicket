@@ -6,3 +6,4 @@ data class Result(
     val warning: String? = null,
     val loading: String? = null
 )
+

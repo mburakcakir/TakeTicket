@@ -2,7 +2,6 @@ package com.mburakcakir.taketicket.ui.entry.login
 
 import android.os.Bundle
 import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +9,8 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.mburakcakir.taketicket.databinding.FragmentLoginBinding
+import com.mburakcakir.taketicket.ui.entry.CustomTextWatcher
+import com.mburakcakir.taketicket.util.LoginState
 import com.mburakcakir.taketicket.util.extToast
 import com.mburakcakir.taketicket.util.navigate
 
@@ -51,50 +52,47 @@ class LoginFragment : Fragment() {
         }
 
         binding.edtUsername.afterTextChanged {
-            dataChanged()
+            loginViewModel.isDataChanged(
+                LoginState.USERNAME,
+                binding.edtPassword.text.toString()
+            )
         }
 
         binding.edtPassword.afterTextChanged {
-            dataChanged()
+            loginViewModel.isDataChanged(
+                LoginState.PASSWORD,
+                binding.edtPassword.text.toString()
+            )
         }
 
         loginViewModel.entryFormState.observe(requireActivity(), {
             binding.btnLogin.isEnabled = it.isDataValid
-            if (it.passwordError != null)
-                binding.edtPassword.error = getString(it.passwordError)
-            if (it.usernameError != null)
-                binding.edtUsername.error = getString(it.usernameError)
+            if (!it.passwordError.isNullOrEmpty())
+                binding.edtPassword.error = it.passwordError
+            if (!it.usernameError.isNullOrEmpty())
+                binding.edtUsername.error = it.usernameError
         })
 
         loginViewModel.result.observe(requireActivity(), {
-            if (!it.success.isNullOrEmpty()) {
-                this.navigate(LoginFragmentDirections.actionLoginFragmentToEventFragment())
+            when {
+                !it.success.isNullOrEmpty() -> {
+                    this.navigate(LoginFragmentDirections.actionLoginFragmentToEventFragment())
+                    it.success
+                }
+                !it.loading.isNullOrEmpty() -> it.loading
+                !it.warning.isNullOrEmpty() -> it.warning
+                else -> it.error
+            }?.let { message ->
+                requireContext() extToast message
             }
-            if (!it.error.isNullOrEmpty())
-                requireContext() extToast it.error
-            if (!it.warning.isNullOrEmpty())
-                requireContext() extToast it.warning
-            if (!it.loading.isNullOrEmpty())
-                requireContext() extToast it.loading
         })
     }
 
-    private fun dataChanged() {
-        loginViewModel.loginDataChanged(
-            binding.edtUsername.text.toString(),
-            binding.edtPassword.text.toString()
-        )
-    }
-
     private fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
-        this.addTextChangedListener(object : TextWatcher {
+        this.addTextChangedListener(object : CustomTextWatcher() {
             override fun afterTextChanged(editable: Editable?) {
                 afterTextChanged.invoke(editable.toString())
             }
-
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
         })
     }
 }

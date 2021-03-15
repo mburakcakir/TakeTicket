@@ -5,3 +5,9 @@ enum class Status {
     ERROR,
     LOADING
 }
+
+enum class LoginState {
+    USERNAME,
+    PASSWORD,
+    EMAIL
+}

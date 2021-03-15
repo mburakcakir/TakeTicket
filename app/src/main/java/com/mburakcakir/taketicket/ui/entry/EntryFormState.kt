@@ -4,9 +4,9 @@ package com.mburakcakir.taketicket.ui.entry
  * Data validation state of the login form.
  */
 data class EntryFormState(
-    val nameError: String? = null,
-    val usernameError: Int? = null,
-    val passwordError: Int? = null,
-    val emailError: String? = null,
+    val nameError: String? = "",
+    var usernameError: String? = "",
+    var passwordError: String? = "",
+    var emailError: String? = "",
     val isDataValid: Boolean = false
 )

@@ -15,6 +15,7 @@ import com.mburakcakir.taketicket.ui.BaseViewModel
 import com.mburakcakir.taketicket.util.Result
 import com.mburakcakir.taketicket.util.Status
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 class TicketViewModel(
@@ -28,9 +29,6 @@ class TicketViewModel(
 
     private val _allEvents = MutableLiveData<List<EventModel>>()
     val allEvents: LiveData<List<EventModel>> = _allEvents
-
-    private val _newTicketResult = MutableLiveData<Result>()
-    val newTicketResult: LiveData<Result> = _newTicketResult
 
     init {
         val database = TicketDatabase.getDatabase(application, viewModelScope)
@@ -46,43 +44,35 @@ class TicketViewModel(
     }
 
     private fun getAllEvents() = viewModelScope.launch {
-        eventRepository.getAllEvents().collect {
-            when (it.status) {
-                Status.LOADING -> _result.value = Result(loading = "Etkinlikler Yükleniyor")
-                Status.SUCCESS -> it.data?.let { listEventModel ->
-                    _allEvents.value = listEventModel
-                    _result.value = Result("Etkinlikler Yüklendi")
-                }
-                Status.ERROR -> _result.value = Result(loading = "Bir hata oluştu.")
+        eventRepository.getAllEvents()
+            .onStart {
+                _result.value = Result(loading = "Etkinlikler Yükleniyor")
             }
-        }
-    }
-
-    fun insertTicket(ticketModel: TicketModel) = viewModelScope.launch {
-        ticketRepository.insertTicket(ticketModel).collect {
-            when (it.status) {
-                Status.LOADING -> _newTicketResult.value = Result(loading = "Bilet Kaydediliyor...")
-                Status.SUCCESS -> {
-                    _newTicketResult.value =
-                        if (it.data!!) Result(success = "Bilet Kaydedildi.") else Result(warning = "Bilet Zaten Alınmış.")
+            .collect {
+                when (it.status) {
+                    Status.SUCCESS -> it.data?.let { listEventModel ->
+                        _allEvents.value = listEventModel
+                        _result.value = Result("Etkinlikler Yüklendi")
+                    }
+                    Status.ERROR -> _result.value = Result(loading = "Bir hata oluştu.")
                 }
-                Status.ERROR -> _newTicketResult.value = Result(error = "Bilet Kaydedilemedi.")
             }
-        }
-
     }
 
     private fun getAllTickets() = viewModelScope.launch {
-        ticketRepository.getAllTickets(sessionManager.getUsername()).collect {
-            it.let {
-                when (it.status) {
-                    Status.LOADING -> _result.value = Result(loading = "Biletler Yükleniyor")
-                    Status.SUCCESS -> it.data?.let { listTicketModel ->
-                        _allTickets.value = listTicketModel
+        ticketRepository.getAllTickets(sessionManager.getUsername())
+            .onStart {
+                _result.value = Result(loading = "Biletler Yükleniyor")
+            }
+            .collect {
+                it.let {
+                    when (it.status) {
+                        Status.SUCCESS -> it.data?.let { listTicketModel ->
+                            _allTickets.value = listTicketModel
+                        }
+                        Status.ERROR -> _result.value = Result(error = "Bir hata oluştu")
                     }
-                    Status.ERROR -> _result.value = Result(error = "Bir hata oluştu")
                 }
             }
-        }
     }
 }

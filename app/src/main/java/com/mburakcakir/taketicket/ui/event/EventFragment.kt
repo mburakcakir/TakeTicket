@@ -1,6 +1,5 @@
 package com.mburakcakir.taketicket.ui.event
 
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.mburakcakir.taketicket.databinding.FragmentEventBinding
 import com.mburakcakir.taketicket.ui.MainActivity
 import com.mburakcakir.taketicket.ui.viewmodel.EventViewModel
@@ -35,7 +33,6 @@ class EventFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         eventViewModel = ViewModelProvider(this).get(EventViewModel::class.java)
         checkIfUserLoggedIn()
-
     }
 
     override fun onDestroyView() {
@@ -44,7 +41,6 @@ class EventFragment : Fragment() {
     }
 
     private fun checkIfUserLoggedIn() {
-
         if (!eventViewModel.sessionManager.ifUserLoggedIn())
             this.navigate(EventFragmentDirections.actionEventFragmentToLoginFragment())
         else
@@ -52,19 +48,13 @@ class EventFragment : Fragment() {
     }
 
     private fun init() {
-        (requireActivity() as MainActivity).apply {
-            changeToolbarVisibility(View.VISIBLE)
-            changeToolbarProfileUri(Uri.parse(eventViewModel.sessionManager.getImageUri()))
-        }
+        (requireActivity() as MainActivity).changeToolbarVisibility(View.VISIBLE)
 
         binding.rvEvent.adapter = eventAdapter
 
-        binding.rvEvent.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-
-        eventAdapter.setOnClickEvent {
-            EventFragmentDirections.actionEventFragmentToDetailDialog(it).let { navDirection ->
-                this.navigate(navDirection)
+        eventAdapter.setEventOnClickListener {
+            EventFragmentDirections.actionEventFragmentToDetailDialog(it).let { direction ->
+                this.navigate(direction)
             }
         }
 
@@ -75,27 +65,15 @@ class EventFragment : Fragment() {
             }
         })
 
-
         eventViewModel.result.observe(requireActivity(), {
             when {
-                !it.success.isNullOrEmpty() -> message = it.success
-                !it.error.isNullOrEmpty() -> message = it.error
-                !it.loading.isNullOrEmpty() -> message = it.loading
+                !it.success.isNullOrEmpty() -> it.success
+                !it.loading.isNullOrEmpty() -> it.loading
+                else -> it.error
+            }?.let { message ->
+                requireContext() extToast message
             }
-            requireContext() extToast message
         })
 
-//        eventViewModel.result.observe(requireActivity(), { result ->
-//            result.success?.let {
-//                message = it
-//            }
-//            result.error?.let {
-//                message = it
-//            }
-//            result.loading?.let {
-//                message = it
-//            }
-//            requireContext() extToast message
-//        })
     }
 }

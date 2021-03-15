@@ -15,7 +15,6 @@ import com.mburakcakir.taketicket.data.repository.user.UserRepositoryImpl
 import com.mburakcakir.taketicket.ui.BaseViewModel
 import com.mburakcakir.taketicket.util.Result
 import com.mburakcakir.taketicket.util.Status
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
@@ -44,9 +43,6 @@ class EventViewModel(
     private fun getAllEvents() = viewModelScope.launch {
         eventRepository.getAllEvents()
             .onStart { _result.value = Result(loading = "Etkinlikler Yükleniyor") }
-            .catch {
-                _result.value = Result(error = "Bir hata oluştu.")
-            }
             .collect {
                 when (it.status) {
                     Status.SUCCESS -> {

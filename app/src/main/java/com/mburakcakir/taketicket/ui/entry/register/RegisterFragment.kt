@@ -1,19 +1,22 @@
 package com.mburakcakir.taketicket.ui.entry.register
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.data.db.entity.UserModel
 import com.mburakcakir.taketicket.databinding.FragmentRegisterBinding
+import com.mburakcakir.taketicket.ui.entry.CustomTextWatcher
+import com.mburakcakir.taketicket.util.LoginState
 import com.mburakcakir.taketicket.util.extToast
 import com.mburakcakir.taketicket.util.navigate
 
@@ -22,6 +25,7 @@ class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
     private var filePath: Uri? = null
+    private lateinit var alertDialog: AlertDialog
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,74 +46,68 @@ class RegisterFragment : Fragment() {
         super.onDestroyView()
     }
 
-//    fun getImageUri(): String {
-//        var value = ""
-//        registerViewModel.loadImage("foto"){
-//            value = it.toString()
-//            Log.v("image", value)
-//        }
-//        return value
-//    }
-//
-//    fun getUri(): String {
-//        val storage = FirebaseStorage.getInstance()
-//        val storageReference = storage.reference
-//        var value = ""
-//        storageReference.child("foto").downloadUrl.addOnSuccessListener {
-//            value = it.toString()
-//            Log.v("a", it.toString())
-//        }.addOnFailureListener {
-//            Log.v("a", "ErrorImage")
-//        }
-//
-//    }
-
-    fun uploadAndSaveFile(username: String) {
-        registerViewModel.uploadFile(username, filePath)
-    }
-
     fun init() {
         registerViewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
 
+        initAlertDialog()
+
         binding.btnRegister.setOnClickListener {
-            uploadAndSaveFile(binding.edtUsername.text.toString())
-//            val imageUri = getUri()
-            val userModel = UserModel(
-                binding.edtName.text.toString(),
-                binding.edtUsername.text.toString(),
-                binding.edtMail.text.toString(),
-                binding.edtPassword.text.toString(),
-                "imageUri"
-            )
+            if (filePath != null)
+                uploadAndSaveFile(binding.edtUsername.text.toString())
+            else {
+                insertUser(null)
+            }
+        }
 
-            registerViewModel.insertUser(userModel)
-
+        registerViewModel.stateImageLoading.observe(requireActivity()) {
+            if (it) {
+                alertDialog.dismiss()
+                insertUser(registerViewModel.imageUri.toString())
+            } else
+                requireContext() extToast "Bir hata oluştu."
         }
 
         registerViewModel.entryFormState.observe(requireActivity(), {
             binding.btnRegister.isEnabled = it.isDataValid
 
-            if (it.passwordError != null)
-                binding.edtPassword.error = getString(it.passwordError)
-            if (it.usernameError != null)
-                binding.edtUsername.error = getString(it.usernameError)
+            if (!it.passwordError.isNullOrEmpty())
+                binding.edtPassword.error = it.passwordError
+            if (!it.usernameError.isNullOrEmpty())
+                binding.edtUsername.error = it.usernameError
+            if (!it.emailError.isNullOrEmpty())
+                binding.edtMail.error = it.emailError
         })
 
         registerViewModel.result.observe(requireActivity(), {
-            if (it.error != null)
-                requireContext() extToast it.error
-            if (it.success != null) {
-                requireContext() extToast it.success
+            it.error?.let { error ->
+                requireContext() extToast error
+
+            }
+            it.success?.let { success ->
+                requireContext() extToast success
                 this.navigate(RegisterFragmentDirections.actionRegisterFragmentToLoginFragment())
             }
         })
 
         binding.edtUsername.afterTextChanged {
-            dataChanged()
+            registerViewModel.isDataChanged(
+                LoginState.USERNAME,
+                binding.edtUsername.text.toString()
+            )
         }
 
         binding.edtPassword.afterTextChanged {
-            dataChanged()
+            registerViewModel.isDataChanged(
+                LoginState.PASSWORD,
+                binding.edtPassword.text.toString()
+            )
+        }
+
+        binding.edtMail.afterTextChanged {
+            registerViewModel.isDataChanged(
+                LoginState.EMAIL,
+                binding.edtMail.text.toString()
+            )
         }
 
         binding.imgProfilePicture.setOnClickListener {
@@ -118,11 +116,28 @@ class RegisterFragment : Fragment() {
 
     }
 
-    private fun dataChanged() {
-        registerViewModel.loginDataChanged(
+    private fun initAlertDialog() {
+        val dialog = AlertDialog.Builder(requireContext())
+        dialog.setView(layoutInflater.inflate(R.layout.dialog_image, null))
+        dialog.setCancelable(false)
+
+        alertDialog = dialog.create()
+    }
+
+    fun uploadAndSaveFile(username: String) {
+        alertDialog.show()
+        registerViewModel.uploadFile(username, filePath)
+    }
+
+    fun insertUser(profileImageUri: String?) {
+        val userModel = UserModel(
+            binding.edtName.text.toString(),
             binding.edtUsername.text.toString(),
-            binding.edtPassword.text.toString()
+            binding.edtMail.text.toString(),
+            binding.edtPassword.text.toString(),
+            profileImageUri
         )
+        registerViewModel.insertUser(userModel)
     }
 
     private fun selectImage() {
@@ -142,14 +157,10 @@ class RegisterFragment : Fragment() {
     }
 
     private fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
-        this.addTextChangedListener(object : TextWatcher {
+        this.addTextChangedListener(object : CustomTextWatcher() {
             override fun afterTextChanged(editable: Editable?) {
                 afterTextChanged.invoke(editable.toString())
             }
-
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
         })
     }
 }

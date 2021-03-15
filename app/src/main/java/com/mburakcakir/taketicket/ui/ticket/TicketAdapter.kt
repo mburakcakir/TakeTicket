@@ -62,7 +62,7 @@ class TicketViewHolder(
             Glide.with(itemView.context).load(eventModel.url).into(imgTicketLastImage)
 
             imgDeleteTicket.setOnClickListener {
-
+                onClick(ticketModel)
             }
 
         }
