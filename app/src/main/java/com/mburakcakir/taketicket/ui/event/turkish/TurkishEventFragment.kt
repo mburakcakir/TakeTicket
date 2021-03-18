@@ -1,38 +1,35 @@
-package com.mburakcakir.taketicket.ui.event
+package com.mburakcakir.taketicket.ui.event.turkish
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.mburakcakir.taketicket.databinding.FragmentEventBinding
+import com.mburakcakir.taketicket.data.db.entity.TicketModel
+import com.mburakcakir.taketicket.databinding.FragmentTurkishEventBinding
 import com.mburakcakir.taketicket.ui.MainActivity
-import com.mburakcakir.taketicket.ui.viewmodel.EventViewModel
-import com.mburakcakir.taketicket.util.extToast
-import com.mburakcakir.taketicket.util.navigate
+import com.mburakcakir.taketicket.util.toast
 
-class EventFragment : Fragment() {
-    private lateinit var eventViewModel: EventViewModel
-    private var _binding: FragmentEventBinding? = null
+class TurkishEventFragment : Fragment() {
+    private lateinit var turkishEventViewModel: TurkishEventViewModel
+    private var _binding: FragmentTurkishEventBinding? = null
     private val binding get() = _binding!!
     private var eventAdapter: EventAdapter = EventAdapter()
-    private var message: String = ""
+    private lateinit var onClickEvent: (ticketModel: TicketModel) -> Unit
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentEventBinding.inflate(inflater, container, false)
+        _binding = FragmentTurkishEventBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        eventViewModel = ViewModelProvider(this).get(EventViewModel::class.java)
-        checkIfUserLoggedIn()
+        init()
     }
 
     override fun onDestroyView() {
@@ -40,40 +37,34 @@ class EventFragment : Fragment() {
         super.onDestroyView()
     }
 
-    private fun checkIfUserLoggedIn() {
-        if (!eventViewModel.sessionManager.ifUserLoggedIn())
-            this.navigate(EventFragmentDirections.actionEventFragmentToLoginFragment())
-        else
-            init()
-    }
-
     private fun init() {
+        turkishEventViewModel = ViewModelProvider(this).get(TurkishEventViewModel::class.java)
         (requireActivity() as MainActivity).changeToolbarVisibility(View.VISIBLE)
 
         binding.rvEvent.adapter = eventAdapter
 
         eventAdapter.setEventOnClickListener {
-            EventFragmentDirections.actionEventFragmentToDetailDialog(it).let { direction ->
-                this.navigate(direction)
-            }
+            onClickEvent.invoke(it)
         }
 
-        eventViewModel.allEvents.observe(requireActivity(), { allEvents ->
+        turkishEventViewModel.allEvents.observe(requireActivity(), { allEvents ->
             allEvents?.let {
                 eventAdapter.submitList(allEvents)
-                Log.d("tag2", allEvents.toString())
             }
         })
 
-        eventViewModel.result.observe(requireActivity(), {
+        turkishEventViewModel.result.observe(requireActivity(), {
             when {
                 !it.success.isNullOrEmpty() -> it.success
                 !it.loading.isNullOrEmpty() -> it.loading
                 else -> it.error
             }?.let { message ->
-                requireContext() extToast message
+                requireContext() toast message
             }
         })
+    }
 
+    fun setEventOnClickListener(onClickEvent: (TicketModel) -> Unit) {
+        this.onClickEvent = onClickEvent
     }
 }

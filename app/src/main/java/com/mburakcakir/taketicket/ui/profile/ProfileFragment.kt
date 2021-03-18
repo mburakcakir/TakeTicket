@@ -11,8 +11,8 @@ import com.bumptech.glide.Glide
 import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.databinding.FragmentProfileBinding
 import com.mburakcakir.taketicket.ui.MainActivity
-import com.mburakcakir.taketicket.util.extToast
 import com.mburakcakir.taketicket.util.navigate
+import com.mburakcakir.taketicket.util.toast
 
 class ProfileFragment : Fragment() {
     private lateinit var profileViewModel: ProfileViewModel
@@ -58,7 +58,7 @@ class ProfileFragment : Fragment() {
 
     private fun endSession() {
         this.navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
-        requireContext() extToast getString(R.string.login_again)
+        requireContext() toast getString(R.string.login_again)
         profileViewModel.endSession()
         (requireActivity() as MainActivity).changeToolbarVisibility(View.GONE)
     }

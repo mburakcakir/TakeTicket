@@ -15,7 +15,7 @@ infix fun Fragment.navigate(navDirections: NavDirections) {
     NavHostFragment.findNavController(this).navigate(navDirections)
 }
 
-infix fun Context.extToast(message: String) {
+infix fun Context.toast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
 

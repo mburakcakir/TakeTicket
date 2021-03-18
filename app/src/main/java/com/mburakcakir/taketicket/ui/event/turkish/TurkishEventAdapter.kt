@@ -1,4 +1,4 @@
-package com.mburakcakir.taketicket.ui.event
+package com.mburakcakir.taketicket.ui.event.turkish
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -44,6 +44,7 @@ class EventViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(eventModel: EventModel) {
         val sessionManager = SessionManager(itemView.context)
+
         with(binding) {
             txtEventTitle.text = eventModel.title
             txtEventSubtitle.text = eventModel.subTitle

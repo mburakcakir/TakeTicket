@@ -9,13 +9,13 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.mburakcakir.taketicket.databinding.DialogOrderBinding
-import com.mburakcakir.taketicket.ui.viewmodel.EventViewModel
-import com.mburakcakir.taketicket.util.extToast
+import com.mburakcakir.taketicket.ui.event.turkish.TurkishEventViewModel
 import com.mburakcakir.taketicket.util.navigate
+import com.mburakcakir.taketicket.util.toast
 
 class OrderDialog : BottomSheetDialogFragment() {
     private lateinit var binding: DialogOrderBinding
-    private lateinit var eventViewModel: EventViewModel
+    private lateinit var turkishEventViewModel: TurkishEventViewModel
     private lateinit var orderViewModel: OrderViewModel
     private val args by navArgs<OrderDialogArgs>()
 
@@ -34,11 +34,11 @@ class OrderDialog : BottomSheetDialogFragment() {
 
     private fun init() {
 
-        eventViewModel = ViewModelProvider(this).get(EventViewModel::class.java)
+        turkishEventViewModel = ViewModelProvider(this).get(TurkishEventViewModel::class.java)
         orderViewModel = ViewModelProvider(this).get(OrderViewModel::class.java)
 
         val ticketModel = args.ticketModel
-        val eventModel = eventViewModel.getEventById(ticketModel.eventID)
+        val eventModel = turkishEventViewModel.getEventById(ticketModel.eventID)
 
         binding.apply {
             txtTicketUsername.text = ticketModel.username
@@ -69,12 +69,12 @@ class OrderDialog : BottomSheetDialogFragment() {
         orderViewModel.result.observe(requireActivity(), {
             when {
                 it.success != null -> {
-                    requireContext() extToast it.success
+                    requireContext() toast it.success
                     this.navigate(OrderDialogDirections.actionDetailDialogToTicketFragment())
                 }
-                it.error != null -> requireContext() extToast it.error
-                it.loading != null -> requireContext() extToast it.loading
-                it.warning != null -> requireContext() extToast it.warning
+                it.error != null -> requireContext() toast it.error
+                it.loading != null -> requireContext() toast it.loading
+                it.warning != null -> requireContext() toast it.warning
             }
         })
     }

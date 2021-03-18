@@ -21,8 +21,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var sessionManager: SessionManager
-    private lateinit var profileFragmentItem: MenuItem
-    private lateinit var profileImage: CircleImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -34,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         navController = findNavController(R.id.nav_host_fragment)
         appBarConfiguration = AppBarConfiguration(navController.graph)
+
 //        val host: NavHostFragment = supportFragmentManager
 //            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment? ?: return
 //        binding.toolbar.setupWithNavController(host.navController, appBarConfiguration)
@@ -45,8 +44,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu, menu)
         Log.v("logImage", "onCreateOptionsMenu")
-        profileFragmentItem = binding.toolbar.menu.findItem(R.id.profileFragment)
-        profileImage = profileFragmentItem.actionView.findViewById(R.id.imgProfilePicture)
+        val profileFragmentItem = binding.toolbar.menu.findItem(R.id.profileFragment)
+        val profileImage =
+            profileFragmentItem.actionView.findViewById<CircleImageView>(R.id.imgProfilePicture)
         sessionManager.getImageUri()?.let {
             Glide.with(this).load(it).into(profileImage)
         }

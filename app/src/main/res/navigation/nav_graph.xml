@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    android:label="Profil"
-    app:startDestination="@id/eventFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -15,24 +14,23 @@
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
         <action
-            android:id="@+id/action_loginFragment_to_eventFragment"
-            app:destination="@id/eventFragment"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/eventFragment"
-        android:name="com.mburakcakir.taketicket.ui.event.EventFragment"
+        android:id="@+id/homeFragment"
+        android:name="com.mburakcakir.taketicket.ui.home.HomeFragment"
         android:label="Etkinlikler"
-        tools:layout="@layout/fragment_event">
+        tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_eventFragment_to_detailDialog"
+            android:id="@+id/action_homeFragment_to_detailDialog"
             app:destination="@id/detailDialog" />
         <action
-            android:id="@+id/action_eventFragment_to_loginFragment"
+            android:id="@+id/action_homeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.mburakcakir.taketicket.ui.entry.register.RegisterFragment"
@@ -42,29 +40,18 @@
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/onboardingFragment"
-        android:name="com.mburakcakir.taketicket.ui.onboarding.OnboardingFragment"
-        android:label="fragment_onboarding"
-        tools:layout="@layout/fragment_onboarding">
-        <action
-            android:id="@+id/action_onboardingFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-        <action
-            android:id="@+id/action_onboardingFragment_to_eventFragment"
-            app:destination="@id/eventFragment" />
-    </fragment>
+
     <fragment
         android:id="@+id/infoFragment"
         android:name="com.mburakcakir.taketicket.ui.info.InfoFragment"
         android:label="İletişim Bilgileri"
         tools:layout="@layout/fragment_info" />
+
     <fragment
         android:id="@+id/ticketFragment"
         android:name="com.mburakcakir.taketicket.ui.ticket.TicketFragment"
         android:label="Biletlerim"
         tools:layout="@layout/fragment_ticket" />
-
 
     <dialog
         android:id="@+id/detailDialog"
@@ -77,6 +64,7 @@
             android:name="ticketModel"
             app:argType="com.mburakcakir.taketicket.data.db.entity.TicketModel" />
     </dialog>
+
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.mburakcakir.taketicket.ui.profile.ProfileFragment"
@@ -91,10 +79,16 @@
         <action
             android:id="@+id/action_profileFragment_to_loginFragment"
             app:destination="@id/loginFragment"
-            app:popUpTo="@id/eventFragment"
+            app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true" />
     </fragment>
+
     <action
         android:id="@+id/action_global_profileFragment"
-        app:destination="@id/profileFragment" />
+        app:destination="@id/profileFragment"
+        app:enterAnim="@android:anim/fade_in"
+        app:exitAnim="@android:anim/fade_out"
+        app:popEnterAnim="@android:anim/slide_in_left"
+        app:popExitAnim="@android:anim/slide_out_right"
+        app:popUpTo="@id/homeFragment" />
 </navigation>

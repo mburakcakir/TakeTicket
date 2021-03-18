@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.mburakcakir.taketicket.databinding.FragmentTicketBinding
-import com.mburakcakir.taketicket.util.extToast
+import com.mburakcakir.taketicket.util.toast
 
 
 class TicketFragment : Fragment() {
@@ -58,7 +58,7 @@ class TicketFragment : Fragment() {
                 !it.warning.isNullOrEmpty() -> it.warning
                 else -> it.error
             }?.let { message ->
-                requireContext() extToast message
+                requireContext() toast message
             }
         })
     }

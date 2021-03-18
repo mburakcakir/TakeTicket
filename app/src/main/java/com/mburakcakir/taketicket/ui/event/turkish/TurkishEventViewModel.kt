@@ -1,4 +1,4 @@
-package com.mburakcakir.taketicket.ui.viewmodel
+package com.mburakcakir.taketicket.ui.event.turkish
 
 import android.app.Application
 import androidx.lifecycle.LiveData
@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
-class EventViewModel(
+class TurkishEventViewModel(
     application: Application
 ) : BaseViewModel(application) {
     private val eventRepository: EventRepository
@@ -59,6 +59,3 @@ class EventViewModel(
     fun getEventById(ID: Int) = eventRepository.getEventById(ID)
     fun getUsername() = sessionManager.getUsername()
 }
-
-
-

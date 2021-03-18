@@ -6,7 +6,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.mburakcakir.taketicket.data.db.entity.UserModel
 
-
 @Dao
 interface UserDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)

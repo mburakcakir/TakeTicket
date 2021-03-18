@@ -10,7 +10,7 @@ data class UserModel(
     val email: String,
     val password: String,
     val profileImageUri: String?
-){
+) {
     @PrimaryKey(autoGenerate = true)
-    var userID : Int = 0
+    var userID: Int = 0
 }

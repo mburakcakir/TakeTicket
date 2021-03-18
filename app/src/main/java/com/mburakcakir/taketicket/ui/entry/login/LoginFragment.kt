@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.mburakcakir.taketicket.databinding.FragmentLoginBinding
 import com.mburakcakir.taketicket.ui.entry.CustomTextWatcher
-import com.mburakcakir.taketicket.util.LoginState
-import com.mburakcakir.taketicket.util.extToast
+import com.mburakcakir.taketicket.util.EntryState
+import com.mburakcakir.taketicket.util.EntryType
 import com.mburakcakir.taketicket.util.navigate
+import com.mburakcakir.taketicket.util.toast
 
 class LoginFragment : Fragment() {
     private lateinit var loginViewModel: LoginViewModel
@@ -40,6 +42,7 @@ class LoginFragment : Fragment() {
 
     fun init() {
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        loginViewModel.setEntryType(EntryType.LOGIN)
 
         binding.btnRegister.setOnClickListener {
             this.navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
@@ -53,14 +56,14 @@ class LoginFragment : Fragment() {
 
         binding.edtUsername.afterTextChanged {
             loginViewModel.isDataChanged(
-                LoginState.USERNAME,
-                binding.edtPassword.text.toString()
+                EntryState.USERNAME,
+                binding.edtUsername.text.toString()
             )
         }
 
         binding.edtPassword.afterTextChanged {
             loginViewModel.isDataChanged(
-                LoginState.PASSWORD,
+                EntryState.PASSWORD,
                 binding.edtPassword.text.toString()
             )
         }
@@ -73,17 +76,19 @@ class LoginFragment : Fragment() {
                 binding.edtUsername.error = it.usernameError
         })
 
+
         loginViewModel.result.observe(requireActivity(), {
             when {
                 !it.success.isNullOrEmpty() -> {
-                    this.navigate(LoginFragmentDirections.actionLoginFragmentToEventFragment())
+                    this.navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+                    findNavController().popBackStack()
                     it.success
                 }
                 !it.loading.isNullOrEmpty() -> it.loading
                 !it.warning.isNullOrEmpty() -> it.warning
                 else -> it.error
             }?.let { message ->
-                requireContext() extToast message
+                requireContext() toast message
             }
         })
     }

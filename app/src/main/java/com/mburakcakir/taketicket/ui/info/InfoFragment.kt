@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.mburakcakir.taketicket.databinding.FragmentInfoBinding
-import com.mburakcakir.taketicket.util.extToast
+import com.mburakcakir.taketicket.util.toast
 
 class InfoFragment : Fragment() {
     private lateinit var infoViewModel: InfoViewModel
@@ -44,7 +44,7 @@ class InfoFragment : Fragment() {
                 !it.loading.isNullOrEmpty() -> it.loading
                 else -> it.error
             }?.let { message ->
-                requireContext() extToast message
+                requireContext() toast message
             }
         })
 

@@ -6,8 +6,13 @@ enum class Status {
     LOADING
 }
 
-enum class LoginState {
+enum class EntryState {
     USERNAME,
     PASSWORD,
     EMAIL
+}
+
+enum class EntryType {
+    LOGIN,
+    REGISTER
 }

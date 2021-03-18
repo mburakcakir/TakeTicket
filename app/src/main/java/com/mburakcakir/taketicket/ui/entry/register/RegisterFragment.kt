@@ -16,9 +16,10 @@ import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.data.db.entity.UserModel
 import com.mburakcakir.taketicket.databinding.FragmentRegisterBinding
 import com.mburakcakir.taketicket.ui.entry.CustomTextWatcher
-import com.mburakcakir.taketicket.util.LoginState
-import com.mburakcakir.taketicket.util.extToast
+import com.mburakcakir.taketicket.util.EntryState
+import com.mburakcakir.taketicket.util.EntryType
 import com.mburakcakir.taketicket.util.navigate
+import com.mburakcakir.taketicket.util.toast
 
 class RegisterFragment : Fragment() {
     private lateinit var registerViewModel: RegisterViewModel
@@ -48,6 +49,7 @@ class RegisterFragment : Fragment() {
 
     fun init() {
         registerViewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
+        registerViewModel.setEntryType(EntryType.REGISTER)
 
         initAlertDialog()
 
@@ -64,7 +66,7 @@ class RegisterFragment : Fragment() {
                 alertDialog.dismiss()
                 insertUser(registerViewModel.imageUri.toString())
             } else
-                requireContext() extToast "Bir hata oluştu."
+                requireContext() toast "Bir hata oluştu."
         }
 
         registerViewModel.entryFormState.observe(requireActivity(), {
@@ -80,32 +82,32 @@ class RegisterFragment : Fragment() {
 
         registerViewModel.result.observe(requireActivity(), {
             it.error?.let { error ->
-                requireContext() extToast error
+                requireContext() toast error
 
             }
             it.success?.let { success ->
-                requireContext() extToast success
+                requireContext() toast success
                 this.navigate(RegisterFragmentDirections.actionRegisterFragmentToLoginFragment())
             }
         })
 
         binding.edtUsername.afterTextChanged {
             registerViewModel.isDataChanged(
-                LoginState.USERNAME,
+                EntryState.USERNAME,
                 binding.edtUsername.text.toString()
             )
         }
 
         binding.edtPassword.afterTextChanged {
             registerViewModel.isDataChanged(
-                LoginState.PASSWORD,
+                EntryState.PASSWORD,
                 binding.edtPassword.text.toString()
             )
         }
 
         binding.edtMail.afterTextChanged {
             registerViewModel.isDataChanged(
-                LoginState.EMAIL,
+                EntryState.EMAIL,
                 binding.edtMail.text.toString()
             )
         }
