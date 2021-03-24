@@ -28,7 +28,8 @@
             app:destination="@id/detailDialog" />
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment" />
     </fragment>
 
     <fragment
@@ -72,10 +73,12 @@
         tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profileFragment_to_infoFragment"
-            app:destination="@id/infoFragment" />
+            app:destination="@id/infoFragment"
+            app:popUpTo="@id/homeFragment" />
         <action
             android:id="@+id/action_profileFragment_to_ticketFragment"
-            app:destination="@id/ticketFragment" />
+            app:destination="@id/ticketFragment"
+            app:popUpTo="@id/homeFragment" />
         <action
             android:id="@+id/action_profileFragment_to_loginFragment"
             app:destination="@id/loginFragment"
@@ -86,9 +89,9 @@
     <action
         android:id="@+id/action_global_profileFragment"
         app:destination="@id/profileFragment"
-        app:enterAnim="@android:anim/fade_in"
-        app:exitAnim="@android:anim/fade_out"
-        app:popEnterAnim="@android:anim/slide_in_left"
-        app:popExitAnim="@android:anim/slide_out_right"
+        app:enterAnim="@anim/slide_in_top"
+        app:exitAnim="@anim/slide_out_top"
+        app:popEnterAnim="@anim/slide_in_top"
+        app:popExitAnim="@anim/slide_out_top"
         app:popUpTo="@id/homeFragment" />
 </navigation>

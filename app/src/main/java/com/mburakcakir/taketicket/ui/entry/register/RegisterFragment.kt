@@ -16,8 +16,8 @@ import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.data.db.entity.UserModel
 import com.mburakcakir.taketicket.databinding.FragmentRegisterBinding
 import com.mburakcakir.taketicket.ui.entry.CustomTextWatcher
-import com.mburakcakir.taketicket.util.EntryState
-import com.mburakcakir.taketicket.util.EntryType
+import com.mburakcakir.taketicket.util.enums.EntryState
+import com.mburakcakir.taketicket.util.enums.EntryType
 import com.mburakcakir.taketicket.util.navigate
 import com.mburakcakir.taketicket.util.toast
 
@@ -47,7 +47,7 @@ class RegisterFragment : Fragment() {
         super.onDestroyView()
     }
 
-    fun init() {
+    private fun init() {
         registerViewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
         registerViewModel.setEntryType(EntryType.REGISTER)
 
@@ -126,12 +126,12 @@ class RegisterFragment : Fragment() {
         alertDialog = dialog.create()
     }
 
-    fun uploadAndSaveFile(username: String) {
+    private fun uploadAndSaveFile(username: String) {
         alertDialog.show()
         registerViewModel.uploadFile(username, filePath)
     }
 
-    fun insertUser(profileImageUri: String?) {
+    private fun insertUser(profileImageUri: String?) {
         val userModel = UserModel(
             binding.edtName.text.toString(),
             binding.edtUsername.text.toString(),

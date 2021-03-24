@@ -54,8 +54,8 @@ class TicketViewHolder(
         val eventModel = eventList[ticketModel.eventID - 1]
         with(binding) {
 
-            txtTicketTitle.text = eventModel.title
-            txtTicketPrice.text = eventModel.price
+            txtEventTitle.text = eventModel.title
+            txtEventPrice.text = eventModel.price
             txtTicketLastTime.text = eventModel.time
             txtTicketCategory.text = eventModel.category
             txtTicketBoughtTime.text = ticketModel.boughtTime

@@ -42,7 +42,6 @@ class TurkishEventFragment : Fragment() {
         (requireActivity() as MainActivity).changeToolbarVisibility(View.VISIBLE)
 
         binding.rvEvent.adapter = eventAdapter
-
         eventAdapter.setEventOnClickListener {
             onClickEvent.invoke(it)
         }

@@ -11,8 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.mburakcakir.taketicket.databinding.FragmentLoginBinding
 import com.mburakcakir.taketicket.ui.entry.CustomTextWatcher
-import com.mburakcakir.taketicket.util.EntryState
-import com.mburakcakir.taketicket.util.EntryType
+import com.mburakcakir.taketicket.util.enums.EntryState
+import com.mburakcakir.taketicket.util.enums.EntryType
 import com.mburakcakir.taketicket.util.navigate
 import com.mburakcakir.taketicket.util.toast
 

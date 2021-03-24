@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.mburakcakir.taketicket.ui.BaseViewModel
 import com.mburakcakir.taketicket.util.Constants
-import com.mburakcakir.taketicket.util.EntryState
-import com.mburakcakir.taketicket.util.EntryType
 import com.mburakcakir.taketicket.util.ValidationUtils
+import com.mburakcakir.taketicket.util.enums.EntryState
+import com.mburakcakir.taketicket.util.enums.EntryType
 
 open class EntryViewModel(application: Application) : BaseViewModel(application) {
     private val _entryForm = MutableLiveData<EntryFormState>()

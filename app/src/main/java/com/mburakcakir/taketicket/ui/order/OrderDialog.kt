@@ -1,13 +1,17 @@
 package com.mburakcakir.taketicket.ui.order
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.databinding.DialogOrderBinding
 import com.mburakcakir.taketicket.ui.event.turkish.TurkishEventViewModel
 import com.mburakcakir.taketicket.util.navigate
@@ -19,12 +23,27 @@ class OrderDialog : BottomSheetDialogFragment() {
     private lateinit var orderViewModel: OrderViewModel
     private val args by navArgs<OrderDialogArgs>()
 
+    override fun getTheme(): Int = R.style.BottomSheetDialog
+
+//    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog = BottomSheetDialog(requireContext(), theme)
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val bottomSheetDialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
+        bottomSheetDialog.setOnShowListener {
+            val dialog = it as BottomSheetDialog
+            val bottomSheet =
+                dialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+            BottomSheetBehavior.from(bottomSheet as View).state = BottomSheetBehavior.STATE_EXPANDED
+        }
+        return bottomSheetDialog
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DialogOrderBinding.inflate(inflater, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.dialog_order, container, false)
         isCancelable = true
 
         init()
@@ -36,35 +55,11 @@ class OrderDialog : BottomSheetDialogFragment() {
 
         turkishEventViewModel = ViewModelProvider(this).get(TurkishEventViewModel::class.java)
         orderViewModel = ViewModelProvider(this).get(OrderViewModel::class.java)
-
         val ticketModel = args.ticketModel
         val eventModel = turkishEventViewModel.getEventById(ticketModel.eventID)
-
-        binding.apply {
-            txtTicketUsername.text = ticketModel.username
-            txtTicketEmail.text = ticketModel.email
-            txtTicketTitle.text = eventModel.title
-            txtTicketPrice.text = eventModel.price
-            txtTicketTime.text = eventModel.time
-            Glide.with(requireContext()).load(eventModel.url).into(imgTicketImage)
-        }
-
-        binding.imgTicketIncrease.setOnClickListener {
-            orderViewModel.updateCountTicket(+1)
-        }
-
-        binding.imgTicketDecrease.setOnClickListener {
-            orderViewModel.updateCountTicket(-1)
-        }
-
-        binding.btnApprove.setOnClickListener {
-            orderViewModel.insertTicket(ticketModel)
-            dismiss()
-        }
-
-        orderViewModel.countTicket.observe(this) {
-            binding.ticketCount.text = it
-        }
+        binding.ticket = ticketModel
+        binding.event = eventModel
+        binding.viewmodel = orderViewModel
 
         orderViewModel.result.observe(requireActivity(), {
             when {

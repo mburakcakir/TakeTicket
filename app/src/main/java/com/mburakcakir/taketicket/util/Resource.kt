@@ -1,5 +1,7 @@
 package com.mburakcakir.taketicket.util
 
+import com.mburakcakir.taketicket.util.enums.Status
+
 sealed class Resource<out T>(val status: Status, val data: T?, val message: Throwable?) {
 
     class Loading<T> : Resource<T>(status = Status.LOADING, data = null, message = null)

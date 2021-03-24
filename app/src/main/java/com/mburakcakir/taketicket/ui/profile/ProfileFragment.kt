@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -13,6 +14,7 @@ import com.mburakcakir.taketicket.databinding.FragmentProfileBinding
 import com.mburakcakir.taketicket.ui.MainActivity
 import com.mburakcakir.taketicket.util.navigate
 import com.mburakcakir.taketicket.util.toast
+
 
 class ProfileFragment : Fragment() {
     private lateinit var profileViewModel: ProfileViewModel
@@ -23,7 +25,7 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
         return binding.root
     }
 
@@ -35,13 +37,11 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         profileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
+        binding.viewmodel = profileViewModel
         profileViewModel.sessionManager.getImageUri()?.let {
             Glide.with(this).load(Uri.parse(profileViewModel.sessionManager.getImageUri()))
                 .into(binding.imgProfilePicture)
         }
-
-        binding.txtNameSurname.text = profileViewModel.sessionManager.getName()
-        binding.txtEmail.text = profileViewModel.sessionManager.getUserEmail()
 
         binding.viewTickets.setOnClickListener {
             this.navigate(ProfileFragmentDirections.actionProfileFragmentToTicketFragment())

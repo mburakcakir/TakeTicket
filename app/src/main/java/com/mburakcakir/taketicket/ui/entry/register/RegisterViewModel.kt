@@ -13,7 +13,7 @@ import com.mburakcakir.taketicket.data.repository.user.UserRepository
 import com.mburakcakir.taketicket.data.repository.user.UserRepositoryImpl
 import com.mburakcakir.taketicket.ui.entry.EntryViewModel
 import com.mburakcakir.taketicket.util.Result
-import com.mburakcakir.taketicket.util.Status
+import com.mburakcakir.taketicket.util.enums.Status
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
@@ -33,7 +33,6 @@ class RegisterViewModel(
         userRepository = UserRepositoryImpl(database.userDao())
         storage = FirebaseStorage.getInstance()
         storageReference = storage!!.reference
-
     }
 
     fun insertUser(userModel: UserModel) = viewModelScope.launch {

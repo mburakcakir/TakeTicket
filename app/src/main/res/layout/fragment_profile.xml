@@ -1,174 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="20dp"
-    tools:context=".ui.profile.ProfileFragment">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imgProfilePicture"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/ic_default_user"
-        app:civ_border_color="@color/colorBlack"
-        app:civ_border_width="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/txtNameSurname"
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.mburakcakir.taketicket.ui.profile.ProfileViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="Your Name"
-        android:textColor="@color/colorBlack"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/imgProfilePicture" />
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        tools:context=".ui.profile.ProfileFragment">
 
-    <TextView
-        android:id="@+id/txtEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="Email"
-        android:textColor="@color/colorBlack"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/txtNameSurname" />
+        <FrameLayout
+            android:id="@+id/viewProfileImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_black_border"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <View
-        android:id="@+id/viewProfile"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/bg_profile_button_background"
-        app:layout_constraintBottom_toTopOf="@+id/viewTickets"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgProfilePicture"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_default_user" />
 
-    <TextView
-        android:id="@+id/txtProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:text="Profile"
-        android:textColor="@color/colorBlack"
-        app:layout_constraintBottom_toBottomOf="@id/viewProfile"
-        app:layout_constraintStart_toStartOf="@id/viewProfile"
-        app:layout_constraintTop_toTopOf="@id/viewProfile" />
+        </FrameLayout>
 
-    <ImageView
-        android:id="@+id/imgProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:src="@drawable/ic_arrow_right"
-        app:layout_constraintBottom_toBottomOf="@id/viewProfile"
-        app:layout_constraintEnd_toEndOf="@id/viewProfile"
-        app:layout_constraintTop_toTopOf="@id/viewProfile" />
+        <TextView
+            android:id="@+id/txtNameSurname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="@{viewmodel.sessionManager.username}"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/viewProfileImage" />
 
-    <View
-        android:id="@+id/viewTickets"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/bg_profile_button_background"
-        app:layout_constraintBottom_toBottomOf="@+id/viewInfo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewProfile" />
+        <TextView
+            android:id="@+id/txtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@{viewmodel.sessionManager.userEmail}"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/txtNameSurname" />
 
-    <TextView
-        android:id="@+id/txtTickets"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:text="Tickets"
-        android:textColor="@color/colorBlack"
-        app:layout_constraintBottom_toBottomOf="@id/viewTickets"
-        app:layout_constraintStart_toStartOf="@id/viewTickets"
-        app:layout_constraintTop_toTopOf="@id/viewTickets" />
+        <View
+            android:id="@+id/viewProfile"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/bg_profile_button_background"
+            app:layout_constraintBottom_toTopOf="@+id/viewTickets"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
 
-    <ImageView
-        android:id="@+id/imgTickets"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:src="@drawable/ic_arrow_right"
-        app:layout_constraintBottom_toBottomOf="@id/viewTickets"
-        app:layout_constraintEnd_toEndOf="@id/viewTickets"
-        app:layout_constraintTop_toTopOf="@id/viewTickets" />
+        <TextView
+            android:id="@+id/txtProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="Profile"
+            android:textColor="@color/colorBlack"
+            app:layout_constraintBottom_toBottomOf="@id/viewProfile"
+            app:layout_constraintStart_toStartOf="@id/viewProfile"
+            app:layout_constraintTop_toTopOf="@id/viewProfile" />
 
-    <View
-        android:id="@+id/viewInfo"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/bg_profile_button_background"
-        app:layout_constraintBottom_toTopOf="@+id/viewExit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewTickets" />
+        <ImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_arrow_right"
+            app:layout_constraintBottom_toBottomOf="@id/viewProfile"
+            app:layout_constraintEnd_toEndOf="@id/viewProfile"
+            app:layout_constraintTop_toTopOf="@id/viewProfile" />
 
-    <TextView
-        android:id="@+id/txtInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:text="Info"
-        android:textColor="@color/colorBlack"
-        app:layout_constraintBottom_toBottomOf="@id/viewInfo"
-        app:layout_constraintStart_toStartOf="@id/viewInfo"
-        app:layout_constraintTop_toTopOf="@id/viewInfo" />
+        <View
+            android:id="@+id/viewTickets"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_profile_button_background"
+            app:layout_constraintBottom_toBottomOf="@+id/viewInfo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewProfile" />
 
-    <ImageView
-        android:id="@+id/imgInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:src="@drawable/ic_arrow_right"
-        app:layout_constraintBottom_toBottomOf="@id/viewInfo"
-        app:layout_constraintEnd_toEndOf="@id/viewInfo"
-        app:layout_constraintTop_toTopOf="@id/viewInfo" />
+        <TextView
+            android:id="@+id/txtTickets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="Tickets"
+            android:textColor="@color/colorBlack"
+            app:layout_constraintBottom_toBottomOf="@id/viewTickets"
+            app:layout_constraintStart_toStartOf="@id/viewTickets"
+            app:layout_constraintTop_toTopOf="@id/viewTickets" />
 
-    <View
-        android:id="@+id/viewExit"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/bg_profile_button_background"
-        app:layout_constraintBottom_toBottomOf="@+id/txtExit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewInfo" />
+        <ImageView
+            android:id="@+id/imgTickets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_arrow_right"
+            app:layout_constraintBottom_toBottomOf="@id/viewTickets"
+            app:layout_constraintEnd_toEndOf="@id/viewTickets"
+            app:layout_constraintTop_toTopOf="@id/viewTickets" />
 
-    <TextView
-        android:id="@+id/txtExit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:text="Exit App"
-        android:textColor="@color/colorBlack"
-        app:layout_constraintBottom_toBottomOf="@id/viewExit"
-        app:layout_constraintStart_toStartOf="@id/viewExit"
-        app:layout_constraintTop_toTopOf="@id/viewExit" />
+        <View
+            android:id="@+id/viewInfo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_profile_button_background"
+            app:layout_constraintBottom_toTopOf="@+id/viewExit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewTickets" />
 
-    <ImageView
-        android:id="@+id/imgExit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:src="@drawable/ic_arrow_right"
-        app:layout_constraintBottom_toBottomOf="@id/viewExit"
-        app:layout_constraintEnd_toEndOf="@id/viewExit"
-        app:layout_constraintTop_toTopOf="@id/viewExit" />
+        <TextView
+            android:id="@+id/txtInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="Info"
+            android:textColor="@color/colorBlack"
+            app:layout_constraintBottom_toBottomOf="@id/viewInfo"
+            app:layout_constraintStart_toStartOf="@id/viewInfo"
+            app:layout_constraintTop_toTopOf="@id/viewInfo" />
+
+        <ImageView
+            android:id="@+id/imgInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_arrow_right"
+            app:layout_constraintBottom_toBottomOf="@id/viewInfo"
+            app:layout_constraintEnd_toEndOf="@id/viewInfo"
+            app:layout_constraintTop_toTopOf="@id/viewInfo" />
+
+        <View
+            android:id="@+id/viewExit"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_profile_button_background"
+            app:layout_constraintBottom_toBottomOf="@+id/txtExit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewInfo" />
+
+        <TextView
+            android:id="@+id/txtExit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="Exit App"
+            android:textColor="@color/colorBlack"
+            app:layout_constraintBottom_toBottomOf="@id/viewExit"
+            app:layout_constraintStart_toStartOf="@id/viewExit"
+            app:layout_constraintTop_toTopOf="@id/viewExit" />
+
+        <ImageView
+            android:id="@+id/imgExit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_arrow_right"
+            app:layout_constraintBottom_toBottomOf="@id/viewExit"
+            app:layout_constraintEnd_toEndOf="@id/viewExit"
+            app:layout_constraintTop_toTopOf="@id/viewExit" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

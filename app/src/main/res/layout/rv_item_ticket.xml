@@ -41,11 +41,11 @@
             android:layout_gravity="center"
             android:background="@drawable/ic_title"
             card_view:layout_constraintStart_toEndOf="@id/guideline"
-            card_view:layout_constraintEnd_toStartOf="@id/txtTicketTitle"
+            card_view:layout_constraintEnd_toStartOf="@id/txtEventTitle"
             card_view:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/txtTicketTitle"
+            android:id="@+id/txtEventTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -67,10 +67,10 @@
             android:layout_marginEnd="5dp"
             android:background="@drawable/ic_price"
             card_view:layout_constraintStart_toEndOf="@id/guideline"
-            card_view:layout_constraintTop_toBottomOf="@id/txtTicketTitle" />
+            card_view:layout_constraintTop_toBottomOf="@id/txtEventTitle" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/txtTicketPrice"
+            android:id="@+id/txt_event_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -78,7 +78,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             card_view:layout_constraintStart_toEndOf="@id/imgPrice"
-            card_view:layout_constraintTop_toBottomOf="@id/txtTicketTitle"
+            card_view:layout_constraintTop_toBottomOf="@id/txtEventTitle"
             tools:text="@string/price" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -87,9 +87,9 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:textStyle="bold"
-            card_view:layout_constraintBottom_toBottomOf="@id/txtTicketPrice"
+            card_view:layout_constraintBottom_toBottomOf="@id/txt_event_price"
             card_view:layout_constraintEnd_toStartOf="@id/guideline3"
-            card_view:layout_constraintStart_toEndOf="@id/txtTicketPrice"
+            card_view:layout_constraintStart_toEndOf="@id/txt_event_price"
             tools:text="category" />
 
         <androidx.constraintlayout.widget.Guideline

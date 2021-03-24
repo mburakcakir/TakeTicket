@@ -13,6 +13,10 @@ android {
         viewBinding true
     }
 
+    dataBinding {
+        enabled = true
+    }
+
     defaultConfig {
         applicationId "com.mburakcakir.taketicket"
         minSdkVersion 17

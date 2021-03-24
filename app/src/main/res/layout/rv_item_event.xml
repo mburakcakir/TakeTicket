@@ -27,8 +27,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorBlack"
             android:textStyle="bold"
+            android:textSize="16sp"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imgEventImage"
@@ -46,11 +47,13 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/txtEventSubtitle"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_marginEnd="10dp"
             android:layout_height="wrap_content"
             android:autoLink="web"
             android:textColorLink="@color/colorBlack"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/txtEventTime"
             app:layout_constraintTop_toBottomOf="@id/txtEventTitle"
             tools:text="link" />
 
@@ -61,7 +64,6 @@
             android:layout_marginTop="10dp"
             android:text="1"
             android:textColor="@color/colorBlack"
-            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txtEventSubtitle"

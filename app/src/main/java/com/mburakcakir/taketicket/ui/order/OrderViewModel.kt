@@ -10,7 +10,7 @@ import com.mburakcakir.taketicket.data.repository.ticket.TicketRepository
 import com.mburakcakir.taketicket.data.repository.ticket.TicketRepositoryImpl
 import com.mburakcakir.taketicket.ui.BaseViewModel
 import com.mburakcakir.taketicket.util.Result
-import com.mburakcakir.taketicket.util.Status
+import com.mburakcakir.taketicket.util.enums.Status
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
