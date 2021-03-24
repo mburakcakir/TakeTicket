@@ -1,86 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    card_view:cardCornerRadius="6dp"
-    card_view:cardElevation="3dp"
-    card_view:cardUseCompatPadding="true">
+<layout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <variable
+            name="event"
+            type="com.mburakcakir.taketicket.data.db.entity.EventModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        card_view:cardCornerRadius="6dp"
+        card_view:cardElevation="3dp"
+        card_view:cardUseCompatPadding="true">
 
-        <ImageView
-            android:id="@+id/imgEventImage"
-            android:layout_width="wrap_content"
-            android:layout_height="200dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/txtEventTitle"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/colorBlack"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imgEventImage"
-            tools:text="subject" />
+            android:padding="10dp">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/txtEventTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imgEventImage"
-            tools:text="time" />
+            <ImageView
+                android:id="@+id/imgEventImage"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                loadImageFromUrl="@{event.url}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/txtEventSubtitle"
-            android:layout_width="0dp"
-            android:layout_marginEnd="10dp"
-            android:layout_height="wrap_content"
-            android:autoLink="web"
-            android:textColorLink="@color/colorBlack"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/txtEventTime"
-            app:layout_constraintTop_toBottomOf="@id/txtEventTitle"
-            tools:text="link" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtEventTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:text="@{event.title}"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imgEventImage"
+                tools:text="title" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/txtEventOrder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="1"
-            android:textColor="@color/colorBlack"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txtEventSubtitle"
-            tools:text="day" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtEventTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:text="@{event.time}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imgEventImage"
+                tools:text="time" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/txtEventCapacity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="right"
-            android:text="1"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txtEventSubtitle"
-            tools:text="day" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtEventSubtitle"
+                android:layout_width="0dp"
+                android:layout_marginEnd="10dp"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:text="@{event.subTitle}"
+                android:textColorLink="@color/colorBlack"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/txtEventTime"
+                app:layout_constraintTop_toBottomOf="@id/txtEventTitle"
+                tools:text="subtitle" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtEventOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{event.category}"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtEventSubtitle"
+                tools:text="day" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtEventCapacity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="end"
+                android:text="@{`Kapasite: ` + String.valueOf(event.capacity)}"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtEventSubtitle"
+                tools:text="capacity" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>

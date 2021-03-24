@@ -2,10 +2,11 @@ package com.mburakcakir.taketicket.ui.event.turkish
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.data.db.entity.EventModel
 import com.mburakcakir.taketicket.data.db.entity.TicketModel
 import com.mburakcakir.taketicket.databinding.RvItemEventBinding
@@ -20,8 +21,12 @@ class EventAdapter : ListAdapter<EventModel, EventViewHolder>(EventCallback()) {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
-        val binding = RvItemEventBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return EventViewHolder(binding, onClickEvent)
+        return EventViewHolder(
+            DataBindingUtil.inflate(
+                LayoutInflater.from(parent.context), R.layout.rv_item_event, parent, false
+            ),
+            onClickEvent
+        )
     }
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) =
@@ -45,14 +50,7 @@ class EventViewHolder(
     fun bind(eventModel: EventModel) {
         val sessionManager = SessionManager(itemView.context)
 
-        with(binding) {
-            txtEventTitle.text = eventModel.title
-            txtEventSubtitle.text = eventModel.subTitle
-            txtEventTime.text = eventModel.time
-            txtEventOrder.text = eventModel.category
-            txtEventCapacity.text = "Kapasite: ${eventModel.capacity}"
-            Glide.with(itemView.context).load(eventModel.url).into(imgEventImage)
-        }
+        binding.event = eventModel
 
         itemView.setOnClickListener {
             val ticketModel = TicketModel(

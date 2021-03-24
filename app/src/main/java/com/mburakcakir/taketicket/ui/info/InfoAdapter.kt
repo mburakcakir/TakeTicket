@@ -2,20 +2,25 @@ package com.mburakcakir.taketicket.ui.info
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.storage.FirebaseStorage
+import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.databinding.RvItemInfoBinding
 import com.mburakcakir.taketicket.network.model.InfoModel
-import com.mburakcakir.taketicket.util.GlideApp
-import com.mburakcakir.taketicket.util.shareText
 
 
 class InfoAdapter : ListAdapter<InfoModel, InfoViewHolder>(InfoCallBack()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InfoViewHolder {
-        val binding = RvItemInfoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return InfoViewHolder(binding)
+        return InfoViewHolder(
+            DataBindingUtil.inflate(
+                LayoutInflater.from(parent.context),
+                R.layout.rv_item_info,
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: InfoViewHolder, position: Int) =
@@ -35,18 +40,6 @@ class InfoViewHolder(
     private val binding: RvItemInfoBinding
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(infoModel: InfoModel) {
-        val storage = FirebaseStorage.getInstance()
-        val getReference = storage.getReferenceFromUrl(infoModel.imageUrl)
-
-        with(binding) {
-            txtInfoTitle.text = infoModel.account
-            txtInfoLink.text = infoModel.siteUrl
-            GlideApp.with(itemView.context).load(getReference).into(imgInfoImage)
-
-            imgInfoShare.setOnClickListener {
-                itemView.context shareText infoModel.siteUrl
-            }
-        }
-
+        binding.info = infoModel
     }
 }

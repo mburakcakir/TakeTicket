@@ -2,10 +2,11 @@ package com.mburakcakir.taketicket.ui.ticket
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.data.db.entity.EventModel
 import com.mburakcakir.taketicket.data.db.entity.TicketModel
 import com.mburakcakir.taketicket.databinding.RvItemTicketBinding
@@ -25,7 +26,12 @@ class TicketAdapter : ListAdapter<TicketModel, TicketViewHolder>(TicketCallback(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TicketViewHolder {
         return TicketViewHolder(
-            RvItemTicketBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            DataBindingUtil.inflate(
+                LayoutInflater.from(parent.context),
+                R.layout.rv_item_ticket,
+                parent,
+                false
+            ),
             eventList,
             onClickEvent
         )
@@ -53,18 +59,12 @@ class TicketViewHolder(
     fun bind(ticketModel: TicketModel) {
         val eventModel = eventList[ticketModel.eventID - 1]
         with(binding) {
-
-            txtEventTitle.text = eventModel.title
-            txtEventPrice.text = eventModel.price
-            txtTicketLastTime.text = eventModel.time
-            txtTicketCategory.text = eventModel.category
-            txtTicketBoughtTime.text = ticketModel.boughtTime
-            Glide.with(itemView.context).load(eventModel.url).into(imgTicketLastImage)
+            binding.event = eventModel
+            binding.ticket = ticketModel
 
             imgDeleteTicket.setOnClickListener {
                 onClick(ticketModel)
             }
-
         }
     }
 

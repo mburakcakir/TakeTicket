@@ -44,6 +44,7 @@ class OrderDialog : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.dialog_order, container, false)
+        binding.lifecycleOwner = this
         isCancelable = true
 
         init()
@@ -57,9 +58,12 @@ class OrderDialog : BottomSheetDialogFragment() {
         orderViewModel = ViewModelProvider(this).get(OrderViewModel::class.java)
         val ticketModel = args.ticketModel
         val eventModel = turkishEventViewModel.getEventById(ticketModel.eventID)
-        binding.ticket = ticketModel
-        binding.event = eventModel
-        binding.viewmodel = orderViewModel
+
+        binding.apply {
+            ticket = ticketModel
+            event = eventModel
+            viewmodel = orderViewModel
+        }
 
         orderViewModel.result.observe(requireActivity(), {
             when {

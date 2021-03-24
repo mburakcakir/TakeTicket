@@ -1,162 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    card_view:cardCornerRadius="6dp"
-    card_view:cardElevation="3dp"
-    card_view:cardUseCompatPadding="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="event"
+            type="com.mburakcakir.taketicket.data.db.entity.EventModel" />
+
+        <variable
+            name="ticket"
+            type="com.mburakcakir.taketicket.data.db.entity.TicketModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="5dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingRight="5dp">
+        card_view:cardCornerRadius="6dp"
+        card_view:cardElevation="3dp"
+        card_view:cardUseCompatPadding="true">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            card_view:layout_constraintGuide_percent="0.15" />
+            android:paddingLeft="5dp"
+            android:paddingTop="10dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="10dp">
 
-        <ImageView
-            android:id="@+id/imgTicketLastImage"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:layout_marginRight="5dp"
-            card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintEnd_toEndOf="@id/guideline"
-            card_view:layout_constraintTop_toTopOf="parent" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                card_view:layout_constraintGuide_percent="0.15" />
 
-        <ImageView
-            android:id="@+id/imgTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/ic_title"
-            card_view:layout_constraintStart_toEndOf="@id/guideline"
-            card_view:layout_constraintEnd_toStartOf="@id/txtEventTitle"
-            card_view:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/imgTicketLastImage"
+                loadImageFromUrl="@{event.url}"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="5dp"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintEnd_toEndOf="@id/guideline"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/txtEventTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:textColor="@color/colorPrimary"
-            android:textStyle="bold"
-            android:maxLines="2"
-            card_view:layout_constraintStart_toEndOf="@id/imgTitle"
-            card_view:layout_constraintEnd_toStartOf="@id/guideline3"
-            card_view:layout_constraintTop_toTopOf="parent"
-            tools:text="subject" />
+            <ImageView
+                android:id="@+id/imgTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_title"
+                card_view:layout_constraintEnd_toStartOf="@id/txtEventTitle"
+                card_view:layout_constraintStart_toEndOf="@id/guideline"
+                card_view:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/imgPrice"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:background="@drawable/ic_price"
-            card_view:layout_constraintStart_toEndOf="@id/guideline"
-            card_view:layout_constraintTop_toBottomOf="@id/txtEventTitle" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtEventTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:maxLines="2"
+                android:text="@{event.title}"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                card_view:layout_constraintEnd_toStartOf="@id/guideline3"
+                card_view:layout_constraintStart_toEndOf="@id/imgTitle"
+                card_view:layout_constraintTop_toTopOf="parent"
+                tools:text="subject" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/txt_event_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            card_view:layout_constraintStart_toEndOf="@id/imgPrice"
-            card_view:layout_constraintTop_toBottomOf="@id/txtEventTitle"
-            tools:text="@string/price" />
+            <ImageView
+                android:id="@+id/imgPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/ic_price"
+                card_view:layout_constraintStart_toEndOf="@id/guideline"
+                card_view:layout_constraintTop_toBottomOf="@id/txtEventTitle" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/txtTicketCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            card_view:layout_constraintBottom_toBottomOf="@id/txt_event_price"
-            card_view:layout_constraintEnd_toStartOf="@id/guideline3"
-            card_view:layout_constraintStart_toEndOf="@id/txt_event_price"
-            tools:text="category" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txt_event_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:text="@{event.price}"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                card_view:layout_constraintStart_toEndOf="@id/imgPrice"
+                card_view:layout_constraintTop_toBottomOf="@id/txtEventTitle"
+                tools:text="@string/price" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            card_view:layout_constraintGuide_percent="0.70" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtTicketCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{event.category}"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                card_view:layout_constraintBottom_toBottomOf="@id/txt_event_price"
+                card_view:layout_constraintEnd_toStartOf="@id/guideline3"
+                card_view:layout_constraintStart_toEndOf="@id/txt_event_price"
+                tools:text="category" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                card_view:layout_constraintGuide_percent="0.70" />
+
+            <ImageView
+                android:id="@+id/imgTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_time"
+                card_view:layout_constraintStart_toStartOf="@id/guideline3"
+                card_view:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtTicketBoughtTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_weight="0.20"
+                android:gravity="center"
+                android:text="@{ticket.boughtTime}"
+                android:textColor="@color/colorRed"
+                android:textStyle="bold"
+                card_view:layout_constraintStart_toEndOf="@id/imgTime"
+                card_view:layout_constraintTop_toTopOf="parent"
+                tools:text="boughttime" />
+
+            <ImageView
+                android:id="@+id/imgCalendar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/ic_calendar"
+                card_view:layout_constraintStart_toStartOf="@id/guideline3"
+                card_view:layout_constraintTop_toBottomOf="@id/imgTime" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtTicketLastTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:maxLines="2"
+                android:text="@{event.time}"
+                android:textSize="14sp"
+                card_view:layout_constraintEnd_toStartOf="@id/imgDeleteTicket"
+                card_view:layout_constraintStart_toEndOf="@id/imgCalendar"
+                card_view:layout_constraintTop_toBottomOf="@id/txtTicketBoughtTime"
+                tools:text="day" />
+
+            <ImageView
+                android:id="@+id/imgDeleteTicket"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_delete"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent" />
 
 
-        <ImageView
-            android:id="@+id/imgTime"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/ic_time"
-            card_view:layout_constraintStart_toStartOf="@id/guideline3"
-            card_view:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/txtTicketBoughtTime"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_weight="0.20"
-            android:gravity="center"
-            android:textColor="@color/colorRed"
-            android:textStyle="bold"
-            card_view:layout_constraintStart_toEndOf="@id/imgTime"
-            card_view:layout_constraintTop_toTopOf="parent"
-            tools:text="boughttime" />
-
-        <ImageView
-            android:id="@+id/imgCalendar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:background="@drawable/ic_calendar"
-            card_view:layout_constraintStart_toStartOf="@id/guideline3"
-            card_view:layout_constraintTop_toBottomOf="@id/imgTime" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/txtTicketLastTime"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:maxLines="2"
-            android:textSize="14sp"
-            card_view:layout_constraintStart_toEndOf="@id/imgCalendar"
-            card_view:layout_constraintEnd_toStartOf="@id/imgDeleteTicket"
-            card_view:layout_constraintTop_toBottomOf="@id/txtTicketBoughtTime"
-            tools:text="day" />
-
-        <ImageView
-            android:id="@+id/imgDeleteTicket"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_delete"
-            card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
 
-</androidx.cardview.widget.CardView>
+</layout>
