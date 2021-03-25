@@ -2,11 +2,9 @@ package com.mburakcakir.taketicket.ui.ticket
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.data.db.entity.EventModel
 import com.mburakcakir.taketicket.data.db.entity.TicketModel
 import com.mburakcakir.taketicket.databinding.RvItemTicketBinding
@@ -26,9 +24,8 @@ class TicketAdapter : ListAdapter<TicketModel, TicketViewHolder>(TicketCallback(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TicketViewHolder {
         return TicketViewHolder(
-            DataBindingUtil.inflate(
+            RvItemTicketBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.rv_item_ticket,
                 parent,
                 false
             ),

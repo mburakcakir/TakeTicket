@@ -4,26 +4,30 @@ buildscript {
         kotlin_version = "1.4.30"
         room_version = "2.2.6"
         lottieVersion = "3.5.0"
-        liveDataVersion ="2.2.0"
+        liveDataVersion = "2.2.0"
         retrofitLibraryVersion = "2.9.0"
         coroutinesVersion = "1.4.2"
         glideVersion = "4.11.0"
         firebaseUiVersion = "6.4.0"
+        firebaseAnalyticsVersion = "18.0.2"
+        firebaseAuthVersion = "20.0.3"
         okHttpVersion = "2.7.2"
         materialVersion = '1.3.0'
-        navigationVersion = "2.3.3"
+        navigationVersion = "2.3.4"
         lifeCycleLiveDataVersion = "2.3.0"
         lifeCycleViewModelVersion = "2.3.0"
+        circleImageViewVersion = "3.1.0"
+
     }
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.1.2"
+        classpath "com.android.tools.build:gradle:4.1.3"
         classpath 'com.google.gms:google-services:4.3.5'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.3"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.4"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }

@@ -20,7 +20,7 @@
             android:id="@+id/viewProfileImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_black_border"
+            android:background="@drawable/bg_border_black"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

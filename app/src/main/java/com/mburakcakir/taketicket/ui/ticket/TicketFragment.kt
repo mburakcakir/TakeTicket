@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.mburakcakir.taketicket.databinding.FragmentTicketBinding
 import com.mburakcakir.taketicket.util.toast
 
-
 class TicketFragment : Fragment() {
     private lateinit var ticketViewModel: TicketViewModel
     private var _binding: FragmentTicketBinding? = null

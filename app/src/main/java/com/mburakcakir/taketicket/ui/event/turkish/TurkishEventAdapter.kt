@@ -2,11 +2,9 @@ package com.mburakcakir.taketicket.ui.event.turkish
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mburakcakir.taketicket.R
 import com.mburakcakir.taketicket.data.db.entity.EventModel
 import com.mburakcakir.taketicket.data.db.entity.TicketModel
 import com.mburakcakir.taketicket.databinding.RvItemEventBinding
@@ -22,9 +20,7 @@ class EventAdapter : ListAdapter<EventModel, EventViewHolder>(EventCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         return EventViewHolder(
-            DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context), R.layout.rv_item_event, parent, false
-            ),
+            RvItemEventBinding.inflate(LayoutInflater.from(parent.context), parent, false),
             onClickEvent
         )
     }
@@ -62,6 +58,5 @@ class EventViewHolder(
             onClickEvent(ticketModel)
         }
     }
-
 }
 

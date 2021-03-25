@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_white_border"
+    android:background="@drawable/bg_border_white"
     android:padding="5dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
