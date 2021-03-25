@@ -73,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:text="Profile"
+            android:text="Profilim"
             android:textColor="@color/colorBlack"
             app:layout_constraintBottom_toBottomOf="@id/viewProfile"
             app:layout_constraintStart_toStartOf="@id/viewProfile"
@@ -105,7 +105,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:text="Tickets"
+            android:text="Biletlerim"
             android:textColor="@color/colorBlack"
             app:layout_constraintBottom_toBottomOf="@id/viewTickets"
             app:layout_constraintStart_toStartOf="@id/viewTickets"
@@ -137,7 +137,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:text="Info"
+            android:text="Geliştirici Bilgileri"
             android:textColor="@color/colorBlack"
             app:layout_constraintBottom_toBottomOf="@id/viewInfo"
             app:layout_constraintStart_toStartOf="@id/viewInfo"
@@ -169,7 +169,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:text="Exit App"
+            android:text="Çıkış Yap"
             android:textColor="@color/colorBlack"
             app:layout_constraintBottom_toBottomOf="@id/viewExit"
             app:layout_constraintStart_toStartOf="@id/viewExit"
@@ -184,6 +184,16 @@
             app:layout_constraintBottom_toBottomOf="@id/viewExit"
             app:layout_constraintEnd_toEndOf="@id/viewExit"
             app:layout_constraintTop_toTopOf="@id/viewExit" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnDarkMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Dark Mode"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewExit" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

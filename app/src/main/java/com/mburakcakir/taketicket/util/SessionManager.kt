@@ -15,6 +15,7 @@ class SessionManager(context: Context) {
         val EMAIL: String = "EMAIL"
         val URI: String = "URI"
         val IS_LOGGED_IN: String = "IS_LOGGED_IN"
+        val IS_DARK_MODE: String = "IS_DARK_MODE"
     }
 
     fun startSession(userModel: UserModel) {
@@ -36,6 +37,13 @@ class SessionManager(context: Context) {
         }
     }
 
+    fun setDarkMode(state: Boolean) {
+        editor.apply {
+            putBoolean(IS_DARK_MODE, state)
+            commit()
+        }
+    }
+
     fun endSession() {
         editor.apply {
             clear()
@@ -48,4 +56,5 @@ class SessionManager(context: Context) {
     fun getUserEmail() = sharedPreferences.getString(EMAIL, "")!!
     fun getName() = sharedPreferences.getString(NAME, "")
     fun getImageUri() = sharedPreferences.getString(URI, null)
+    fun isDarkMode() = sharedPreferences.getBoolean(IS_DARK_MODE, false)
 }
