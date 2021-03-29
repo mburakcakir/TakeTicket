@@ -16,7 +16,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     lateinit var homeEventPagerAdapter: HomeEventPagerAdapter
-    private val tabTitles = arrayOf("Türkçe Etkinlikler", "Yabancı Etkinlikler")
+    private val tabTitles = arrayOf("Yerel Etkinlikler", "Yabancı Etkinlikler")
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,21 +39,23 @@ class HomeFragment : Fragment() {
     }
 
     private fun checkIfUserLoggedIn() {
-        if (!homeViewModel.sessionManager.ifUserLoggedIn())
+        if (!homeViewModel.sessionManager.ifUserLoggedIn()) {
+            (requireActivity() as MainActivity).changeToolbarVisibility(View.GONE)
             this.navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
-        else
+        } else
             init()
     }
 
     private fun init() {
         (requireActivity() as MainActivity).changeToolbarVisibility(View.VISIBLE)
+        homeEventPagerAdapter = HomeEventPagerAdapter(this)
 
-        homeEventPagerAdapter = HomeEventPagerAdapter(this) {
+        homeEventPagerAdapter.setEventOnClickListener {
             this.navigate(HomeFragmentDirections.actionHomeFragmentToDetailDialog(it))
         }
+        homeEventPagerAdapter.createFragment(0)
 
         binding.vpEvent.adapter = homeEventPagerAdapter
-
         TabLayoutMediator(binding.tabEvent, binding.vpEvent) { tab, position ->
             tab.text = tabTitles[position]
             binding.vpEvent.setCurrentItem(tab.position, true)

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="event"
+            type="com.mburakcakir.taketicket.network.model.event.MovieResult" />
+    </data>
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="6dp"
+        card_view:cardElevation="3dp"
+        card_view:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:paddingBottom="8dp">
+
+            <ImageView
+                android:id="@+id/imgEventImage"
+                loadMovieImage="@{event.poster_path}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/viewEvent"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/colorWhite"
+                app:layout_constraintBottom_toBottomOf="@id/txtEventCategory"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imgEventImage" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtEventTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{event.title}"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="@id/viewEvent"
+                app:layout_constraintTop_toTopOf="@id/viewEvent"
+                tools:text="title" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtEventTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{event.release_date}"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/viewEvent"
+                app:layout_constraintTop_toTopOf="@id/viewEvent"
+                tools:text="time" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtEventSubtitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:autoLink="web"
+                android:text="@{event.overview}"
+                android:textColorLink="@color/colorBlack"
+                app:layout_constraintEnd_toStartOf="@id/txtEventTime"
+                app:layout_constraintStart_toStartOf="@id/viewEvent"
+                app:layout_constraintTop_toBottomOf="@id/txtEventTitle"
+                tools:text="subtitle" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtEventCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text="@{event.original_title}"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/txtEventCapacity"
+                app:layout_constraintStart_toStartOf="@id/viewEvent"
+                app:layout_constraintTop_toTopOf="@id/txtEventCapacity"
+                tools:text="category" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtEventCapacity"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:gravity="end"
+                android:text="@{`Kapasite: ` + String.valueOf(event.vote_count)}"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@id/viewEvent"
+                app:layout_constraintTop_toBottomOf="@id/txtEventSubtitle"
+                tools:text="capacity" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>

@@ -14,7 +14,9 @@ class ServiceProvider {
 
     companion object {
         private var retrofit: Retrofit? = null
-        private const val BASE_URL = "https://taketicketandroid-default-rtdb.firebaseio.com/"
+
+        //private const val BASE_URL = "https://taketicketandroid-default-rtdb.firebaseio.com/"
+        private const val BASE_URL = "https://api.themoviedb.org/3/"
 
         private val instance: Retrofit?
             get() {

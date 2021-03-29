@@ -25,8 +25,8 @@ class TurkishEventViewModel(
     private val eventRepository: EventRepository
     private val ticketRepository: TicketRepository
     private val userRepository: UserRepository
-    private val _allEvents = MutableLiveData<List<EventModel>>()
-    val allEvents: LiveData<List<EventModel>> = _allEvents
+    private val _turkishEvents = MutableLiveData<List<EventModel>>()
+    val turkishEvents: LiveData<List<EventModel>> = _turkishEvents
 
     init {
         val database = TicketDatabase.getDatabase(application, viewModelScope)
@@ -47,7 +47,7 @@ class TurkishEventViewModel(
                 when (it.status) {
                     Status.SUCCESS -> {
                         it.data?.let { eventList ->
-                            _allEvents.value = eventList
+                            _turkishEvents.value = eventList
                             _result.value = Result("Etkinlikler Yüklendi")
                         }
                     }

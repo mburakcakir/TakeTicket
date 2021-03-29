@@ -12,9 +12,10 @@ import com.mburakcakir.taketicket.util.enums.EntryType
 open class EntryViewModel(application: Application) : BaseViewModel(application) {
     private val _entryForm = MutableLiveData<EntryFormState>()
     val entryFormState: LiveData<EntryFormState> = _entryForm
-    private var errorUsername = MutableLiveData("")
-    private var errorPassword = MutableLiveData("")
-    private var errorEmail = MutableLiveData("")
+    private val _errorUsername = MutableLiveData("")
+    private val _errorPassword = MutableLiveData("")
+    private val _errorEmail = MutableLiveData("")
+
     private lateinit var entryType: EntryType
     private var typeList: MutableList<String?> = mutableListOf()
 
@@ -28,34 +29,35 @@ open class EntryViewModel(application: Application) : BaseViewModel(application)
     ) {
         when (entryState) {
             EntryState.USERNAME -> {
-                errorUsername.value =
+                _errorUsername.value =
                     if (!isUserNameValid(text)) Constants.INVALID_USERNAME
                     else null
             }
 
             EntryState.PASSWORD -> {
-                errorPassword.value =
+                _errorPassword.value =
                     if (!isPasswordValid(text)) Constants.INVALID_PASSWORD
                     else null
             }
 
             EntryState.EMAIL -> {
-                errorEmail.value =
+                _errorEmail.value =
                     if (!isEmailValid(text)) Constants.INVALID_EMAIL
                     else null
             }
         }
         setEntryParameters()
-        setEntryState()
+        setEntryFormState()
     }
 
-    private fun setEntryState() {
+    private fun setEntryFormState() {
         _entryForm.value = EntryFormState(
-            usernameError = errorUsername.value,
-            passwordError = errorPassword.value,
-            emailError = errorEmail.value,
+            usernameError = _errorUsername.value,
+            passwordError = _errorPassword.value,
+            emailError = _errorEmail.value,
             isDataValid = isDataValid()
         )
+
     }
 
     private fun isDataValid() =
@@ -66,11 +68,11 @@ open class EntryViewModel(application: Application) : BaseViewModel(application)
 
     private fun setEntryParameters() {
         typeList = when (entryType) {
-            EntryType.LOGIN -> mutableListOf(errorUsername.value, errorPassword.value)
+            EntryType.LOGIN -> mutableListOf(_errorUsername.value, _errorPassword.value)
             EntryType.REGISTER -> mutableListOf(
-                errorUsername.value,
-                errorPassword.value,
-                errorEmail.value
+                _errorUsername.value,
+                _errorPassword.value,
+                _errorEmail.value
             )
         }
     }

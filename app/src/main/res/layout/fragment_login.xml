@@ -1,131 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="10dp"
-    tools:context=".ui.entry.login.LoginFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottieAnimationView"
+    <data>
+
+        <import type="android.text.TextUtils" />
+
+        <import type="com.mburakcakir.taketicket.util.enums.EntryState" />
+
+        <variable
+            name="loginViewModel"
+            type="com.mburakcakir.taketicket.ui.entry.login.LoginViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/ticket" />
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        tools:context=".ui.entry.login.LoginFragment">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/txtWelcome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="@string/login_welcome"
-        app:layout_constraintTop_toBottomOf="@id/lottieAnimationView" />
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieAnimationView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/ticket" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/txtLoginMessage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="30dp"
-        android:gravity="center"
-        android:text="@string/login_message"
-        android:textColor="@color/colorBlack"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/txtWelcome" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutUsername"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="30dp"
-        app:layout_constraintTop_toBottomOf="@id/txtLoginMessage">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtUsername"
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtWelcome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_user"
-            android:drawablePadding="5dp"
-            android:hint="@string/username"
-            android:inputType="textPersonName"
-            app:counterEnabled="true"
-            app:counterMaxLength="15"
-            app:errorEnabled="true" />
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="@string/login_welcome"
+            app:layout_constraintTop_toBottomOf="@id/lottieAnimationView" />
 
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutPassword"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/layoutUsername">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtPassword"
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtLoginMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_password"
-            android:drawablePadding="5dp"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            app:errorEnabled="true"
-            app:passwordToggleEnabled="true" />
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            android:gravity="center"
+            android:text="@string/login_message"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/txtWelcome" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutUsername"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintTop_toBottomOf="@id/txtLoginMessage">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:enabled="false"
-        android:text="@string/login"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/layoutPassword" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_user"
+                android:drawablePadding="5dp"
+                android:hint="@string/username"
+                android:inputType="textPersonName"
+                app:counterEnabled="true"
+                app:counterMaxLength="15"
 
-    <View
-        android:id="@+id/bottomView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/btnLogin"
-        tools:layout_editor_absoluteX="10dp" />
+                app:error="@{TextUtils.isEmpty(loginViewModel.entryFormState.usernameError)? null : loginViewModel.entryFormState.usernameError}"
+                app:errorEnabled="true" />
 
-    <TextView
-        android:id="@+id/txtCheck"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:text="@string/login_check_user"
-        android:padding="10dp"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@id/btnRegister"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="@id/bottomView"
-        app:layout_constraintTop_toTopOf="@id/bottomView" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <!--        loginViewModel="@{loginViewModel}"-->
+        <!--        text="@{edtUsername.getText().toString()}"-->
+        <!--        entryState="@{EntryState.USERNAME}"-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutPassword"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
 
-    <TextView
-        android:id="@+id/btnRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="@string/login_message_register"
-        android:textColor="@color/colorPrimary"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/bottomView"
-        app:layout_constraintStart_toEndOf="@id/txtCheck"
-        app:layout_constraintTop_toTopOf="@id/bottomView" />
+            app:layout_constraintTop_toBottomOf="@+id/layoutUsername">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_password"
+                android:drawablePadding="5dp"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+
+                app:error="@{TextUtils.isEmpty(loginViewModel.entryFormState.passwordError)? null : loginViewModel.entryFormState.passwordError}"
+                app:errorEnabled="true"
+                app:passwordToggleEnabled="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <!--        loginViewModel="@{loginViewModel}"-->
+        <!--        text="@{edtPassword.getText().toString()}"-->
+        <!--        entryState="@{EntryState.PASSWORD}"-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:enabled="@{loginViewModel.entryFormState.dataValid}"
+            android:onClick="@{() -> loginViewModel.login(edtUsername.getText().toString(), edtPassword.getText().toString())}"
+            android:text="@string/login"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/layoutPassword" />
+
+        <View
+            android:id="@+id/bottomView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/btnLogin"
+            tools:layout_editor_absoluteX="10dp" />
+
+        <TextView
+            android:id="@+id/txtCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:padding="10dp"
+            android:text="@string/login_check_user"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@id/btnRegister"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@id/bottomView"
+            app:layout_constraintTop_toTopOf="@id/bottomView" />
+
+        <TextView
+            android:id="@+id/btnRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/login_message_register"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/bottomView"
+            app:layout_constraintStart_toEndOf="@id/txtCheck"
+            app:layout_constraintTop_toTopOf="@id/bottomView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

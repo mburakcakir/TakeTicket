@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -56,17 +55,7 @@ class ProfileFragment : Fragment() {
         }
 
         binding.btnDarkMode.setOnClickListener {
-            val isDarkMode = profileViewModel.isDarkMode()
-            if (isDarkMode) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                binding.btnDarkMode.text = "DARK MODE"
-                profileViewModel.setDarkMode(true)
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                binding.btnDarkMode.text = "LIGHT MODE"
-                profileViewModel.setDarkMode(false)
-            }
-
+            profileViewModel.changeDarkMode()
         }
     }
 

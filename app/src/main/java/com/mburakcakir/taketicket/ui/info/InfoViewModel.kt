@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.mburakcakir.taketicket.data.repository.info.InfoRepository
 import com.mburakcakir.taketicket.data.repository.info.InfoRepositoryImpl
-import com.mburakcakir.taketicket.network.model.InfoModel
+import com.mburakcakir.taketicket.network.model.info.InfoModel
 import com.mburakcakir.taketicket.network.service.ServiceApiClient
 import com.mburakcakir.taketicket.network.service.ServiceProvider
 import com.mburakcakir.taketicket.ui.BaseViewModel

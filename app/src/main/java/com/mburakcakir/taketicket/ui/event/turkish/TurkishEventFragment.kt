@@ -1,6 +1,7 @@
 package com.mburakcakir.taketicket.ui.event.turkish
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +16,7 @@ class TurkishEventFragment : Fragment() {
     private lateinit var turkishEventViewModel: TurkishEventViewModel
     private var _binding: FragmentTurkishEventBinding? = null
     private val binding get() = _binding!!
-    private var eventAdapter: EventAdapter = EventAdapter()
+    private val turkishEventAdapter: TurkishEventAdapter = TurkishEventAdapter()
     private lateinit var onClickEvent: (ticketModel: TicketModel) -> Unit
 
     override fun onCreateView(
@@ -41,14 +42,15 @@ class TurkishEventFragment : Fragment() {
         turkishEventViewModel = ViewModelProvider(this).get(TurkishEventViewModel::class.java)
         (requireActivity() as MainActivity).changeToolbarVisibility(View.VISIBLE)
 
-        binding.rvEvent.adapter = eventAdapter
-        eventAdapter.setEventOnClickListener {
+        binding.rvEvent.adapter = turkishEventAdapter
+        turkishEventAdapter.setEventOnClickListener {
+            Log.v("onClickEventSet", this.onClickEvent.toString())
             onClickEvent.invoke(it)
         }
 
-        turkishEventViewModel.allEvents.observe(requireActivity(), { allEvents ->
+        turkishEventViewModel.turkishEvents.observe(requireActivity(), { allEvents ->
             allEvents?.let {
-                eventAdapter.submitList(allEvents)
+                turkishEventAdapter.submitList(allEvents)
             }
         })
 
@@ -65,5 +67,6 @@ class TurkishEventFragment : Fragment() {
 
     fun setEventOnClickListener(onClickEvent: (TicketModel) -> Unit) {
         this.onClickEvent = onClickEvent
+        Log.v("onClickEvent", this.onClickEvent.toString())
     }
 }

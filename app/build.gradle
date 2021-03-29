@@ -101,8 +101,4 @@ dependencies {
 
     //circleimageview
     implementation "de.hdodenhof:circleimageview:$circleImageViewVersion"
-
-
-
-
 }

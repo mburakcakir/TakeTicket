@@ -10,6 +10,7 @@
         android:id="@+id/rvInfo"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/colorWhite"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

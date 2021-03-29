@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mburakcakir.taketicket.databinding.RvItemInfoBinding
-import com.mburakcakir.taketicket.network.model.InfoModel
+import com.mburakcakir.taketicket.network.model.info.InfoModel
 
 
 class InfoAdapter : ListAdapter<InfoModel, InfoViewHolder>(InfoCallBack()) {

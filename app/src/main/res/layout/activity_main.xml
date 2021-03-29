@@ -15,12 +15,11 @@
             android:background="@color/colorPrimary"
             android:paddingEnd="10dp"
             android:theme="@style/ToolbarTheme"
-            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:menu="@menu/toolbar_menu"
-            app:titleTextColor="@color/colorWhite" />
+            app:titleTextColor="@color/colorToolbar" />
 
         <fragment
             android:id="@+id/nav_host_fragment"

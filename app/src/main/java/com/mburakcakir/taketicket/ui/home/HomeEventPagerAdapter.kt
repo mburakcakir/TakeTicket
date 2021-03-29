@@ -6,14 +6,19 @@ import com.mburakcakir.taketicket.data.db.entity.TicketModel
 import com.mburakcakir.taketicket.ui.event.foreign.ForeignEventFragment
 import com.mburakcakir.taketicket.ui.event.turkish.TurkishEventFragment
 
-class HomeEventPagerAdapter(fragment: Fragment, private val onClickEvent: (TicketModel) -> Unit) :
-    FragmentStateAdapter(fragment) {
+class HomeEventPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+
+    private lateinit var onClickEvent: (ticketModel: TicketModel) -> Unit
+
+    fun setEventOnClickListener(onClickEvent: (TicketModel) -> Unit) {
+        this.onClickEvent = onClickEvent
+    }
 
     override fun getItemCount(): Int = 2
 
     override fun createFragment(position: Int): Fragment =
         if (position == 0) TurkishEventFragment().apply {
-            this.setEventOnClickListener(onClickEvent)
+            setEventOnClickListener(onClickEvent)
         }
         else ForeignEventFragment()
 }
