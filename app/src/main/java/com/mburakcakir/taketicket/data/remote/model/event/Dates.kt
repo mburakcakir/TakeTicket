@@ -1,4 +1,4 @@
-package com.mburakcakir.taketicket.network.model.event
+package com.mburakcakir.taketicket.data.remote.model.event
 
 data class Dates(
     val maximum: String,

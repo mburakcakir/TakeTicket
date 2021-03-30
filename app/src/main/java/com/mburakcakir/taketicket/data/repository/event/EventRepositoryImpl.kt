@@ -2,15 +2,17 @@ package com.mburakcakir.taketicket.data.repository.event
 
 import com.mburakcakir.taketicket.data.db.dao.EventDao
 import com.mburakcakir.taketicket.data.db.entity.EventModel
-import com.mburakcakir.taketicket.network.model.event.MovieResponse
-import com.mburakcakir.taketicket.network.service.ServiceProvider
+import com.mburakcakir.taketicket.data.remote.model.event.ResponsePopularMovies
+import com.mburakcakir.taketicket.data.remote.model.event.ResponseTrendingMovies
+import com.mburakcakir.taketicket.data.remote.model.event.ResponseUpcomingMovies
+import com.mburakcakir.taketicket.data.remote.service.ServiceProvider
 import com.mburakcakir.taketicket.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class EventRepositoryImpl(private val eventDao: EventDao) : EventRepository {
 
-    private val apiClient = ServiceProvider().getServiceApi()
+    private val apiClient = ServiceProvider().getEventInstance()
 
     override suspend fun getAllEvents(): Flow<Resource<List<EventModel>>> = flow {
         emit(Resource.Loading())
@@ -22,10 +24,38 @@ class EventRepositoryImpl(private val eventDao: EventDao) : EventRepository {
         }
     }
 
-    override suspend fun getUpcomingMovies(): Flow<Resource<MovieResponse>> = flow {
+    override suspend fun getUpcomingMovies(): Flow<Resource<ResponseUpcomingMovies>> = flow {
         emit(Resource.Loading())
         try {
-            val response = apiClient.getUpcomingMovies("0084f501851d0d513240f2a30678bbe4")
+            val response = apiClient.getUpcomingMovies()
+            if (response.isSuccessful)
+                response.body()?.run {
+                    emit(Resource.Success(this))
+                }
+        } catch (e: Exception) {
+            emit(Resource.Error(e))
+            e.printStackTrace()
+        }
+    }
+
+    override suspend fun getPopularMovies(): Flow<Resource<ResponsePopularMovies>> = flow {
+        emit(Resource.Loading())
+        try {
+            val response = apiClient.getPopularMovies()
+            if (response.isSuccessful)
+                response.body()?.run {
+                    emit(Resource.Success(this))
+                }
+        } catch (e: Exception) {
+            emit(Resource.Error(e))
+            e.printStackTrace()
+        }
+    }
+
+    override suspend fun getTrendingMovies(): Flow<Resource<ResponseTrendingMovies>> = flow {
+        emit(Resource.Loading())
+        try {
+            val response = apiClient.getTrendingMovies()
             if (response.isSuccessful)
                 response.body()?.run {
                     emit(Resource.Success(this))

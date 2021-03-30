@@ -6,9 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mburakcakir.taketicket.data.db.entity.TicketModel
+import com.mburakcakir.taketicket.data.remote.model.event.MovieResult
 import com.mburakcakir.taketicket.databinding.RvItemForeignEventBinding
-import com.mburakcakir.taketicket.network.model.event.MovieResult
-import com.mburakcakir.taketicket.util.SessionManager
 
 class ForeignEventAdapter :
     ListAdapter<MovieResult, ForeignEventAdapter.ForeignEventViewHolder>(ForeignEventCallback()) {
@@ -31,18 +30,8 @@ class ForeignEventAdapter :
         private val binding: RvItemForeignEventBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(movieResult: MovieResult) {
-            val sessionManager = SessionManager(itemView.context)
+            binding.movie = movieResult
 
-            binding.event = movieResult
-//            itemView.setOnClickListener {
-//                val ticketModel = TicketModel(
-//                    sessionManager.getUsername(),
-//                    sessionManager.getUserEmail(),
-//                    getCurrentTime(),
-//                    eventModel.eventID
-//                )
-//                onClickEvent(ticketModel)
-//            }
         }
     }
 

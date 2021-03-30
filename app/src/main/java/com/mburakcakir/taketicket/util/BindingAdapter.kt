@@ -2,18 +2,21 @@ package com.mburakcakir.taketicket.util
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import coil.load
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 
 @BindingAdapter("loadImageFromUrl")
-fun ImageView.loadImage(url: String) {
-    Glide.with(context).load(url).into(this)
+fun ImageView.loadImage(imageUrl: String) {
+    Glide.with(context).load(imageUrl).into(this)
+//    this.load(imageUrl)
 }
 
 @BindingAdapter("loadMovieImage")
-fun ImageView.loadMovieImage(url: String) {
-    val base = "https://image.tmdb.org/t/p/original"
-    Glide.with(context).load(base + url).into(this)
+fun ImageView.loadMovieImage(imageUrl: String) {
+    val base = "https://image.tmdb.org/t/p/w500"
+//    Glide.with(context).load(base + imageUrl).into(this)
+    this.load(base + imageUrl)
 }
 
 @BindingAdapter("loadImageFromUrlWithFirebase")

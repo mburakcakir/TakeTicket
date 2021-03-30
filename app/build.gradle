@@ -101,4 +101,7 @@ dependencies {
 
     //circleimageview
     implementation "de.hdodenhof:circleimageview:$circleImageViewVersion"
+
+    // coil
+    implementation("io.coil-kt:coil:1.1.1")
 }

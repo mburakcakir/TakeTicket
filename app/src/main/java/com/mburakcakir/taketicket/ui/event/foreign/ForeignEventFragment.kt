@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.mburakcakir.taketicket.data.db.entity.TicketModel
+import com.mburakcakir.taketicket.data.remote.model.event.MovieResult
 import com.mburakcakir.taketicket.databinding.FragmentForeignEventBinding
 import com.mburakcakir.taketicket.util.toast
 
@@ -16,7 +17,11 @@ class ForeignEventFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var foreignEventViewModel: ForeignEventViewModel
     private val foreignEventAdapter: ForeignEventAdapter = ForeignEventAdapter()
+    private var nestedRecyclerViewAdapter: NestedRecyclerViewAdapter = NestedRecyclerViewAdapter()
     private lateinit var onClickEvent: (ticketModel: TicketModel) -> Unit
+    private var upcomingMovies: List<MovieResult> = emptyList()
+    private var popularMovies: List<MovieResult> = emptyList()
+    private var trendingMovies: List<MovieResult> = emptyList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,13 +44,25 @@ class ForeignEventFragment : Fragment() {
 
     private fun init() {
         foreignEventViewModel = ViewModelProvider(this).get(ForeignEventViewModel::class.java)
-        binding.rvForeignEvent.adapter = foreignEventAdapter
 
-        foreignEventViewModel.foreignEvents.observe(viewLifecycleOwner) { allEvents ->
-            allEvents?.let {
-                foreignEventAdapter.submitList(allEvents.results)
+        foreignEventViewModel.upcomingEvents.observe(viewLifecycleOwner) { upcomingEvents ->
+            upcomingEvents?.let {
+                upcomingMovies = upcomingEvents.results
+                setAdapter()
             }
-            Log.v("data", allEvents.toString())
+        }
+
+        foreignEventViewModel.popularEvents.observe(viewLifecycleOwner) { popularEvents ->
+            popularEvents?.let {
+                popularMovies = popularEvents.results
+            }
+        }
+
+        foreignEventViewModel.trendingEvents.observe(viewLifecycleOwner) { trendingEvents ->
+            trendingEvents?.let {
+                trendingMovies = trendingEvents.results
+
+            }
         }
 
         foreignEventAdapter.setEventOnClickListener {
@@ -62,6 +79,16 @@ class ForeignEventFragment : Fragment() {
                 requireContext() toast message
             }
         })
+    }
+
+    fun setAdapter() {
+        val categoryItemList = listOf<NestedRecyclerViewModel>(
+            NestedRecyclerViewModel("Yaklaşan Etkinlikler", upcomingMovies),
+            NestedRecyclerViewModel("Popüler Etkinlikler", popularMovies),
+            NestedRecyclerViewModel("Yükselen Etkinlikler", trendingMovies)
+        )
+        nestedRecyclerViewAdapter.setCategoryList(categoryItemList)
+        binding.rvForeignEvent.adapter = nestedRecyclerViewAdapter
     }
 
     fun setEventOnClickListener(onClickEvent: (TicketModel) -> Unit) {

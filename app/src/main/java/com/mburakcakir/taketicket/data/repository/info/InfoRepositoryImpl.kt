@@ -1,7 +1,7 @@
 package com.mburakcakir.taketicket.data.repository.info
 
-import com.mburakcakir.taketicket.network.model.info.InfoModel
-import com.mburakcakir.taketicket.network.service.ServiceApiClient
+import com.mburakcakir.taketicket.data.remote.model.info.InfoModel
+import com.mburakcakir.taketicket.data.remote.service.ServiceApiClient
 import com.mburakcakir.taketicket.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

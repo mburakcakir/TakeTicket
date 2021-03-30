@@ -1,7 +1,6 @@
-package com.mburakcakir.taketicket.network.model.event
+package com.mburakcakir.taketicket.data.remote.model.event
 
-data class MovieResponse(
-    val dates: Dates,
+data class ResponseTrendingMovies(
     val page: Int,
     val results: List<MovieResult>,
     val total_pages: Int,

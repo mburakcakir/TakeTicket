@@ -56,7 +56,7 @@
 
     <dialog
         android:id="@+id/detailDialog"
-        android:name="com.mburakcakir.taketicket.ui.order.OrderDialog"
+        android:name="com.mburakcakir.taketicket.ui.order.OrderBottomSheetDialog"
         android:label="DetailDialog">
         <action
             android:id="@+id/action_detailDialog_to_ticketFragment"

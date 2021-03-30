@@ -16,11 +16,11 @@ import com.mburakcakir.taketicket.ui.event.turkish.TurkishEventViewModel
 import com.mburakcakir.taketicket.util.navigate
 import com.mburakcakir.taketicket.util.toast
 
-class OrderDialog : BottomSheetDialogFragment() {
+class OrderBottomSheetDialog : BottomSheetDialogFragment() {
     private lateinit var binding: DialogOrderBinding
     private lateinit var turkishEventViewModel: TurkishEventViewModel
     private lateinit var orderViewModel: OrderViewModel
-    private val args by navArgs<OrderDialogArgs>()
+    private val args by navArgs<OrderBottomSheetDialogArgs>()
 
     override fun getTheme(): Int = R.style.BottomSheetDialog
 
@@ -68,7 +68,7 @@ class OrderDialog : BottomSheetDialogFragment() {
             when {
                 it.success != null -> {
                     requireContext() toast it.success
-                    this.navigate(OrderDialogDirections.actionDetailDialogToTicketFragment())
+                    this.navigate(OrderBottomSheetDialogDirections.actionDetailDialogToTicketFragment())
                 }
                 it.error != null -> requireContext() toast it.error
                 it.loading != null -> requireContext() toast it.loading

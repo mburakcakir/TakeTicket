@@ -1,5 +1,6 @@
-package com.mburakcakir.taketicket.network.service
+package com.mburakcakir.taketicket.data.remote.service
 
+import com.mburakcakir.taketicket.util.Constants
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -7,22 +8,20 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ServiceProvider {
     private lateinit var serviceApi: ServiceApiClient
 
-    fun getServiceApi(): ServiceApiClient {
-        serviceApi = instance!!.create(ServiceApiClient::class.java)
-        return serviceApi
+    fun getEventInstance(): ServiceApiClient {
+        return instance!!.create(ServiceApiClient::class.java)
     }
 
     companion object {
         private var retrofit: Retrofit? = null
 
         //private const val BASE_URL = "https://taketicketandroid-default-rtdb.firebaseio.com/"
-        private const val BASE_URL = "https://api.themoviedb.org/3/"
 
         private val instance: Retrofit?
             get() {
                 if (retrofit == null) {
                     retrofit = Retrofit.Builder()
-                        .baseUrl(BASE_URL)
+                        .baseUrl(Constants.BASE_URL)
                         .client(okHttpClientFactory)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build()

@@ -4,11 +4,11 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.mburakcakir.taketicket.data.remote.model.info.InfoModel
+import com.mburakcakir.taketicket.data.remote.service.ServiceApiClient
+import com.mburakcakir.taketicket.data.remote.service.ServiceProvider
 import com.mburakcakir.taketicket.data.repository.info.InfoRepository
 import com.mburakcakir.taketicket.data.repository.info.InfoRepositoryImpl
-import com.mburakcakir.taketicket.network.model.info.InfoModel
-import com.mburakcakir.taketicket.network.service.ServiceApiClient
-import com.mburakcakir.taketicket.network.service.ServiceProvider
 import com.mburakcakir.taketicket.ui.BaseViewModel
 import com.mburakcakir.taketicket.util.Result
 import com.mburakcakir.taketicket.util.enums.Status
@@ -26,7 +26,7 @@ class InfoViewModel(
     private val serviceClient: ServiceApiClient
 
     init {
-        serviceClient = ServiceProvider().getServiceApi()
+        serviceClient = ServiceProvider().getEventInstance()
         infoRepository = InfoRepositoryImpl(serviceClient)
         getAllInfo()
     }
