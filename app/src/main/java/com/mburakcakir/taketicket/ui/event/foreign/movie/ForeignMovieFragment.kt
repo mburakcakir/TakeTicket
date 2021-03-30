@@ -87,10 +87,8 @@ class ForeignMovieFragment : Fragment() {
             NestedViewModel("Popüler Etkinlikler", popularMovies),
             NestedViewModel("Trending Etkinlikler", trendingMovies)
         )
-        if (!upcomingMovies.isNullOrEmpty() && !popularMovies.isNullOrEmpty() && !trendingMovies.isNullOrEmpty()) {
             nestedRecyclerViewAdapter.setCategoryList(categoryItemList)
             binding.rvForeignEvent.adapter = nestedRecyclerViewAdapter
-        }
 
     }
 

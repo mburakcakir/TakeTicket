@@ -47,13 +47,13 @@ class ForeignMovieViewModel(application: Application) : BaseViewModel(applicatio
         eventRepository.getUpcomingMovies()
             .onStart {
                 _result.value =
-                    Result(loading = "Yaklaşan Etkinlikler Yükleniyor..")
+                    Result(loading = "Yaklaşan Filmler Yükleniyor..")
             }
             .collect {
                 when (it.status) {
                     Status.SUCCESS -> {
                         _upcomingEvents.value = it.data!!
-                        _result.value = Result("Yaklaşan Etkinlikler Yüklendi.")
+                        _result.value = Result("Yaklaşan Filmler Yüklendi.")
                     }
                     Status.ERROR -> _result.value = Result(error = "Bir hata oluştu.")
                 }
@@ -64,13 +64,13 @@ class ForeignMovieViewModel(application: Application) : BaseViewModel(applicatio
         eventRepository.getPopularMovies()
             .onStart {
                 _result.value =
-                    Result(loading = "Popüler Etkinlikler Yükleniyor..")
+                    Result(loading = "Popüler Filmler Yükleniyor..")
             }
             .collect {
                 when (it.status) {
                     Status.SUCCESS -> {
                         _popularEvents.value = it.data!!
-                        _result.value = Result("Popüler Etkinlikler Yüklendi.")
+                        _result.value = Result("Popüler Filmler Yüklendi.")
                     }
                     Status.ERROR -> _result.value = Result(error = "Bir hata oluştu.")
                 }
@@ -81,13 +81,13 @@ class ForeignMovieViewModel(application: Application) : BaseViewModel(applicatio
         eventRepository.getTrendingMovies()
             .onStart {
                 _result.value =
-                    Result(loading = "Yükselen Etkinlikler Yükleniyor..")
+                    Result(loading = "Trending Filmler Yükleniyor..")
             }
             .collect {
                 when (it.status) {
                     Status.SUCCESS -> {
                         _trendingEvents.value = it.data!!
-                        _result.value = Result("Yükselen Etkinlikler Yüklendi.")
+                        _result.value = Result("Trending Filmler Yüklendi.")
                     }
                     Status.ERROR -> _result.value = Result(error = "Bir hata oluştu.")
                 }
