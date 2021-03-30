@@ -1,4 +1,4 @@
-package com.mburakcakir.taketicket.ui.event.foreign
+package com.mburakcakir.taketicket.ui.event.foreign.movie
 
 import android.os.Bundle
 import android.util.Log
@@ -8,15 +8,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.mburakcakir.taketicket.data.db.entity.TicketModel
-import com.mburakcakir.taketicket.data.remote.model.event.MovieResult
-import com.mburakcakir.taketicket.databinding.FragmentForeignEventBinding
+import com.mburakcakir.taketicket.data.remote.model.movie.MovieResult
+import com.mburakcakir.taketicket.databinding.FragmentForeignMovieBinding
 import com.mburakcakir.taketicket.util.toast
 
-class ForeignEventFragment : Fragment() {
-    private var _binding: FragmentForeignEventBinding? = null
+class ForeignMovieFragment : Fragment() {
+    private var _binding: FragmentForeignMovieBinding? = null
     private val binding get() = _binding!!
-    private lateinit var foreignEventViewModel: ForeignEventViewModel
-    private val foreignEventAdapter: ForeignEventAdapter = ForeignEventAdapter()
+    private lateinit var foreignMovieViewModel: ForeignMovieViewModel
+    private val foreignMovieAdapter: ForeignMovieAdapter = ForeignMovieAdapter()
     private var nestedRecyclerViewAdapter: NestedRecyclerViewAdapter = NestedRecyclerViewAdapter()
     private lateinit var onClickEvent: (ticketModel: TicketModel) -> Unit
     private var upcomingMovies: List<MovieResult> = emptyList()
@@ -27,7 +27,7 @@ class ForeignEventFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentForeignEventBinding.inflate(inflater, container, false)
+        _binding = FragmentForeignMovieBinding.inflate(inflater, container, false)
 
         return binding.root
     }
@@ -43,34 +43,34 @@ class ForeignEventFragment : Fragment() {
     }
 
     private fun init() {
-        foreignEventViewModel = ViewModelProvider(this).get(ForeignEventViewModel::class.java)
+        foreignMovieViewModel = ViewModelProvider(this).get(ForeignMovieViewModel::class.java)
 
-        foreignEventViewModel.upcomingEvents.observe(viewLifecycleOwner) { upcomingEvents ->
+        foreignMovieViewModel.upcomingEvents.observe(viewLifecycleOwner) { upcomingEvents ->
             upcomingEvents?.let {
                 upcomingMovies = upcomingEvents.results
                 setAdapter()
             }
         }
 
-        foreignEventViewModel.popularEvents.observe(viewLifecycleOwner) { popularEvents ->
+        foreignMovieViewModel.popularEvents.observe(viewLifecycleOwner) { popularEvents ->
             popularEvents?.let {
                 popularMovies = popularEvents.results
             }
         }
 
-        foreignEventViewModel.trendingEvents.observe(viewLifecycleOwner) { trendingEvents ->
+        foreignMovieViewModel.trendingEvents.observe(viewLifecycleOwner) { trendingEvents ->
             trendingEvents?.let {
                 trendingMovies = trendingEvents.results
-
             }
         }
 
-        foreignEventAdapter.setEventOnClickListener {
+
+        foreignMovieAdapter.setEventOnClickListener {
             Log.v("onClickEventSet", this.onClickEvent.toString())
             onClickEvent.invoke(it)
         }
 
-        foreignEventViewModel.result.observe(requireActivity(), {
+        foreignMovieViewModel.result.observe(requireActivity(), {
             when {
                 !it.success.isNullOrEmpty() -> it.success
                 !it.loading.isNullOrEmpty() -> it.loading
@@ -82,13 +82,16 @@ class ForeignEventFragment : Fragment() {
     }
 
     fun setAdapter() {
-        val categoryItemList = listOf<NestedRecyclerViewModel>(
-            NestedRecyclerViewModel("Yaklaşan Etkinlikler", upcomingMovies),
-            NestedRecyclerViewModel("Popüler Etkinlikler", popularMovies),
-            NestedRecyclerViewModel("Yükselen Etkinlikler", trendingMovies)
+        val categoryItemList = listOf<NestedViewModel>(
+            NestedViewModel("Yaklaşan Etkinlikler", upcomingMovies),
+            NestedViewModel("Popüler Etkinlikler", popularMovies),
+            NestedViewModel("Trending Etkinlikler", trendingMovies)
         )
-        nestedRecyclerViewAdapter.setCategoryList(categoryItemList)
-        binding.rvForeignEvent.adapter = nestedRecyclerViewAdapter
+        if (!upcomingMovies.isNullOrEmpty() && !popularMovies.isNullOrEmpty() && !trendingMovies.isNullOrEmpty()) {
+            nestedRecyclerViewAdapter.setCategoryList(categoryItemList)
+            binding.rvForeignEvent.adapter = nestedRecyclerViewAdapter
+        }
+
     }
 
     fun setEventOnClickListener(onClickEvent: (TicketModel) -> Unit) {

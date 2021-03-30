@@ -1,14 +1,16 @@
 package com.mburakcakir.taketicket.data.repository.event
 
 import com.mburakcakir.taketicket.data.db.entity.EventModel
-import com.mburakcakir.taketicket.data.remote.model.event.ResponsePopularMovies
-import com.mburakcakir.taketicket.data.remote.model.event.ResponseTrendingMovies
-import com.mburakcakir.taketicket.data.remote.model.event.ResponseUpcomingMovies
+import com.mburakcakir.taketicket.data.remote.model.event.ResponseEvents
+import com.mburakcakir.taketicket.data.remote.model.movie.ResponsePopularMovies
+import com.mburakcakir.taketicket.data.remote.model.movie.ResponseTrendingMovies
+import com.mburakcakir.taketicket.data.remote.model.movie.ResponseUpcomingMovies
 import com.mburakcakir.taketicket.util.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface EventRepository {
-    suspend fun getAllEvents(): Flow<Resource<List<EventModel>>>
+    suspend fun getTurkishEvents(): Flow<Resource<List<EventModel>>>
+    suspend fun getForeignEvents(): Flow<Resource<ResponseEvents>>
     suspend fun insertEvent(eventModel: EventModel)
     fun deleteAllEvents()
     fun getEventById(ID: Int): EventModel

@@ -41,7 +41,7 @@ class TurkishEventViewModel(
     }
 
     private fun getAllEvents() = viewModelScope.launch {
-        eventRepository.getAllEvents()
+        eventRepository.getTurkishEvents()
             .onStart { _result.value = Result(loading = "Etkinlikler Yükleniyor") }
             .collect {
                 when (it.status) {

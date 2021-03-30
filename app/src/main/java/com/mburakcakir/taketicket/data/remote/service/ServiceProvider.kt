@@ -11,17 +11,14 @@ class ServiceProvider {
     fun getEventInstance(): ServiceApiClient {
         return instance!!.create(ServiceApiClient::class.java)
     }
-
     companion object {
         private var retrofit: Retrofit? = null
-
-        //private const val BASE_URL = "https://taketicketandroid-default-rtdb.firebaseio.com/"
 
         private val instance: Retrofit?
             get() {
                 if (retrofit == null) {
                     retrofit = Retrofit.Builder()
-                        .baseUrl(Constants.BASE_URL)
+                        .baseUrl(Constants.BASE_URL_TICKET)
                         .client(okHttpClientFactory)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build()

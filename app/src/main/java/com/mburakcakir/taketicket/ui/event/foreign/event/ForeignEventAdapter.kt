@@ -1,21 +1,16 @@
-package com.mburakcakir.taketicket.ui.event.foreign
+package com.mburakcakir.taketicket.ui.event.foreign.event
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mburakcakir.taketicket.data.db.entity.TicketModel
-import com.mburakcakir.taketicket.data.remote.model.event.MovieResult
+import com.mburakcakir.taketicket.data.remote.model.event.ForeignEvent
 import com.mburakcakir.taketicket.databinding.RvItemForeignEventBinding
+import com.mburakcakir.taketicket.util.SessionManager
 
 class ForeignEventAdapter :
-    ListAdapter<MovieResult, ForeignEventAdapter.ForeignEventViewHolder>(ForeignEventCallback()) {
-    private lateinit var onClickEvent: (ticketModel: TicketModel) -> Unit
-
-    fun setEventOnClickListener(onClickEvent: (TicketModel) -> Unit) {
-        this.onClickEvent = onClickEvent
-    }
+    ListAdapter<ForeignEvent, ForeignEventAdapter.ForeignEventViewHolder>(ForeignEventCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForeignEventViewHolder {
         return ForeignEventViewHolder(
@@ -29,22 +24,19 @@ class ForeignEventAdapter :
     inner class ForeignEventViewHolder(
         private val binding: RvItemForeignEventBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(movieResult: MovieResult) {
-            binding.movie = movieResult
-
+        fun bind(foreignEvent: ForeignEvent) {
+            val sessionManager = SessionManager(itemView.context)
+            binding.event = foreignEvent
         }
     }
 
 }
 
-class ForeignEventCallback : DiffUtil.ItemCallback<MovieResult>() {
-    override fun areItemsTheSame(oldItem: MovieResult, newItem: MovieResult) =
+class ForeignEventCallback : DiffUtil.ItemCallback<ForeignEvent>() {
+    override fun areItemsTheSame(oldItem: ForeignEvent, newItem: ForeignEvent) =
         oldItem == newItem
 
-    override fun areContentsTheSame(oldItem: MovieResult, newItem: MovieResult): Boolean {
+    override fun areContentsTheSame(oldItem: ForeignEvent, newItem: ForeignEvent): Boolean {
         return false
     }
 }
-
-
-

@@ -1,0 +1,32 @@
+package com.mburakcakir.taketicket.data.remote.model.event
+
+data class ForeignEvent(
+    val access_method: AccessMethod,
+    val announce_date: String,
+    val announcements: Announcements,
+    val conditional: Boolean,
+    val created_at: String,
+    val date_tbd: Boolean,
+    val datetime_local: String,
+    val datetime_tbd: Boolean,
+    val datetime_utc: String,
+    val description: String,
+    val domain_information: List<Any>,
+    val enddatetime_utc: Any,
+    val event_promotion: Any,
+    val id: Int,
+    val is_open: Boolean,
+    val links: List<Any>,
+    val performers: List<Performer>,
+    val popularity: Float,
+    val score: Double,
+    val short_title: String,
+    val status: String,
+    val themes: List<Any>,
+    val time_tbd: Boolean,
+    val title: String,
+    val type: String,
+    val url: String,
+    val venue: Venue,
+    val visible_until_utc: String
+)

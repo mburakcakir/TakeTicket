@@ -1,13 +1,13 @@
-package com.mburakcakir.taketicket.ui.event.foreign
+package com.mburakcakir.taketicket.ui.event.foreign.movie
 
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.mburakcakir.taketicket.data.db.TicketDatabase
-import com.mburakcakir.taketicket.data.remote.model.event.ResponsePopularMovies
-import com.mburakcakir.taketicket.data.remote.model.event.ResponseTrendingMovies
-import com.mburakcakir.taketicket.data.remote.model.event.ResponseUpcomingMovies
+import com.mburakcakir.taketicket.data.remote.model.movie.ResponsePopularMovies
+import com.mburakcakir.taketicket.data.remote.model.movie.ResponseTrendingMovies
+import com.mburakcakir.taketicket.data.remote.model.movie.ResponseUpcomingMovies
 import com.mburakcakir.taketicket.data.repository.event.EventRepository
 import com.mburakcakir.taketicket.data.repository.event.EventRepositoryImpl
 import com.mburakcakir.taketicket.ui.BaseViewModel
@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
-class ForeignEventViewModel(application: Application) : BaseViewModel(application) {
+class ForeignMovieViewModel(application: Application) : BaseViewModel(application) {
 
     private val eventRepository: EventRepository
 
@@ -29,6 +29,7 @@ class ForeignEventViewModel(application: Application) : BaseViewModel(applicatio
 
     private val _trendingEvents = MutableLiveData<ResponseTrendingMovies>()
     val trendingEvents: LiveData<ResponseTrendingMovies> = _trendingEvents
+
 
     init {
         val database = TicketDatabase.getDatabase(application, viewModelScope)
@@ -92,4 +93,5 @@ class ForeignEventViewModel(application: Application) : BaseViewModel(applicatio
                 }
             }
     }
+
 }

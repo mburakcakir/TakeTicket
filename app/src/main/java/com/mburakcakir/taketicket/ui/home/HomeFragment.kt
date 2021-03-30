@@ -16,7 +16,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     lateinit var homeEventPagerAdapter: HomeEventPagerAdapter
-    private val tabTitles = arrayOf("Yerel Etkinlikler", "Yabancı Etkinlikler")
+    private val tabTitles = arrayOf("Yerel", "Yabancı", "Filmler")
 
     override fun onCreateView(
         inflater: LayoutInflater,

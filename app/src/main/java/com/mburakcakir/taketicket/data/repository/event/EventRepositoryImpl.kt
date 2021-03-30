@@ -2,9 +2,10 @@ package com.mburakcakir.taketicket.data.repository.event
 
 import com.mburakcakir.taketicket.data.db.dao.EventDao
 import com.mburakcakir.taketicket.data.db.entity.EventModel
-import com.mburakcakir.taketicket.data.remote.model.event.ResponsePopularMovies
-import com.mburakcakir.taketicket.data.remote.model.event.ResponseTrendingMovies
-import com.mburakcakir.taketicket.data.remote.model.event.ResponseUpcomingMovies
+import com.mburakcakir.taketicket.data.remote.model.event.ResponseEvents
+import com.mburakcakir.taketicket.data.remote.model.movie.ResponsePopularMovies
+import com.mburakcakir.taketicket.data.remote.model.movie.ResponseTrendingMovies
+import com.mburakcakir.taketicket.data.remote.model.movie.ResponseUpcomingMovies
 import com.mburakcakir.taketicket.data.remote.service.ServiceProvider
 import com.mburakcakir.taketicket.util.Resource
 import kotlinx.coroutines.flow.Flow
@@ -14,10 +15,24 @@ class EventRepositoryImpl(private val eventDao: EventDao) : EventRepository {
 
     private val apiClient = ServiceProvider().getEventInstance()
 
-    override suspend fun getAllEvents(): Flow<Resource<List<EventModel>>> = flow {
+    override suspend fun getTurkishEvents(): Flow<Resource<List<EventModel>>> = flow {
         emit(Resource.Loading())
         try {
             emit(Resource.Success(eventDao.getAllEvents()))
+        } catch (e: Exception) {
+            emit(Resource.Error(e))
+            e.printStackTrace()
+        }
+    }
+
+    override suspend fun getForeignEvents(): Flow<Resource<ResponseEvents>> = flow {
+        emit(Resource.Loading())
+        try {
+            val response = apiClient.getForeignEvents()
+            if (response.isSuccessful)
+                response.body()?.run {
+                    emit(Resource.Success(this))
+                }
         } catch (e: Exception) {
             emit(Resource.Error(e))
             e.printStackTrace()
