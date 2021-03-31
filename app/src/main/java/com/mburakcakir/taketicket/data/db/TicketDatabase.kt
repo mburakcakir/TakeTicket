@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 
 @Database(
     entities = [UserModel::class, EventModel::class, TicketModel::class],
-    version = 2,
+    version = 4,
     exportSchema = false
 )
 abstract class TicketDatabase : RoomDatabase() {
@@ -39,6 +39,7 @@ abstract class TicketDatabase : RoomDatabase() {
         suspend fun populateDatabase() {
             val eventDao = INSTANCE!!.eventDao()
             var eventModel = EventModel(
+                2235,
                 "Ahududu",
                 "Harbiye Cemil Topuzlu Açıkhava Sahnesi ",
                 "Tiyatro",
@@ -51,6 +52,7 @@ abstract class TicketDatabase : RoomDatabase() {
             eventDao.insertEvent(eventModel)
 
             eventModel = EventModel(
+                2236,
                 "Cihangir Kafika'dan size özel gösterim!",
                 "Kaçırdığınız filmler kafesi, Kafika!",
                 "Sinema",
@@ -63,6 +65,7 @@ abstract class TicketDatabase : RoomDatabase() {
             eventDao.insertEvent(eventModel)
 
             eventModel = EventModel(
+                2237,
                 "Mustafa Keser sahnesi",
                 "Ataköy Marina Nossa Costa'da limitsiz yerli içecek ve fiks menü / Mustafa Keser sahnesi için geçerlidir.",
                 "Müzik",
@@ -75,6 +78,7 @@ abstract class TicketDatabase : RoomDatabase() {
             eventDao.insertEvent(eventModel)
 
             eventModel = EventModel(
+                2238,
                 "Notre Dame’ın Kamburu",
                 "Dünyaca ünlü \"Notre Dame’ın Kamburu\" isimli müzikal, izleyicisi ile buluşuyor!",
                 "Müzikal",
@@ -87,6 +91,7 @@ abstract class TicketDatabase : RoomDatabase() {
             eventDao.insertEvent(eventModel)
 
             eventModel = EventModel(
+                2239,
                 "Forest Kemerburgaz'a giriş biletleri",
                 "Türkiye'nin en büyük açık alanına sahip macera & etkinlik parkı Forest Kemerburgaz sizi ve sevdiklerinizi bekliyor.",
                 "Eğlence Merkezi",
@@ -99,6 +104,7 @@ abstract class TicketDatabase : RoomDatabase() {
             eventDao.insertEvent(eventModel)
 
             eventModel = EventModel(
+                2240,
                 "Ahmet Aslan konseri",
                 "Anadolu müziğini batı enstrümanlarıyla birlikte kullanan Ahmet Aslan, müzikseverlerle buluşuyor.",
                 "Müzik",
@@ -111,6 +117,7 @@ abstract class TicketDatabase : RoomDatabase() {
             eventDao.insertEvent(eventModel)
 
             eventModel = EventModel(
+                2241,
                 "Müfit Can Saçıntı Güldürüsü",
                 "Müfit Can Saçıntı'nın sahneledeği tek kişilik müzikli gösteri ''İtiraz Ediyorum\" seyircisiyle buluşuyor!",
                 "Tiyatro",
@@ -123,6 +130,7 @@ abstract class TicketDatabase : RoomDatabase() {
             eventDao.insertEvent(eventModel)
 
             eventModel = EventModel(
+                2242,
                 "Son Senfoni",
                 "Kaan Erkam’ın kaleminden çıkan Levent Tayman’ın yönettiği, yağmurlu ve soğuk bir gecede opera tezi yazmaya çalışan adamın yaşadıkları.",
                 "Tiyatro",
@@ -135,6 +143,7 @@ abstract class TicketDatabase : RoomDatabase() {
             eventDao.insertEvent(eventModel)
 
             eventModel = EventModel(
+                2243,
                 "Emaar Akvaryum & Sualtı Hayvanat Bahçesi",
                 "Okyanusların büyüleyici dünyasına dalışa geçin.",
                 "Akvaryum",
@@ -147,6 +156,7 @@ abstract class TicketDatabase : RoomDatabase() {
             eventDao.insertEvent(eventModel)
 
             eventModel = EventModel(
+                2244,
                 "Cihangir Kafika'dan size özel gösterim!",
                 "İster evden DVD getirebilir ister mekanın geniş arşivinden seçim yapabilirsiniz.",
                 "Sinema",

@@ -62,8 +62,8 @@
             android:id="@+id/action_detailDialog_to_ticketFragment"
             app:destination="@id/ticketFragment" />
         <argument
-            android:name="ticketModel"
-            app:argType="com.mburakcakir.taketicket.data.db.entity.TicketModel" />
+            android:name="eventModel"
+            app:argType="com.mburakcakir.taketicket.data.db.entity.EventModel" />
     </dialog>
 
     <fragment

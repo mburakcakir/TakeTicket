@@ -61,7 +61,7 @@ class RegisterFragment : Fragment() {
             }
         }
 
-        registerViewModel.stateImageLoading.observe(requireActivity()) {
+        registerViewModel.stateImageLoading.observe(viewLifecycleOwner) {
             if (it) {
                 alertDialog.dismiss()
                 insertUser(registerViewModel.imageUri.toString())
@@ -69,7 +69,7 @@ class RegisterFragment : Fragment() {
                 requireContext() toast "Bir hata oluştu."
         }
 
-        registerViewModel.entryFormState.observe(requireActivity(), {
+        registerViewModel.entryFormState.observe(viewLifecycleOwner, {
             binding.btnRegister.isEnabled = it.isDataValid
 
             if (!it.passwordError.isNullOrEmpty())
@@ -80,7 +80,7 @@ class RegisterFragment : Fragment() {
                 binding.edtMail.error = it.emailError
         })
 
-        registerViewModel.result.observe(requireActivity(), {
+        registerViewModel.result.observe(viewLifecycleOwner, {
             it.error?.let { error ->
                 requireContext() toast error
 

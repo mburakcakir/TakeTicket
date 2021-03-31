@@ -38,7 +38,7 @@ class InfoFragment : Fragment() {
         binding.rvInfo.adapter = infoAdapter
         infoViewModel = ViewModelProvider(this).get(InfoViewModel::class.java)
 
-        infoViewModel.result.observe(requireActivity(), {
+        infoViewModel.result.observe(viewLifecycleOwner, {
             when {
                 !it.success.isNullOrEmpty() -> it.success
                 !it.loading.isNullOrEmpty() -> it.loading
@@ -48,7 +48,7 @@ class InfoFragment : Fragment() {
             }
         })
 
-        infoViewModel.allInfo.observe(requireActivity(), {
+        infoViewModel.allInfo.observe(viewLifecycleOwner, {
             infoAdapter.submitList(it)
         })
     }

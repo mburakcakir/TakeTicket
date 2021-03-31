@@ -50,10 +50,15 @@ class HomeFragment : Fragment() {
         (requireActivity() as MainActivity).changeToolbarVisibility(View.VISIBLE)
         homeEventPagerAdapter = HomeEventPagerAdapter(this)
 
-        homeEventPagerAdapter.setEventOnClickListener {
-            this.navigate(HomeFragmentDirections.actionHomeFragmentToDetailDialog(it))
+        homeEventPagerAdapter.apply {
+            setOnEventClickListener { eventModel ->
+                this@HomeFragment.navigate(
+                    HomeFragmentDirections.actionHomeFragmentToDetailDialog(
+                        eventModel
+                    )
+                )
+            }
         }
-        homeEventPagerAdapter.createFragment(0)
 
         binding.vpEvent.adapter = homeEventPagerAdapter
         TabLayoutMediator(binding.tabEvent, binding.vpEvent) { tab, position ->

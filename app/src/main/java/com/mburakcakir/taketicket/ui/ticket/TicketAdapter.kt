@@ -54,7 +54,10 @@ class TicketViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(ticketModel: TicketModel) {
-        val eventModel = eventList[ticketModel.eventID - 1]
+        val eventModel = eventList.first {
+            it.eventID == ticketModel.eventID
+        }
+
         with(binding) {
             binding.event = eventModel
             binding.ticket = ticketModel

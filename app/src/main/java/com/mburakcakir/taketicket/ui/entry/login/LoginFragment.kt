@@ -63,7 +63,7 @@ class LoginFragment : Fragment() {
             )
         }
 
-        loginViewModel.result.observe(requireActivity(), {
+        loginViewModel.result.observe(viewLifecycleOwner, {
             when {
                 !it.success.isNullOrEmpty() -> {
                     this.navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())

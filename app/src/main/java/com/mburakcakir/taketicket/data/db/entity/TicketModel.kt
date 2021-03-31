@@ -11,7 +11,8 @@ data class TicketModel(
     val username: String,
     val email: String,
     val boughtTime: String,
-    val eventID: Int
+    val eventID: Int,
+    val ticketType: String
 ) : Parcelable {
     @PrimaryKey(autoGenerate = true)
     var ticketID: Int = 0

@@ -46,11 +46,11 @@ class TicketFragment : Fragment() {
             }
         }
 
-        ticketViewModel.allTickets.observe(requireActivity(), {
+        ticketViewModel.allTickets.observe(viewLifecycleOwner, {
             ticketAdapter.submitList(it)
         })
 
-        ticketViewModel.result.observe(requireActivity(), {
+        ticketViewModel.result.observe(viewLifecycleOwner, {
             when {
                 !it.success.isNullOrEmpty() -> it.success
                 !it.loading.isNullOrEmpty() -> it.loading

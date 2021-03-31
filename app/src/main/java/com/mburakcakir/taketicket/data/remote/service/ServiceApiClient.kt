@@ -1,5 +1,6 @@
 package com.mburakcakir.taketicket.data.remote.service
 
+import com.mburakcakir.taketicket.data.remote.model.event.ResponseEventById
 import com.mburakcakir.taketicket.data.remote.model.event.ResponseEvents
 import com.mburakcakir.taketicket.data.remote.model.info.InfoModel
 import com.mburakcakir.taketicket.data.remote.model.movie.ResponsePopularMovies
@@ -41,5 +42,8 @@ interface ServiceApiClient {
     suspend fun getTrendingMovies(@Url url: String = Constants.BASE_URL_MOVIE + Constants.QUERY_MOVIE_TRENDING): Response<ResponseTrendingMovies>
 
     @GET
-    suspend fun getForeignEvents(@Url url: String = Constants.BASE_URL_TICKET + Constants.QUERY_TICKET): Response<ResponseEvents>
+    suspend fun getForeignEvents(@Url url: String = Constants.BASE_URL_FOREIGN_EVENT + Constants.ENDPOINT_ALL_FOREIGN_EVENTS + Constants.QUERY_FOREIGN_EVENT): Response<ResponseEvents>
+
+    @GET
+    suspend fun getForeignEventById(@Url url: String = Constants.BASE_URL_FOREIGN_EVENT + Constants.ENDPOINT_ALL_FOREIGN_EVENTS + Constants.ENDPOINT_FOREIGN_EVENT_BY_ID + Constants.QUERY_FOREIGN_EVENT): Response<ResponseEventById>
 }

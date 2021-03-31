@@ -1,12 +1,15 @@
 package com.mburakcakir.taketicket.data.repository.event
 
+import android.util.Log
 import com.mburakcakir.taketicket.data.db.dao.EventDao
 import com.mburakcakir.taketicket.data.db.entity.EventModel
+import com.mburakcakir.taketicket.data.remote.model.event.ResponseEventById
 import com.mburakcakir.taketicket.data.remote.model.event.ResponseEvents
 import com.mburakcakir.taketicket.data.remote.model.movie.ResponsePopularMovies
 import com.mburakcakir.taketicket.data.remote.model.movie.ResponseTrendingMovies
 import com.mburakcakir.taketicket.data.remote.model.movie.ResponseUpcomingMovies
 import com.mburakcakir.taketicket.data.remote.service.ServiceProvider
+import com.mburakcakir.taketicket.util.Constants
 import com.mburakcakir.taketicket.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -31,6 +34,22 @@ class EventRepositoryImpl(private val eventDao: EventDao) : EventRepository {
             val response = apiClient.getForeignEvents()
             if (response.isSuccessful)
                 response.body()?.run {
+                    emit(Resource.Success(this))
+                }
+        } catch (e: Exception) {
+            emit(Resource.Error(e))
+            e.printStackTrace()
+        }
+    }
+
+    override suspend fun getForeignEventByID(ID: Int): Flow<Resource<ResponseEventById>> = flow {
+        emit(Resource.Loading())
+        try {
+            Constants.ENDPOINT_FOREIGN_EVENT_BY_ID = ID
+            val response = apiClient.getForeignEventById()
+            if (response.isSuccessful)
+                response.body()?.run {
+                    Log.v("data", response.body()?.title.toString())
                     emit(Resource.Success(this))
                 }
         } catch (e: Exception) {
@@ -84,5 +103,6 @@ class EventRepositoryImpl(private val eventDao: EventDao) : EventRepository {
     // update veya delete Completable
     override suspend fun insertEvent(eventModel: EventModel) = eventDao.insertEvent(eventModel)
     override fun deleteAllEvents() = eventDao.deleteAllEvents()
-    override fun getEventById(ID: Int): EventModel = eventDao.getEventById(ID)
+    override fun getTurkishEventById(ID: Int): EventModel = eventDao.getEventById(ID)
+//    override suspend fun getForeignEventByID(ID: Int): EventModel = apiClient.getForeignEventById()
 }

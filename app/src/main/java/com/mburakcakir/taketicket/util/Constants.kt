@@ -14,11 +14,13 @@ object Constants {
 
     // base url
     const val BASE_URL_MOVIE = "https://api.themoviedb.org/3/"
-    const val BASE_URL_TICKET = "https://api.seatgeek.com/2/"
+    const val BASE_URL_FOREIGN_EVENT = "https://api.seatgeek.com/2/"
     const val BASE_URL_INFO = "https://taketicketandroid-default-rtdb.firebaseio.com/"
 
     // query
-    const val QUERY_TICKET = "events/?client_id=$CLIENT_ID"
+    const val ENDPOINT_ALL_FOREIGN_EVENTS = "events/"
+    var ENDPOINT_FOREIGN_EVENT_BY_ID = 0
+    const val QUERY_FOREIGN_EVENT = "?client_id=$CLIENT_ID"
 
     const val QUERY_INFO = ".json"
 

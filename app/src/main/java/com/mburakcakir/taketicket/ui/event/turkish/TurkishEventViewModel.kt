@@ -42,13 +42,13 @@ class TurkishEventViewModel(
 
     private fun getAllEvents() = viewModelScope.launch {
         eventRepository.getTurkishEvents()
-            .onStart { _result.value = Result(loading = "Etkinlikler Yükleniyor") }
+            .onStart { _result.value = Result(loading = "Yerli Etkinlikler Yükleniyor") }
             .collect {
                 when (it.status) {
                     Status.SUCCESS -> {
                         it.data?.let { eventList ->
                             _turkishEvents.value = eventList
-                            _result.value = Result("Etkinlikler Yüklendi")
+                            _result.value = Result("Yerli Etkinlikler Yüklendi")
                         }
                     }
                     Status.ERROR -> _result.value = Result(error = "Bir hata oluştu.")
@@ -56,6 +56,6 @@ class TurkishEventViewModel(
             }
     }
 
-    fun getEventById(ID: Int) = eventRepository.getEventById(ID)
+    fun getEventById(ID: Int) = eventRepository.getTurkishEventById(ID)
     fun getUsername() = sessionManager.getUsername()
 }

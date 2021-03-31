@@ -6,16 +6,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mburakcakir.taketicket.data.db.entity.EventModel
-import com.mburakcakir.taketicket.data.db.entity.TicketModel
 import com.mburakcakir.taketicket.databinding.RvItemTurkishEventBinding
-import com.mburakcakir.taketicket.util.SessionManager
-import com.mburakcakir.taketicket.util.getCurrentTime
 
 class TurkishEventAdapter :
     ListAdapter<EventModel, TurkishEventAdapter.TurkishEventViewHolder>(TurkishEventCallback()) {
-    private lateinit var onClickEvent: (ticketModel: TicketModel) -> Unit
+    private lateinit var onClickEvent: (EventModel) -> Unit
 
-    fun setEventOnClickListener(onClickEvent: (TicketModel) -> Unit) {
+    fun setEventOnClickListener(onClickEvent: (EventModel) -> Unit) {
         this.onClickEvent = onClickEvent
     }
 
@@ -32,21 +29,13 @@ class TurkishEventAdapter :
         private val binding: RvItemTurkishEventBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(eventModel: EventModel) {
-            val sessionManager = SessionManager(itemView.context)
 
             binding.event = eventModel
             itemView.setOnClickListener {
-                val ticketModel = TicketModel(
-                    sessionManager.getUsername(),
-                    sessionManager.getUserEmail(),
-                    getCurrentTime(),
-                    eventModel.eventID
-                )
-                onClickEvent(ticketModel)
+                onClickEvent(eventModel)
             }
         }
     }
-
 }
 
 class TurkishEventCallback : DiffUtil.ItemCallback<EventModel>() {

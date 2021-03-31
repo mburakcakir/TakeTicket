@@ -18,7 +18,7 @@ class ServiceProvider {
             get() {
                 if (retrofit == null) {
                     retrofit = Retrofit.Builder()
-                        .baseUrl(Constants.BASE_URL_TICKET)
+                        .baseUrl(Constants.BASE_URL_FOREIGN_EVENT)
                         .client(okHttpClientFactory)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build()
