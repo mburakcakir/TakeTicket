@@ -40,6 +40,7 @@ class TurkishEventFragment : Fragment() {
         turkishEventViewModel = ViewModelProvider(this).get(TurkishEventViewModel::class.java)
 
         binding.rvEvent.adapter = turkishEventAdapter
+
         turkishEventAdapter.setEventOnClickListener { eventModel ->
             onClickEvent.invoke(eventModel)
         }

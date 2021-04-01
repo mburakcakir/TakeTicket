@@ -39,6 +39,7 @@ class ForeignEventFragment : Fragment() {
         foreignEventViewModel = ViewModelProvider(this).get(ForeignEventViewModel::class.java)
 
         binding.rvEvent.adapter = foreignEventAdapter
+
         foreignEventAdapter.setEventOnClickListener { eventModel ->
             foreignEventViewModel.insertEvent(eventModel)
             onClickEvent.invoke(eventModel)
