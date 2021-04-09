@@ -6,6 +6,7 @@
         <variable
             name="event"
             type="com.mburakcakir.taketicket.data.remote.model.event.ForeignEvent" />
+
     </data>
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -21,7 +22,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorWhite"
+            android:background="@color/colorCardBackground"
             android:paddingBottom="8dp">
 
             <ImageView
@@ -40,7 +41,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:background="@color/colorWhite"
+                android:background="@color/colorCardBackground"
                 app:layout_constraintBottom_toBottomOf="@id/txtEventCategory"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{event.venue.name}"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorTextFirst"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintHorizontal_chainStyle="spread"
@@ -76,9 +77,9 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
                 android:autoLink="web"
-                android:text="@{event.announcements.checkout_disclosures.messages.get(0).text}"
-                android:textColorLink="@color/colorBlack"
-                app:layout_constraintEnd_toStartOf="@id/txtEventTime"
+                android:text="@{event.url}"
+                android:textColorLink="@color/colorTextFirst"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/viewEvent"
                 app:layout_constraintTop_toBottomOf="@id/txtEventTitle"
                 tools:text="subtitle" />
@@ -88,7 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:text="@{event.type}"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorTextFirst"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/txtEventCapacity"
                 app:layout_constraintStart_toStartOf="@id/viewEvent"

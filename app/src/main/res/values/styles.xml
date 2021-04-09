@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
     </style>
 
     <!-- The launcher theme. It sets the main window background to the launch_screen drawable -->
@@ -15,7 +16,7 @@
     </style>
 
     <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.ActionBar">
-        <item name="colorControlNormal">@color/colorWhite</item>
+        <item name="colorControlNormal">@color/colorCardBackground</item>
     </style>
 
     <!-- set the rounded drawable as background to your bottom sheet -->

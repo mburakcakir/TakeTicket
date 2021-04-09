@@ -9,8 +9,8 @@ object Constants {
     const val INVALID_EMAIL = "Email formatı eşleşmiyor."
 
     // authentication
-    private const val CLIENT_ID = "MjE2NTIxOTh8MTYxNzA5NjQzMi42MTIyMDUz"
-    private const val API_KEY = "0084f501851d0d513240f2a30678bbe4"
+    const val CLIENT_ID = "MjE2NTIxOTh8MTYxNzA5NjQzMi42MTIyMDUz"
+    const val API_KEY = "0084f501851d0d513240f2a30678bbe4"
 
     // base url
     const val BASE_URL_MOVIE = "https://api.themoviedb.org/3/"
@@ -19,7 +19,6 @@ object Constants {
 
     // query
     const val ENDPOINT_ALL_FOREIGN_EVENTS = "events/"
-    var ENDPOINT_FOREIGN_EVENT_BY_ID = 0
     const val QUERY_FOREIGN_EVENT = "?client_id=$CLIENT_ID"
 
     const val QUERY_INFO = ".json"

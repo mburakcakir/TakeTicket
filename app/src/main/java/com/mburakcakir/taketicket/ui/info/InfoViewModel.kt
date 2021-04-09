@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.mburakcakir.taketicket.data.remote.model.info.InfoModel
-import com.mburakcakir.taketicket.data.remote.service.ServiceApiClient
+import com.mburakcakir.taketicket.data.remote.service.InfoClient
 import com.mburakcakir.taketicket.data.remote.service.ServiceProvider
 import com.mburakcakir.taketicket.data.repository.info.InfoRepository
 import com.mburakcakir.taketicket.data.repository.info.InfoRepositoryImpl
@@ -23,11 +23,11 @@ class InfoViewModel(
     private val _allInfo = MutableLiveData<List<InfoModel>>()
     val allInfo: LiveData<List<InfoModel>> = _allInfo
     private val infoRepository: InfoRepository
-    private val serviceClient: ServiceApiClient
+    private val infoClient: InfoClient
 
     init {
-        serviceClient = ServiceProvider().getEventInstance()
-        infoRepository = InfoRepositoryImpl(serviceClient)
+        infoClient = ServiceProvider().getInfoInstance()
+        infoRepository = InfoRepositoryImpl(infoClient)
         getAllInfo()
     }
 

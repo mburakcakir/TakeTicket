@@ -22,13 +22,25 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
     private val _countTicket = MutableLiveData<String>("1")
     val countTicket: LiveData<String> = _countTicket
 
+    private val _countPrice = MutableLiveData<Int>(0)
+    val countPrice: LiveData<Int> = _countPrice
+
     init {
         val database = TicketDatabase.getDatabase(application, viewModelScope)
         ticketRepository = TicketRepositoryImpl(database.ticketDao())
     }
 
+    fun setCountPrice(price: Int) {
+        _countPrice.value = price
+    }
+
+    private fun updateCountPrice(count: Int) {
+        _countPrice.value = _countPrice.value?.times(count)
+    }
+
     fun updateCountTicket(count: Int) {
         _countTicket.value = (Integer.parseInt(_countTicket.value) + count).toString()
+        updateCountPrice(count)
     }
 
     fun insertTicket(ticketModel: TicketModel) = viewModelScope.launch {

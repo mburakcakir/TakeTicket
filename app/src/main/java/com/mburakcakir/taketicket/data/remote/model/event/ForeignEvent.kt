@@ -1,7 +1,7 @@
 package com.mburakcakir.taketicket.data.remote.model.event
 
 data class ForeignEvent(
-    val access_method: AccessMethod,
+    val access_method: AccessMethod?,
     val announce_date: String,
     val announcements: Announcements,
     val conditional: Boolean,
@@ -12,8 +12,8 @@ data class ForeignEvent(
     val datetime_utc: String,
     val description: String,
     val domain_information: List<Any>,
-    val enddatetime_utc: Any,
-    val event_promotion: Any,
+    val enddatetime_utc: Any?,
+    val event_promotion: Any?,
     val id: Int,
     val is_open: Boolean,
     val links: List<Any>,

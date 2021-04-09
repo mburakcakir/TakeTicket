@@ -21,7 +21,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorWhite"
+            android:background="@color/colorCardBackground"
             android:paddingBottom="8dp">
 
             <ImageView
@@ -40,7 +40,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:background="@color/colorWhite"
+                android:background="@color/colorCardBackground"
                 app:layout_constraintBottom_toBottomOf="@id/txtEventCategory"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{event.title}"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorTextFirst"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintHorizontal_chainStyle="spread"
@@ -77,7 +77,7 @@
                 android:layout_marginEnd="10dp"
                 android:autoLink="web"
                 android:text="@{event.subTitle}"
-                android:textColorLink="@color/colorBlack"
+                android:textColorLink="@color/colorTextFirst"
                 app:layout_constraintEnd_toStartOf="@id/txtEventTime"
                 app:layout_constraintStart_toStartOf="@id/viewEvent"
                 app:layout_constraintTop_toBottomOf="@id/txtEventTitle"
@@ -88,7 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:text="@{event.category}"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorTextFirst"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/txtEventCapacity"
                 app:layout_constraintStart_toStartOf="@id/viewEvent"

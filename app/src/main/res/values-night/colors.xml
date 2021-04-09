@@ -2,11 +2,13 @@
 <resources>
     <color name="colorPrimary">#23272A</color>
     <!--    <color name="colorPrimaryDark">#00574B</color>-->
-    <color name="colorPrimaryDark">#23272A</color>
-    <color name="colorPrimaryLight">#0069c0</color>
+    <color name="colorPrimaryDark">#1E1E1E</color>
+    <color name="colorPrimaryLight">#3D4043</color>
     <color name="colorAccent">#03DAC5</color>
-    <color name="colorBlack">#ffffff</color>
-    <color name="colorWhite">#2C2F33</color>
+    <color name="colorTextFirst">#ffffff</color>
+    <color name="colorCardBackground">#2C2F33</color>
+    <color name="colorProfileBackground">#3D4043</color>
+    <color name="colorWhite">#ffffff</color>
     <color name="colorToolbar">#ffffff</color>
     <color name="colorRed">#F43636</color>
     <color name="colorMoreLightGray">#F6F6F6</color>

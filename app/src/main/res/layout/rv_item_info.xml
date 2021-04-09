@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorTextFirst"
                 android:textStyle="bold"
                 android:text="@{info.account}"
                 app:layout_constraintBottom_toTopOf="@id/txtInfoLink"
@@ -74,7 +74,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="@color/colorBlack"
+            android:background="@color/colorTextFirst"
             app:layout_constraintStart_toStartOf="@id/viewChild"
             app:layout_constraintTop_toBottomOf="@id/viewChild" />
     </androidx.constraintlayout.widget.ConstraintLayout>

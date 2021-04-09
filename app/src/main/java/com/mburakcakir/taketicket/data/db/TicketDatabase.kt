@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 
 @Database(
     entities = [UserModel::class, EventModel::class, TicketModel::class],
-    version = 4,
+    version = 5,
     exportSchema = false
 )
 abstract class TicketDatabase : RoomDatabase() {
@@ -46,7 +46,7 @@ abstract class TicketDatabase : RoomDatabase() {
                 240,
                 "https://grpstat.com/DealImages/G-owctuutu/12782__5_600-318.jpg",
                 "14 Ekim",
-                "₺48"
+                48
             )
 
             eventDao.insertEvent(eventModel)
@@ -59,7 +59,7 @@ abstract class TicketDatabase : RoomDatabase() {
                 180,
                 "https://grpstat.com/DealImages/K-wwrnxwoh/KAFIKA-KAPAK2082__3_600-318.jpg",
                 "12.00 - 22.00",
-                "₺70"
+                70
             )
 
             eventDao.insertEvent(eventModel)
@@ -72,7 +72,7 @@ abstract class TicketDatabase : RoomDatabase() {
                 300,
                 "https://grpstat.com/DealImages/K-q13ydz2e/18524_600-318.jpg",
                 "23 Ekim",
-                "₺399"
+                399
             )
 
             eventDao.insertEvent(eventModel)
@@ -85,7 +85,7 @@ abstract class TicketDatabase : RoomDatabase() {
                 150,
                 "https://grpstat.com/DealImages/K-p2fmaj3v/notre5663_600-318.jpg",
                 "21 Ekim",
-                "₺63"
+                63
             )
 
             eventDao.insertEvent(eventModel)
@@ -98,7 +98,7 @@ abstract class TicketDatabase : RoomDatabase() {
                 20,
                 "https://grpstat.com/DealImages/G-g4y0jr53/17780__5_600-318.jpg",
                 "10.00 - 20.00",
-                "₺33"
+                33
             )
 
             eventDao.insertEvent(eventModel)
@@ -111,7 +111,7 @@ abstract class TicketDatabase : RoomDatabase() {
                 100,
                 "https://grpstat.com/DealImages/K-hldymgnv/konserr6248_600-318.jpg",
                 "1 Kasım",
-                "₺56"
+                56
             )
 
             eventDao.insertEvent(eventModel)
@@ -124,7 +124,7 @@ abstract class TicketDatabase : RoomDatabase() {
                 50,
                 "https://grpstat.com/DealImages/K-vq05rmrp/gosteriii5709_600-318.jpg",
                 "4 Aralık",
-                "₺49"
+                49
             )
 
             eventDao.insertEvent(eventModel)
@@ -137,7 +137,7 @@ abstract class TicketDatabase : RoomDatabase() {
                 85,
                 "https://grpstat.com/DealImages/G-i4bb1xjp/15024_600-318.jpg",
                 "6 - 13 Aralık",
-                "₺20"
+                20
             )
 
             eventDao.insertEvent(eventModel)
@@ -150,7 +150,7 @@ abstract class TicketDatabase : RoomDatabase() {
                 10,
                 "https://grpstat.com/DealImages/G-q3l05po5/akvaryumgrsll6606__5_600-318.jpg",
                 "12.00 - 18.00",
-                "₺48"
+                48
             )
 
             eventDao.insertEvent(eventModel)
@@ -163,7 +163,7 @@ abstract class TicketDatabase : RoomDatabase() {
                 2,
                 "https://grpstat.com/DealImages/K-wwrnxwoh/KAFIKA-KAPAK2082__2_600-318.jpg",
                 "18.00 - 20.00",
-                "₺70"
+                70
             )
 
             eventDao.insertEvent(eventModel)

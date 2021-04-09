@@ -13,6 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorProfileBackground"
         android:padding="20dp"
         tools:context=".ui.profile.ProfileFragment">
 
@@ -42,7 +43,7 @@
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:text="@{viewmodel.sessionManager.username}"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorTextFirst"
             android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/viewProfileImage" />
 
@@ -53,7 +54,7 @@
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="@{viewmodel.sessionManager.userEmail}"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorTextFirst"
             android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/txtNameSurname" />
 
@@ -74,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="Profilim"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorTextFirst"
             app:layout_constraintBottom_toBottomOf="@id/viewProfile"
             app:layout_constraintStart_toStartOf="@id/viewProfile"
             app:layout_constraintTop_toTopOf="@id/viewProfile" />
@@ -106,7 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="Biletlerim"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorTextFirst"
             app:layout_constraintBottom_toBottomOf="@id/viewTickets"
             app:layout_constraintStart_toStartOf="@id/viewTickets"
             app:layout_constraintTop_toTopOf="@id/viewTickets" />
@@ -138,7 +139,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="Geliştirici Bilgileri"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorTextFirst"
             app:layout_constraintBottom_toBottomOf="@id/viewInfo"
             app:layout_constraintStart_toStartOf="@id/viewInfo"
             app:layout_constraintTop_toTopOf="@id/viewInfo" />
@@ -170,7 +171,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="Çıkış Yap"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorTextFirst"
             app:layout_constraintBottom_toBottomOf="@id/viewExit"
             app:layout_constraintStart_toStartOf="@id/viewExit"
             app:layout_constraintTop_toTopOf="@id/viewExit" />

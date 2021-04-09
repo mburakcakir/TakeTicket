@@ -25,3 +25,8 @@ infix fun Context.shareText(text: String) {
     val shareIntent = Intent.createChooser(sendIntent, null)
     this.startActivity(shareIntent)
 }
+
+fun String.splitHour() {
+
+}
+

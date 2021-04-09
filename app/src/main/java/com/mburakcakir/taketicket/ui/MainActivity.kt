@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         Log.v("logImage", "onCreate")
         setSupportActionBar(binding.toolbar)
         setupActionBarWithNavController(navController)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

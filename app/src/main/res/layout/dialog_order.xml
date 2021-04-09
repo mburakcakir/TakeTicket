@@ -23,14 +23,14 @@
         android:id="@+id/rootLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorBlack"
+        android:background="@color/colorTextFirst"
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/rootCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorBlack">
+            app:cardBackgroundColor="@color/colorCardBackground">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -68,7 +68,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{event.title}"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/colorTextFirst"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@id/cardEvent"
@@ -135,6 +135,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Salon"
+                    android:textColor="?android:attr/textColorPrimary"
                     android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="@id/guideline1"
                     app:layout_constraintStart_toStartOf="@id/cardTicket"
@@ -146,7 +147,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="C120"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/colorTextFirst"
                     app:layout_constraintEnd_toEndOf="@id/guideline1"
                     app:layout_constraintStart_toStartOf="@id/cardTicket"
                     app:layout_constraintTop_toBottomOf="@id/ticketThreater" />
@@ -167,7 +168,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="G10"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/colorTextFirst"
                     app:layout_constraintEnd_toEndOf="@id/guideline2"
                     app:layout_constraintStart_toStartOf="@id/guideline1"
                     app:layout_constraintTop_toBottomOf="@id/ticketSeat" />
@@ -187,8 +188,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="@{event.price}"
-                    android:textColor="@color/colorBlack"
+                    android:text="@{Integer.toString(viewmodel.countPrice) + `$` }"
+                    android:textColor="@color/colorTextFirst"
                     app:layout_constraintEnd_toEndOf="@id/cardTicket"
                     app:layout_constraintStart_toStartOf="@id/guideline2"
                     app:layout_constraintTop_toBottomOf="@id/ticketPrice"
@@ -199,7 +200,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Müşteri Bilgileri"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/colorTextFirst"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@id/cardUser"
                     app:layout_constraintTop_toTopOf="@id/cardUser" />
@@ -232,7 +233,7 @@
                     android:layout_height="wrap_content"
                     android:maxLines="2"
                     android:text="@{viewmodel.sessionManager.username}"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/colorTextFirst"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toStartOf="@id/guideline1"
                     app:layout_constraintStart_toStartOf="@id/cardUser"
@@ -266,7 +267,7 @@
                     android:layout_marginStart="5dp"
                     android:maxLines="2"
                     android:text="@{viewmodel.countTicket}"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/colorTextFirst"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="@id/imgTicketIncrease"
                     app:layout_constraintStart_toEndOf="@id/imgTicketIncrease"
@@ -307,7 +308,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{viewmodel.sessionManager.userEmail}"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/colorTextFirst"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="@id/cardUser"
                     app:layout_constraintTop_toBottomOf="@id/ticketEmail"
@@ -328,8 +329,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="COVID-19 sebebiyle koltuk seçimleri 24 saat kala yapılabilmektedir."
-                    android:textColor="@color/colorBlack"
+                    android:text="Seat selections can be made 24 hours before due to COVID-19."
+                    android:textColor="@color/colorTextFirst"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@id/imgInfo"
                     app:layout_constraintStart_toEndOf="@id/imgInfo"
@@ -393,7 +394,7 @@
                     android:gravity="center"
                     android:onClick="@{() -> viewmodel.insertTicket(ticket)}"
                     android:text="@string/approve_ticket"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorCardBackground"
                     app:layout_constraintTop_toBottomOf="@id/imgQrCode" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

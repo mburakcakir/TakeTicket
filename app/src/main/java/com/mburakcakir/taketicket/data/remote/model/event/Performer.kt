@@ -12,7 +12,7 @@ data class Performer(
     val image: String,
     val image_attribution: String,
     val image_license: String,
-    val images: İmagesX,
+    val images: ImagesX,
     val location: Any,
     val name: String,
     val num_upcoming_events: Int,

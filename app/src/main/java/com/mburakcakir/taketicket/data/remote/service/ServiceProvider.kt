@@ -6,11 +6,22 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class ServiceProvider {
-    private lateinit var serviceApi: ServiceApiClient
+    private lateinit var event: EventClient
 
-    fun getEventInstance(): ServiceApiClient {
-        return instance!!.create(ServiceApiClient::class.java)
+    fun getEventInstance(): EventClient {
+        return instance!!.create(EventClient::class.java)
     }
+//    retrofitBuilder.baseUrl("https://api.example.com").build().create(Api.class);
+
+    fun getMovieInstance(): MovieClient {
+        return instance!!.create(MovieClient::class.java)
+    }
+
+    fun getInfoInstance(): InfoClient {
+        return instance!!.create(InfoClient::class.java)
+    }
+
+
     companion object {
         private var retrofit: Retrofit? = null
 
@@ -18,7 +29,7 @@ class ServiceProvider {
             get() {
                 if (retrofit == null) {
                     retrofit = Retrofit.Builder()
-                        .baseUrl(Constants.BASE_URL_FOREIGN_EVENT)
+                        .baseUrl(Constants.BASE_URL_MOVIE)
                         .client(okHttpClientFactory)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build()
@@ -27,6 +38,5 @@ class ServiceProvider {
             }
 
         private val okHttpClientFactory: OkHttpClient = OkHttpClient().newBuilder().build()
-
     }
 }

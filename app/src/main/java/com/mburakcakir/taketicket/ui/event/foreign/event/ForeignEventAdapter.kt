@@ -32,19 +32,28 @@ class ForeignEventAdapter :
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(foreignEvent: ForeignEvent) {
 
-            binding.event = foreignEvent
+            val list = foreignEvent.datetime_utc.chunked(10)
+            val datetime = "${list[0]} ${list[1].substring(1, 6)}"
+
+            val copiedEvent = foreignEvent.copy(
+                datetime_utc = datetime,
+                type = foreignEvent.type.capitalize()
+            )
+
+            binding.event = copiedEvent
+
 
             itemView.setOnClickListener {
                 foreignEvent.apply {
                     eventModel = EventModel(
                         id,
-                        title,
-                        title,
+                        venue.name,
+                        "${venue.address} ${venue.extended_address}",
                         type,
                         venue.capacity,
                         performers[0].image,
-                        datetime_utc,
-                        performers[0].score.toString(),
+                        datetime,
+                        performers[0].num_upcoming_events,
                         "Foreign"
                     )
                 }

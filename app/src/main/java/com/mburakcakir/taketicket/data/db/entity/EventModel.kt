@@ -15,7 +15,7 @@ data class EventModel(
     val capacity: Int,
     val url: String,
     val time: String,
-    val price: String,
+    val price: Int,
     val type: String = "Turkish"
 ) : Parcelable {
     @PrimaryKey(autoGenerate = true)

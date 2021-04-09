@@ -50,25 +50,25 @@ class ForeignEventViewModel(
             }
     }
 
-    private fun getForeignEventById(ID: Int) = viewModelScope.launch {
-        eventRepository.getForeignEventByID(ID)
-            .onStart {
-                _result.value =
-                    Result(loading = "Yabancı Etkinlikler Yükleniyor..")
-            }
-            .collect {
-                when (it.status) {
-                    Status.SUCCESS -> {
-                        it.data?.apply {
-                            _foreignEventById.value = it.data
-                        }
-
-                        _result.value = Result("Yabancı Etkinlikler Yüklendi.")
-                    }
-                    Status.ERROR -> _result.value = Result(error = "Bir hata oluştu.")
-                }
-            }
-    }
+//    private fun getForeignEventById(ID: Int) = viewModelScope.launch {
+//        eventRepository.getForeignEventByID(ID)
+//            .onStart {
+//                _result.value =
+//                    Result(loading = "Yabancı Etkinlikler Yükleniyor..")
+//            }
+//            .collect {
+//                when (it.status) {
+//                    Status.SUCCESS -> {
+//                        it.data?.apply {
+//                            _foreignEventById.value = it.data
+//                        }
+//
+//                        _result.value = Result("Yabancı Etkinlikler Yüklendi.")
+//                    }
+//                    Status.ERROR -> _result.value = Result(error = "Bir hata oluştu.")
+//                }
+//            }
+//    }
 
     fun insertEvent(eventModel: EventModel) = viewModelScope.launch {
         eventRepository.insertEvent(eventModel)

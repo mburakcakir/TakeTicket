@@ -30,7 +30,6 @@ class ForeignMovieViewModel(application: Application) : BaseViewModel(applicatio
     private val _trendingEvents = MutableLiveData<ResponseTrendingMovies>()
     val trendingEvents: LiveData<ResponseTrendingMovies> = _trendingEvents
 
-
     init {
         val database = TicketDatabase.getDatabase(application, viewModelScope)
         eventRepository = EventRepositoryImpl(database.eventDao())
