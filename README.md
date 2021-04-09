@@ -16,6 +16,7 @@ You can list local and foreign events, movies and buy tickets.
 <li><a href="https://developer.android.com/topic/libraries/architecture/viewmodel">ViewModel</a></li>
 <li><a href="https://developer.android.com/topic/libraries/architecture/livedata">LiveData</a></li>
 <li><a href="https://developer.android.com/guide/navigation">Navigation</a></li>
+<li><a href="https://developer.android.com/training/data-storage/room">Room</a></li>
 <li><a href="https://square.github.io/retrofit/">Retrofit</a> & <a href="https://github.com/square/okhttp">OkHttp</a></li>
 <li><a href="https://developer.android.com/topic/libraries/architecture/lifecycle">Lifecycle</a></li>
 <li><a href="https://developer.android.com/topic/libraries/data-binding">DataBinding</a></li>
