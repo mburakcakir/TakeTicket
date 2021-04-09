@@ -58,7 +58,7 @@
             android:id="@+id/edtUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@drawable/ic_user"
+            android:drawableStart="@drawable/ic_user"
             android:drawablePadding="@dimen/margin_min"
             android:hint="@string/username"
             android:inputType="textPersonName"
@@ -81,7 +81,7 @@
             android:id="@+id/edtMail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@drawable/ic_email"
+            android:drawableStart="@drawable/ic_email"
             android:drawablePadding="@dimen/margin_min"
             android:hint="@string/email"
             android:inputType="textEmailAddress" />
@@ -100,7 +100,7 @@
             android:id="@+id/edtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@drawable/ic_password"
+            android:drawableStart="@drawable/ic_password"
             android:drawablePadding="@dimen/margin_min"
             android:hint="@string/password"
             android:inputType="textPassword"
@@ -108,7 +108,6 @@
             app:passwordToggleEnabled="true" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnRegister"
