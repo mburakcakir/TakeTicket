@@ -9,6 +9,7 @@
     <color name="colorDarkBackground">#ffffff</color>
     <color name="colorProfileBackground">#ffffff</color>
     <color name="colorRed">#F43636</color>
+    <color name="colorBlack">#000000</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorToolbar">#ffffff</color>
     <color name="colorMoreLightGray">#F6F6F6</color>

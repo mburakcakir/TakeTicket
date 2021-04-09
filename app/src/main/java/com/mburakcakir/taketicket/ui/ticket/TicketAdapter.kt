@@ -58,8 +58,12 @@ class TicketViewHolder(
             it.eventID == ticketModel.eventID
         }
 
+        val copiedEventModel = eventModel.copy(
+            category = eventModel.category.capitalize()
+        )
+
         with(binding) {
-            binding.event = eventModel
+            binding.event = copiedEventModel
             binding.ticket = ticketModel
 
             imgDeleteTicket.setOnClickListener {
