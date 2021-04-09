@@ -9,11 +9,11 @@ buildscript {
         coroutinesVersion = "1.4.2"
         glideVersion = "4.11.0"
         firebaseUiVersion = "6.4.0"
-        firebaseAnalyticsVersion = "18.0.2"
-        firebaseAuthVersion = "20.0.3"
+        firebaseAnalyticsVersion = "18.0.3"
+        firebaseAuthVersion = "20.0.4"
         okHttpVersion = "2.7.2"
         materialVersion = '1.3.0'
-        navigationVersion = "2.3.4"
+        navigationVersion = "2.3.5"
         lifeCycleLiveDataVersion = "2.3.1"
         lifeCycleViewModelVersion = "2.3.1"
         circleImageViewVersion = "3.1.0"
@@ -28,7 +28,7 @@ buildscript {
         classpath "com.android.tools.build:gradle:4.1.3"
         classpath 'com.google.gms:google-services:4.3.5'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.4"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }

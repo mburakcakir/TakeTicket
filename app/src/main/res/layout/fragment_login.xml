@@ -18,13 +18,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp"
+        android:background="@color/colorDarkBackground"
+        android:padding="@dimen/margin_medium"
         tools:context=".ui.entry.login.LoginFragment">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottieAnimationView"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="@dimen/size_lottie_animation"
             app:layout_constraintTop_toTopOf="parent"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
@@ -34,7 +35,7 @@
             android:id="@+id/txtWelcome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/margin_big"
             android:gravity="center"
             android:text="@string/login_welcome"
             app:layout_constraintTop_toBottomOf="@id/lottieAnimationView" />
@@ -44,12 +45,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginTop="@dimen/margin_big"
+            android:layout_marginBottom="@dimen/margin_profile_item"
             android:gravity="center"
             android:text="@string/login_message"
             android:textColor="@color/colorTextFirst"
-            android:textSize="16sp"
+            android:textSize="@dimen/text_size_big"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/txtWelcome" />
 
@@ -58,7 +59,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="@dimen/margin_profile_item"
             app:layout_constraintTop_toBottomOf="@id/txtLoginMessage">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -66,7 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_user"
-                android:drawablePadding="5dp"
+                android:drawablePadding="@dimen/margin_min"
                 android:hint="@string/username"
                 android:inputType="textPersonName"
                 app:counterEnabled="true"
@@ -84,8 +85,8 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginBottom="@dimen/margin_big"
 
             app:layout_constraintTop_toBottomOf="@+id/layoutUsername">
 
@@ -94,7 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_password"
-                android:drawablePadding="5dp"
+                android:drawablePadding="@dimen/margin_min"
                 android:hint="@string/password"
                 android:inputType="textPassword"
 
@@ -111,29 +112,29 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_gravity="center"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/margin_big"
             android:enabled="@{loginViewModel.entryFormState.dataValid}"
             android:onClick="@{() -> loginViewModel.login(edtUsername.getText().toString(), edtPassword.getText().toString())}"
             android:text="@string/login"
-            android:textSize="16sp"
+            android:textSize="@dimen/text_size_big"
             app:layout_constraintTop_toBottomOf="@+id/layoutPassword" />
 
         <View
             android:id="@+id/bottomView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/margin_medium"
             app:layout_constraintTop_toBottomOf="@id/btnLogin"
-            tools:layout_editor_absoluteX="10dp" />
+            tools:layout_editor_absoluteX="@dimen/margin_medium" />
 
         <TextView
             android:id="@+id/txtCheck"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:padding="10dp"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:padding="@dimen/margin_medium"
             android:text="@string/login_check_user"
-            android:textSize="16sp"
+            android:textSize="@dimen/text_size_big"
             app:layout_constraintEnd_toStartOf="@id/btnRegister"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="@id/bottomView"
@@ -143,10 +144,10 @@
             android:id="@+id/btnRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:padding="@dimen/margin_medium"
             android:text="@string/login_message_register"
-            android:textColor="@color/colorPrimary"
-            android:textSize="16sp"
+            android:textColor="@color/colorTextFirst"
+            android:textSize="@dimen/text_size_big"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@id/bottomView"
             app:layout_constraintStart_toEndOf="@id/txtCheck"

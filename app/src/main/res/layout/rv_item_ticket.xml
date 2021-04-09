@@ -18,18 +18,18 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card_view:cardCornerRadius="6dp"
-        card_view:cardElevation="3dp"
-        card_view:cardBackgroundColor="@color/colorCardBackground"
+        card_view:cardBackgroundColor="@color/colorDarkBackground"
+        card_view:cardCornerRadius="@dimen/card_corner_radius"
+        card_view:cardElevation="@dimen/height_line_heighter"
         card_view:cardUseCompatPadding="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
-            android:paddingTop="10dp"
-            android:paddingRight="5dp"
-            android:paddingBottom="10dp">
+            android:paddingLeft="@dimen/margin_min"
+            android:paddingTop="@dimen/margin_medium"
+            android:paddingRight="@dimen/margin_min"
+            android:paddingBottom="@dimen/margin_medium">
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"
@@ -44,7 +44,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_gravity="center"
-                android:layout_marginRight="5dp"
+                android:layout_marginEnd="@dimen/margin_min"
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintEnd_toEndOf="@id/guideline"
                 card_view:layout_constraintStart_toStartOf="parent"
@@ -64,8 +64,8 @@
                 android:id="@+id/txtEventTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginStart="@dimen/margin_min"
+                android:layout_marginEnd="@dimen/margin_min"
                 android:maxLines="2"
                 android:text="@{event.title}"
                 android:textColor="@color/colorTextFirst"
@@ -73,27 +73,27 @@
                 card_view:layout_constraintEnd_toStartOf="@id/guideline3"
                 card_view:layout_constraintStart_toEndOf="@id/imgTitle"
                 card_view:layout_constraintTop_toTopOf="parent"
-                tools:text="subject" />
+                tools:text="@string/event_subject" />
 
             <ImageView
                 android:id="@+id/imgPrice"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginTop="@dimen/margin_min"
+                android:layout_marginEnd="@dimen/margin_min"
                 android:background="@drawable/ic_price"
                 card_view:layout_constraintStart_toEndOf="@id/guideline"
                 card_view:layout_constraintTop_toBottomOf="@id/txtEventTitle" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/txt_event_price"
+                android:id="@+id/txtEventPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
-                android:text="@{event.price}"
-                android:textSize="16sp"
+                android:layout_marginStart="@dimen/margin_min"
+                android:layout_marginTop="@dimen/margin_min"
+                android:text="@{Integer.toString(event.price)}"
+                android:textSize="@dimen/text_size_big"
                 android:textStyle="bold"
                 card_view:layout_constraintStart_toEndOf="@id/imgPrice"
                 card_view:layout_constraintTop_toBottomOf="@id/txtEventTitle"
@@ -104,12 +104,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{event.category}"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_size_big"
                 android:textStyle="bold"
-                card_view:layout_constraintBottom_toBottomOf="@id/txt_event_price"
+                card_view:layout_constraintBottom_toBottomOf="@id/txtEventPrice"
                 card_view:layout_constraintEnd_toStartOf="@id/guideline3"
-                card_view:layout_constraintStart_toEndOf="@id/txt_event_price"
-                tools:text="category" />
+                card_view:layout_constraintStart_toEndOf="@id/txtEventPrice"
+                tools:text="@string/event_category" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline3"
@@ -131,7 +131,7 @@
                 android:id="@+id/txtTicketBoughtTime"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="@dimen/margin_min"
                 android:layout_weight="0.20"
                 android:gravity="center"
                 android:text="@{ticket.boughtTime}"
@@ -139,15 +139,15 @@
                 android:textStyle="bold"
                 card_view:layout_constraintStart_toEndOf="@id/imgTime"
                 card_view:layout_constraintTop_toTopOf="parent"
-                tools:text="boughttime" />
+                tools:text="@string/event_bought_time" />
 
             <ImageView
                 android:id="@+id/imgCalendar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginTop="@dimen/margin_min"
+                android:layout_marginEnd="@dimen/margin_min"
                 android:background="@drawable/ic_calendar"
                 card_view:layout_constraintStart_toStartOf="@id/guideline3"
                 card_view:layout_constraintTop_toBottomOf="@id/imgTime" />
@@ -156,15 +156,14 @@
                 android:id="@+id/txtTicketLastTime"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginStart="@dimen/margin_min"
+                android:layout_marginTop="@dimen/margin_min"
                 android:maxLines="2"
                 android:text="@{event.time}"
-                android:textSize="14sp"
                 card_view:layout_constraintEnd_toStartOf="@id/imgDeleteTicket"
                 card_view:layout_constraintStart_toEndOf="@id/imgCalendar"
                 card_view:layout_constraintTop_toBottomOf="@id/txtTicketBoughtTime"
-                tools:text="day" />
+                tools:text="@string/event_day" />
 
             <ImageView
                 android:id="@+id/imgDeleteTicket"

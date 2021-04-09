@@ -30,18 +30,18 @@
             android:id="@+id/rootCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/colorCardBackground">
+            app:cardBackgroundColor="@color/colorDarkBackground">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="@dimen/margin_big">
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginEnd="@dimen/margin_medium"
                     android:orientation="vertical"
                     app:layout_constraintGuide_percent="0.33" />
 
@@ -49,8 +49,8 @@
                     android:id="@+id/cardEvent"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="@dimen/margin_big"
+                    android:layout_marginEnd="@dimen/margin_big"
                     app:layout_constraintBottom_toBottomOf="@id/txtEventTime"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -69,44 +69,44 @@
                     android:layout_height="wrap_content"
                     android:text="@{event.title}"
                     android:textColor="@color/colorTextFirst"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/text_size_max"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@id/cardEvent"
                     app:layout_constraintStart_toStartOf="@id/cardEvent"
                     app:layout_constraintTop_toTopOf="@id/cardEvent"
-                    tools:text="Event Title" />
+                    tools:text="@string/event_title" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/txtEventSubtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginStart="@dimen/margin_min"
+                    android:layout_marginTop="@dimen/margin_min"
+                    android:layout_marginEnd="@dimen/margin_min"
+                    android:layout_marginBottom="@dimen/margin_min"
                     android:gravity="center"
                     android:text="@{event.subTitle}"
                     app:layout_constraintEnd_toEndOf="@id/cardEvent"
                     app:layout_constraintStart_toStartOf="@id/cardEvent"
                     app:layout_constraintTop_toBottomOf="@id/txtEventTitle"
-                    tools:text="Subtitle" />
+                    tools:text="@string/event_subtitle" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/txtEventTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="@dimen/margin_min"
                     android:text="@{event.time}"
                     app:layout_constraintEnd_toEndOf="@id/cardEvent"
                     app:layout_constraintStart_toStartOf="@id/cardEvent"
                     app:layout_constraintTop_toBottomOf="@id/txtEventSubtitle"
-                    tools:text="21 Şubat Cumartesi, 19.00" />
+                    tools:text="@string/event_time_default" />
 
                 <View
                     android:id="@+id/viewLine"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_height="@dimen/height_line"
+                    android:layout_marginTop="@dimen/margin_big"
                     android:background="@color/colorGray"
                     app:layout_constraintTop_toBottomOf="@id/txtEventTime" />
 
@@ -114,10 +114,10 @@
                     android:id="@+id/cardTicket"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="10dp"
-                    app:layout_constraintBottom_toBottomOf="@id/txt_event_price"
+                    android:layout_marginStart="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_big"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    app:layout_constraintBottom_toBottomOf="@id/txtEventPrice"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/viewLine" />
@@ -125,8 +125,8 @@
                 <View
                     android:id="@+id/viewLine2"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_height="@dimen/height_line"
+                    android:layout_marginTop="@dimen/margin_big"
                     android:background="@color/colorGray"
                     app:layout_constraintTop_toBottomOf="@id/cardTicket" />
 
@@ -134,9 +134,9 @@
                     android:id="@+id/ticketThreater"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Salon"
+                    android:text="@string/hall"
                     android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/text_size_min"
                     app:layout_constraintEnd_toEndOf="@id/guideline1"
                     app:layout_constraintStart_toStartOf="@id/cardTicket"
                     app:layout_constraintTop_toTopOf="@id/cardTicket" />
@@ -145,8 +145,8 @@
                     android:id="@+id/txtTicketThreater"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="C120"
+                    android:layout_marginTop="@dimen/margin_min"
+                    android:text="@string/hall_default"
                     android:textColor="@color/colorTextFirst"
                     app:layout_constraintEnd_toEndOf="@id/guideline1"
                     app:layout_constraintStart_toStartOf="@id/cardTicket"
@@ -156,8 +156,8 @@
                     android:id="@+id/ticketSeat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Koltuk"
-                    android:textSize="12sp"
+                    android:text="@string/seat"
+                    android:textSize="@dimen/text_size_min"
                     app:layout_constraintEnd_toEndOf="@id/guideline2"
                     app:layout_constraintStart_toStartOf="@id/guideline1"
                     app:layout_constraintTop_toTopOf="@id/cardTicket" />
@@ -166,8 +166,8 @@
                     android:id="@+id/txtTicketSeat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="G10"
+                    android:layout_marginTop="@dimen/margin_min"
+                    android:text="@string/seat_default"
                     android:textColor="@color/colorTextFirst"
                     app:layout_constraintEnd_toEndOf="@id/guideline2"
                     app:layout_constraintStart_toStartOf="@id/guideline1"
@@ -177,29 +177,29 @@
                     android:id="@+id/ticketPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Fiyat"
-                    android:textSize="12sp"
+                    android:text="@string/price"
+                    android:textSize="@dimen/text_size_min"
                     app:layout_constraintEnd_toEndOf="@id/cardTicket"
                     app:layout_constraintStart_toStartOf="@id/guideline2"
                     app:layout_constraintTop_toTopOf="@id/cardTicket" />
 
                 <TextView
-                    android:id="@+id/txt_event_price"
+                    android:id="@+id/txtEventPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="@dimen/margin_min"
                     android:text="@{Integer.toString(viewmodel.countPrice) + `$` }"
                     android:textColor="@color/colorTextFirst"
                     app:layout_constraintEnd_toEndOf="@id/cardTicket"
                     app:layout_constraintStart_toStartOf="@id/guideline2"
                     app:layout_constraintTop_toBottomOf="@id/ticketPrice"
-                    tools:text="105 dk" />
+                    tools:text="@string/event_price_default" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/txtUserInfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Müşteri Bilgileri"
+                    android:text="@string/user_info"
                     android:textColor="@color/colorTextFirst"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@id/cardUser"
@@ -209,9 +209,9 @@
                     android:id="@+id/cardUser"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_big"
+                    android:layout_marginEnd="@dimen/margin_medium"
                     app:layout_constraintBottom_toBottomOf="@id/txtTicketCount"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -221,9 +221,9 @@
                     android:id="@+id/ticketName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="@dimen/margin_big"
                     android:text="@string/name"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/text_size_min"
                     app:layout_constraintStart_toStartOf="@id/cardUser"
                     app:layout_constraintTop_toBottomOf="@id/txtUserInfo" />
 
@@ -234,19 +234,18 @@
                     android:maxLines="2"
                     android:text="@{viewmodel.sessionManager.username}"
                     android:textColor="@color/colorTextFirst"
-                    android:textSize="16sp"
                     app:layout_constraintEnd_toStartOf="@id/guideline1"
                     app:layout_constraintStart_toStartOf="@id/cardUser"
                     app:layout_constraintTop_toBottomOf="@id/ticketName"
-                    tools:text="TicketName" />
+                    tools:text="@string/ticket_name" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/ticketCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/margin_medium"
                     android:text="@string/count_ticket"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/text_size_min"
                     app:layout_constraintStart_toStartOf="@id/cardUser"
                     app:layout_constraintTop_toBottomOf="@id/txtTicketEmail" />
 
@@ -254,7 +253,7 @@
                     android:id="@+id/imgTicketIncrease"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="@dimen/margin_min"
                     android:onClick="@{() -> viewmodel.updateCountTicket(+1)}"
                     android:src="@drawable/ic_add"
                     app:layout_constraintStart_toStartOf="@id/cardUser"
@@ -264,11 +263,11 @@
                     android:id="@+id/txtTicketCount"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
+                    android:layout_marginStart="@dimen/margin_min"
                     android:maxLines="2"
                     android:text="@{viewmodel.countTicket}"
                     android:textColor="@color/colorTextFirst"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/text_size_big"
                     app:layout_constraintBottom_toBottomOf="@id/imgTicketIncrease"
                     app:layout_constraintStart_toEndOf="@id/imgTicketIncrease"
                     app:layout_constraintTop_toTopOf="@id/imgTicketIncrease" />
@@ -277,8 +276,8 @@
                     android:id="@+id/imgTicketDecrease"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="@dimen/margin_min"
+                    android:layout_marginTop="@dimen/margin_min"
                     android:onClick="@{() -> viewmodel.updateCountTicket(-1)}"
                     android:src="@drawable/ic_substract"
                     app:layout_constraintStart_toEndOf="@id/txtTicketCount"
@@ -297,9 +296,9 @@
                     android:id="@+id/ticketEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/margin_medium"
                     android:text="@string/email"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/text_size_min"
                     app:layout_constraintStart_toStartOf="@id/cardUser"
                     app:layout_constraintTop_toBottomOf="@id/txtTicketUsername" />
 
@@ -309,29 +308,29 @@
                     android:layout_height="wrap_content"
                     android:text="@{viewmodel.sessionManager.userEmail}"
                     android:textColor="@color/colorTextFirst"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/text_size_big"
                     app:layout_constraintStart_toStartOf="@id/cardUser"
                     app:layout_constraintTop_toBottomOf="@id/ticketEmail"
-                    tools:text="TicketEmail" />
+                    tools:text="@string/ticket_email" />
 
                 <ImageView
                     android:id="@+id/imgInfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_big"
                     android:background="@drawable/ic_info"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cardUser" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/txtInfo"
+                    android:id="@+id/txtDeveloperInfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="Seat selections can be made 24 hours before due to COVID-19."
+                    android:layout_marginStart="@dimen/margin_medium"
+                    android:text="@string/covid_info"
                     android:textColor="@color/colorTextFirst"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/text_size_min"
                     app:layout_constraintBottom_toBottomOf="@id/imgInfo"
                     app:layout_constraintStart_toEndOf="@id/imgInfo"
                     app:layout_constraintTop_toTopOf="@id/imgInfo" />
@@ -340,7 +339,7 @@
                     android:id="@+id/viewTicketLine"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="@dimen/margin_big"
                     app:layout_constraintBottom_toBottomOf="@id/imgLeftCorner"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -365,7 +364,7 @@
                 <View
                     android:id="@+id/viewDottedLine"
                     android:layout_width="0dp"
-                    android:layout_height="3dp"
+                    android:layout_height="@dimen/height_line_heighter"
                     android:background="@drawable/bg_dotted"
                     app:layout_constraintBottom_toBottomOf="@id/imgLeftCorner"
                     app:layout_constraintEnd_toStartOf="@id/imgRightCorner"
@@ -375,11 +374,11 @@
                 <ImageView
                     android:id="@+id/imgQrCode"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_height="@dimen/margin_qr_code"
+                    android:layout_marginStart="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_big"
                     android:background="@drawable/qrcode"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -389,12 +388,12 @@
                     android:id="@+id/btnApprove"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="@dimen/margin_big"
                     android:background="@color/colorPrimary"
                     android:gravity="center"
                     android:onClick="@{() -> viewmodel.insertTicket(ticket)}"
                     android:text="@string/approve_ticket"
-                    android:textColor="@color/colorCardBackground"
+                    android:textColor="@color/colorDarkBackground"
                     app:layout_constraintTop_toBottomOf="@id/imgQrCode" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

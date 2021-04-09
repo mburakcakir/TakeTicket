@@ -33,7 +33,8 @@ class ForeignEventAdapter :
         fun bind(foreignEvent: ForeignEvent) {
 
             val list = foreignEvent.datetime_utc.chunked(10)
-            val datetime = "${list[0]} ${list[1].substring(1, 6)}"
+//            val datetime = "${list[0]} ${list[1].substring(1, 6)}"
+            val datetime = list[0]
 
             val copiedEvent = foreignEvent.copy(
                 datetime_utc = datetime,

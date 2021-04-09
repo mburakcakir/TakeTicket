@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="10dp"
+    android:layout_marginTop="@dimen/margin_medium"
     android:background="@color/colorMoreLightGray"
     tools:context=".ui.event.foreign.movie.ForeignMovieFragment">
 

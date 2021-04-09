@@ -16,7 +16,7 @@
     </style>
 
     <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.ActionBar">
-        <item name="colorControlNormal">@color/colorCardBackground</item>
+        <item name="colorControlNormal">@color/colorDarkBackground</item>
     </style>
 
     <!-- set the rounded drawable as background to your bottom sheet -->

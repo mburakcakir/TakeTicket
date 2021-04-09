@@ -15,15 +15,15 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card_view:cardCornerRadius="6dp"
-        card_view:cardElevation="3dp"
+        card_view:cardCornerRadius="@dimen/card_corner_radius"
+        card_view:cardElevation="@dimen/height_line_heighter"
         card_view:cardUseCompatPadding="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorCardBackground"
-            android:paddingBottom="8dp">
+            android:background="@color/colorDarkBackground"
+            android:paddingBottom="@dimen/margin_medium">
 
             <ImageView
                 android:id="@+id/imgEventImage"
@@ -38,10 +38,10 @@
                 android:id="@+id/viewEvent"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:background="@color/colorCardBackground"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginEnd="@dimen/margin_medium"
+                android:background="@color/colorDarkBackground"
                 app:layout_constraintBottom_toBottomOf="@id/txtEventCategory"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -53,12 +53,12 @@
                 android:layout_height="wrap_content"
                 android:text="@{event.venue.name}"
                 android:textColor="@color/colorTextFirst"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_size_big"
                 android:textStyle="bold"
                 app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintStart_toStartOf="@id/viewEvent"
                 app:layout_constraintTop_toTopOf="@id/viewEvent"
-                tools:text="title" />
+                tools:text="@string/event_title" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtEventTime"
@@ -68,21 +68,21 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@id/viewEvent"
                 app:layout_constraintTop_toTopOf="@id/viewEvent"
-                tools:text="time" />
+                tools:text="@string/event_time" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtEventSubtitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginTop="@dimen/margin_min"
+                android:layout_marginEnd="@dimen/margin_medium"
                 android:autoLink="web"
                 android:text="@{event.url}"
                 android:textColorLink="@color/colorTextFirst"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/viewEvent"
                 app:layout_constraintTop_toBottomOf="@id/txtEventTitle"
-                tools:text="subtitle" />
+                tools:text="@string/event_subtitle" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtEventCategory"
@@ -94,19 +94,18 @@
                 app:layout_constraintBottom_toBottomOf="@id/txtEventCapacity"
                 app:layout_constraintStart_toStartOf="@id/viewEvent"
                 app:layout_constraintTop_toTopOf="@id/txtEventCapacity"
-                tools:text="category" />
+                tools:text="@string/event_category" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtEventCapacity"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:gravity="end"
                 android:text="@{`Kapasite: ` + String.valueOf(event.venue.capacity)}"
-                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="@id/viewEvent"
                 app:layout_constraintTop_toBottomOf="@id/txtEventSubtitle"
-                tools:text="capacity" />
+                tools:text="@string/event_capacity" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

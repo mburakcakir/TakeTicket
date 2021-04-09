@@ -13,14 +13,14 @@
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        app:cardCornerRadius="5dp">
+        android:layout_marginStart="@dimen/margin_medium"
+        android:layout_marginEnd="@dimen/margin_big"
+        android:layout_marginBottom="@dimen/margin_big"
+        app:cardCornerRadius="@dimen/margin_min">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
-            android:background="@color/colorCardBackground"
+            android:background="@color/colorDarkBackground"
             android:layout_height="wrap_content">
 
             <ImageView
@@ -28,7 +28,7 @@
                 loadMovieImage="@{movie.poster_path}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxHeight="200dp"
+                android:maxHeight="@dimen/size_lottie_animation"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,8 +36,8 @@
                 android:id="@+id/txtTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginBottom="@dimen/margin_medium"
                 android:gravity="center"
                 android:text="@{movie.title}"
                 app:layout_constraintBottom_toBottomOf="parent"

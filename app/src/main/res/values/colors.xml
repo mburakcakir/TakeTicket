@@ -6,7 +6,7 @@
     <color name="colorPrimaryLight">#F1F1F1</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="colorTextFirst">#000000</color>
-    <color name="colorCardBackground">#ffffff</color>
+    <color name="colorDarkBackground">#ffffff</color>
     <color name="colorProfileBackground">#ffffff</color>
     <color name="colorRed">#F43636</color>
     <color name="colorWhite">#ffffff</color>

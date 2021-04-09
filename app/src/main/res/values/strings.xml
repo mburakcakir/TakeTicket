@@ -6,20 +6,25 @@
     <string name="register">Üye Ol</string>
     <string name="approve_ticket">Onayla</string>
 
-    <!-- user info -->
+    <!-- user -->
     <string name="name">Ad-Soyad</string>
     <string name="username">Kullanıcı Adı</string>
     <string name="email">Email</string>
     <string name="password">Şifre</string>
 
-    <!-- ticket info -->
+    <!-- ticket -->
     <string name="activity">Etkinlik</string>
     <string name="price">Ücret</string>
     <string name="count_ticket">Bilet Sayısı</string>
+    <string name="ticket_name">TicketName</string>
+    <string name="ticket_email">TicketEmail</string>
 
-    <!-- header -->
+    <!-- profile -->
     <string name="tickets">Biletlerim</string>
     <string name="contact">İletişim Bilgileri</string>
+    <string name="profile">Profilim</string>
+    <string name="developer_info">Geliştirici Bilgileri</string>
+    <string name="exit_app">Çıkış Yap</string>
 
     <!-- success -->
     <string name="success_ticket">Biletin alındı.</string>
@@ -28,30 +33,48 @@
     <string name="already_registered">Kullanıcı zaten kayıtlı.</string>
     <string name="warn_ticket">Bilet zaten alınmış.</string>
 
-
     <!-- error -->
     <string name="no_user">Kullanıcı bulunamadı.</string>
     <string name="try_again">Tekrar dene.</string>
-
-    <!-- info -->
-    <string name="login_again">OTURUM KAPATILDI. TEKRAR GİRİŞ YAPIN.</string>
-    <string name="exit_app">Çıkmak için geri tuşuna basın.</string>
-
-
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Şifre en az 6 haneli olmalıdır.</string>
     <string name="invalid_email">Email formatınız eşleşmiyor.</string>
-    <string name="login_failed">"Login failed"</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- info -->
+    <string name="info_site">site</string>
+    <string name="info_link">link</string>
+
+    <!-- login -->
     <string name="login_welcome">Hoşgeldiniz</string>
     <string name="login_message">Üye girişi yapınız</string>
     <string name="login_check_user">Üye değil misin?</string>
     <string name="login_message_register">Hemen Üye Ol</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="login_again">OTURUM KAPATILDI. TEKRAR GİRİŞ YAPIN.</string>
+
+    <!-- event -->
+    <string name="event_subject">subject</string>
+    <string name="event_category">category</string>
+    <string name="event_bought_time">boughttime</string>
+    <string name="event_day">day</string>
+    <string name="event_subtitle">subtitle</string>
+    <string name="event_capacity">capacity</string>
+    <string name="event_time">time</string>
+    <string name="event_title">title</string>
+    <string name="event_time_default">21 Şubat Cumartesi, 19.00</string>
+    <string name="event_price_default">100 TL</string>
+
+    <!-- dialog -->
+    <string name="hall">Salon</string>
+    <string name="hall_default">C120</string>
+    <string name="seat">Koltuk</string>
+    <string name="seat_default">G10</string>
+    <string name="user_info">Müşteri Bilgileri</string>
+    <string name="covid_info">Seat selections can be made 24 hours before due to COVID-19.</string>
+
+    <!-- header -->
+    <string name="header">Header</string>
 </resources>

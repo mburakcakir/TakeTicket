@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/colorPrimary"
-            android:paddingEnd="10dp"
+            android:paddingEnd="@dimen/margin_medium"
             android:theme="@style/ToolbarTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

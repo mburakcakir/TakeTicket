@@ -11,7 +11,7 @@
         android:background="@color/colorPrimary"
         app:layout_constraintTop_toTopOf="parent"
         app:tabIndicatorColor="@color/colorWhite"
-        app:tabIndicatorHeight="3dp"
+        app:tabIndicatorHeight="@dimen/height_line_heighter"
         app:tabMode="fixed"
         app:tabSelectedTextColor="@color/colorWhite"
         app:tabTextColor="@color/colorDarkGray" />

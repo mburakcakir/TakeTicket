@@ -19,17 +19,17 @@
             android:id="@+id/viewChild"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="8dp"
-            android:paddingTop="16dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="16dp"
+            android:paddingStart="@dimen/margin_medium"
+            android:paddingTop="@dimen/margin_big"
+            android:paddingEnd="@dimen/margin_medium"
+            android:paddingBottom="@dimen/margin_big"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/imgInfoImage"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="@dimen/size_info_image"
+                android:layout_height="@dimen/size_info_image"
                 loadImageFromUrlWithFirebase="@{info.imageUrl}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -39,26 +39,26 @@
                 android:id="@+id/txtInfoTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/margin_big"
                 android:textColor="@color/colorTextFirst"
                 android:textStyle="bold"
                 android:text="@{info.account}"
                 app:layout_constraintBottom_toTopOf="@id/txtInfoLink"
                 app:layout_constraintStart_toEndOf="@id/imgInfoImage"
                 app:layout_constraintTop_toTopOf="@id/imgInfoImage"
-                tools:text="subject" />
+                tools:text="@string/info_site" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtInfoLink"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/margin_big"
                 android:autoLink="web|email"
                 android:text="@{info.siteUrl}"
                 app:layout_constraintBottom_toBottomOf="@id/imgInfoImage"
                 app:layout_constraintStart_toEndOf="@id/imgInfoImage"
                 app:layout_constraintTop_toBottomOf="@id/txtInfoTitle"
-                tools:text="link" />
+                tools:text="@string/info_link" />
 
             <ImageView
                 android:id="@+id/imgInfoShare"
@@ -70,10 +70,9 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <!--                shareText="@{info.siteUrl}"-->
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
+            android:layout_height="@dimen/height_line"
             android:background="@color/colorTextFirst"
             app:layout_constraintStart_toStartOf="@id/viewChild"
             app:layout_constraintTop_toBottomOf="@id/viewChild" />
