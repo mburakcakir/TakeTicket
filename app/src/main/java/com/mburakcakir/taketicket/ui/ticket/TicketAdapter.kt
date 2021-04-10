@@ -59,7 +59,8 @@ class TicketViewHolder(
         }
 
         val copiedEventModel = eventModel.copy(
-            category = eventModel.category.capitalize()
+            category = eventModel.category.capitalize(),
+            price = eventModel.price.times(ticketModel.ticketCount)
         )
 
         with(binding) {

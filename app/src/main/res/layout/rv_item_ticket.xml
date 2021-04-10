@@ -71,15 +71,16 @@
                 app:layout_constraintBottom_toBottomOf="@id/imgDeleteTicket"
                 app:layout_constraintEnd_toStartOf="@id/imgDeleteTicket"
                 app:layout_constraintTop_toTopOf="@id/imgDeleteTicket"
-                tools:text="@string/price" />
+                tools:text="@string/ticket_price" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtTicketCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_medium"
-                android:layout_marginTop="@dimen/margin_min"
                 android:paddingBottom="@dimen/margin_min"
+                android:paddingTop="@dimen/margin_min"
+                android:textSize="@dimen/text_size_min"
                 android:text="@{event.category}"
                 app:layout_constraintStart_toEndOf="@id/imgTicketLastImage"
                 app:layout_constraintTop_toBottomOf="@id/txtTicketLastTime"
@@ -94,16 +95,32 @@
 
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/txtTicketBoughtTime"
+                android:id="@+id/txtTicketCount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_min"
-                android:layout_weight="0.20"
+                android:paddingTop="@dimen/margin_min"
+                android:paddingBottom="@dimen/margin_min"
                 android:gravity="center"
-                android:text="@{ticket.boughtTime}"
+                android:text="@{ticket.ticketCount + ` bilet`}"
+                android:textSize="@dimen/text_size_min"
+                app:layout_constraintStart_toEndOf="@id/imgMiddlePoint2"
+                app:layout_constraintTop_toTopOf="@id/txtTicketCapacity"
+                tools:text="@string/ticket_count" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtTicketCapacity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_min"
+                android:gravity="center"
+                android:paddingTop="@dimen/margin_min"
+                android:paddingBottom="@dimen/margin_min"
+                android:text="@{event.capacity + ` koltuk`}"
+                android:textSize="@dimen/text_size_min"
                 app:layout_constraintStart_toEndOf="@id/imgMiddlePoint"
                 app:layout_constraintTop_toTopOf="@id/txtTicketCategory"
-                tools:text="@string/event_bought_time" />
+                tools:text="@string/event_capacity" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtTicketLastTime"
@@ -119,11 +136,25 @@
 
             <ImageView
                 android:id="@+id/imgMiddlePoint"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_border_black"
+                android:layout_width="3dp"
+                android:layout_height="3dp"
+                android:layout_marginStart="@dimen/margin_min"
+                android:background="@drawable/bg_custom_round"
                 app:layout_constraintStart_toEndOf="@id/txtTicketCategory"
+                app:layout_constraintBottom_toBottomOf="@id/txtTicketCategory"
+                app:layout_constraintEnd_toStartOf="@id/txtTicketCapacity"
                 app:layout_constraintTop_toTopOf="@id/txtTicketCategory" />
+
+            <ImageView
+                android:id="@+id/imgMiddlePoint2"
+                android:layout_width="3dp"
+                android:layout_height="3dp"
+                android:layout_marginStart="@dimen/margin_min"
+                android:background="@drawable/bg_custom_round"
+                app:layout_constraintBottom_toBottomOf="@id/txtTicketCapacity"
+                app:layout_constraintEnd_toStartOf="@id/txtTicketCount"
+                app:layout_constraintStart_toEndOf="@id/txtTicketCapacity"
+                app:layout_constraintTop_toTopOf="@id/txtTicketCapacity" />
 
             <ImageView
                 android:id="@+id/imgDeleteTicket"

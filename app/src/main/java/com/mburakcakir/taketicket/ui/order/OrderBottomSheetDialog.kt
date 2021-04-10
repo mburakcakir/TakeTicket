@@ -55,12 +55,13 @@ class OrderBottomSheetDialog : BottomSheetDialogFragment() {
 
         val eventModel = args.eventModel
         orderViewModel.setCountPrice(eventModel.price)
+
         val ticketModel = TicketModel(
-            orderViewModel.sessionManager.getUsername(),
-            orderViewModel.sessionManager.getUserEmail(),
-            getCurrentTime(),
-            eventModel.eventID,
-            eventModel.type
+            username = orderViewModel.sessionManager.getUsername(),
+            email = orderViewModel.sessionManager.getUserEmail(),
+            boughtTime = getCurrentTime(),
+            eventID = eventModel.eventID,
+            ticketType = eventModel.type
         )
 
         binding.apply {

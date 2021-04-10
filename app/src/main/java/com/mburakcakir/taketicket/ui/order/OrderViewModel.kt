@@ -19,11 +19,13 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
 
     private val ticketRepository: TicketRepository
 
-    private val _countTicket = MutableLiveData<String>("1")
-    val countTicket: LiveData<String> = _countTicket
+    private val _countTicket = MutableLiveData<Int>(1)
+    val countTicket: LiveData<Int> = _countTicket
 
     private val _countPrice = MutableLiveData<Int>(0)
     val countPrice: LiveData<Int> = _countPrice
+
+    private var basePrice: Int = 0
 
     init {
         val database = TicketDatabase.getDatabase(application, viewModelScope)
@@ -31,20 +33,24 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
     }
 
     fun setCountPrice(price: Int) {
+        basePrice = price
         _countPrice.value = price
     }
 
-    private fun updateCountPrice(count: Int) {
-        _countPrice.value = _countPrice.value?.times(count)
+    private fun updateCountPrice() {
+        _countPrice.value = basePrice.times(_countTicket.value!!)
     }
 
     fun updateCountTicket(count: Int) {
-        _countTicket.value = (Integer.parseInt(_countTicket.value) + count).toString()
-        updateCountPrice(count)
+        _countTicket.value = _countTicket.value?.plus(count)
+        updateCountPrice()
     }
 
-    fun insertTicket(ticketModel: TicketModel) = viewModelScope.launch {
-        ticketRepository.insertTicket(ticketModel)
+    fun insertTicket(ticketCount: Int, ticketModel: TicketModel) = viewModelScope.launch {
+        val copiedTicketModel = ticketModel.copy(
+            ticketCount = ticketCount
+        )
+        ticketRepository.insertTicket(copiedTicketModel)
             .onStart {
                 _result.value = Result(loading = "Bilet Kaydediliyor...")
             }

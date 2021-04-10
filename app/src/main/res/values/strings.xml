@@ -13,9 +13,8 @@
     <string name="password">Şifre</string>
 
     <!-- ticket -->
-    <string name="activity">Etkinlik</string>
-    <string name="price">Ücret</string>
-    <string name="count_ticket">Bilet Sayısı</string>
+    <string name="ticket_price">Ücret</string>
+    <string name="ticket_count">Bilet Sayısı</string>
     <string name="ticket_name">TicketName</string>
     <string name="ticket_email">TicketEmail</string>
 
@@ -56,6 +55,7 @@
     <string name="login_again">OTURUM KAPATILDI. TEKRAR GİRİŞ YAPIN.</string>
 
     <!-- event -->
+    <string name="activity">Etkinlik</string>
     <string name="event_subject">subject</string>
     <string name="event_category">category</string>
     <string name="event_bought_time">boughttime</string>
