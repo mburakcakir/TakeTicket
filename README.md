@@ -5,11 +5,11 @@ You can list local and foreign events, movies and buy tickets.
 
 ## Screenshots 
 <p float="left">
-  <img src="https://user-images.githubusercontent.com/53263815/114157541-68281480-992c-11eb-84af-d41b02aac40d.png" />
+  <img src="https://user-images.githubusercontent.com/53263815/114252074-2f2f8480-99ac-11eb-9013-ed5ffade068f.png" />
 </p>
 
 <p float="left">
-  <img src="https://user-images.githubusercontent.com/53263815/114158545-762a6500-992d-11eb-9efc-fd05e06b0c83.png" />
+  <img src="https://user-images.githubusercontent.com/53263815/114252095-42425480-99ac-11eb-9449-a50bcad3845f.png" />
 </p>
 
 ## Libraries and tools 🛠
